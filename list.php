@@ -1,6 +1,6 @@
 <?php
 
-include('list-backend');
+include('list-backend.php');
 
 
 ?>
