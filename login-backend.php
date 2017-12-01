@@ -10,7 +10,7 @@ $loginstatus = "Please login to access the portal";
 //insert values into table
 
 if (isset($_GET['redir']) && $_GET['redir'] == 1) {
-	$loginstatus = "Please login to access the portal";
+	$loginstatus = "Login";
 }
 
 if (isset($_REQUEST['login'])){
