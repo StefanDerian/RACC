@@ -1,0 +1,47 @@
+.pageheadding {
+	color:#000;
+	font-family:Calibri;
+	text-align:center;
+	font-size:24px;
+}
+
+.error {
+	color:#F00;
+}
+
+.listrow:hover {
+    background-color: rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.listrow {
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
+
+footer {
+	color:#000;
+	font-family:Calibri;
+	text-align:center;
+}
+
+.footer {
+	padding-top: 30px;
+	text-align: center;
+}
+
+div {
+    display: block;
+}
+form {
+	text-align:center;
+	display: inline-block;
+}
+
+.Bt {
+	background-color:rgb(88,88,88);
+	border: none;
+    color: white;
+	padding: 5px 10px;
+}
