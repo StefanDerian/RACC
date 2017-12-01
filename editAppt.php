@@ -1,10 +1,5 @@
 <?php
-include('dbConnection.php'); // connect with database
-
-$statusmsg = "";
-if(isset($_GET["success"]) && $_GET["sucess"] == 1) {
-    $statusmsg = "modified successfully";
-}
+include ('editAppt.php');
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
