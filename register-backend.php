@@ -106,6 +106,6 @@ $statusmsg = "";
 <?php //store data
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['submit'] == "Submit") {  
         $query = "INSERT INTO userAccount (FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, Who) VALUES ('$first', '$last', '$prefer', '$dob', '$nationality', '$gender', '$mobile', '$email', '$who')";
-        echo $query;
+        //echo $query;
         $mysqli->query($query);
 }?>

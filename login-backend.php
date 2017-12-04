@@ -21,7 +21,7 @@ if (isset($_REQUEST['login'])){
 
 	$encpass = MD5($pass);
 
-	$stmt = $mysqli->prepare("SELECT UserID, UserName FROM Account WHERE UserName=? AND Password=?");
+	$stmt = $mysqli->prepare("SELECT UserID, UserName FROM ".ACCOUNT['table_name']." WHERE ".ACCOUNT['collumn']['username']."=? AND ". ACCOUNT['collumn']['password']." =?");
 	$stmt->bind_param("ss", $user, $encpass);
 	$stmt->execute();
     $stmt->bind_result($UserID);
@@ -30,11 +30,15 @@ if (isset($_REQUEST['login'])){
 	if ($stmt->num_rows > 0) {
 		$_SESSION["user"] = "$user";
         $_SESSION["userID"] = "$UserID";
-		header("Location: http://localhost/racc/createAccount.php"); //redirect
+		header("Location: createAccount.php"); //redirect
         exit;
 	} else {
 		$loginstatus = "Incorrect username or password. Please try again.";
 	}
 	//$mysqli->close();
 }
+
+
+
+
 ?>
