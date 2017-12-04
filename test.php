@@ -1,31 +1,11 @@
 <?php
 
 include ('test-backend.php');
+include ('header.php');
 ?>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Register page</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
-</head>
 
-
-
-<header id="hero">
-	<div class="container">
-		<div class="row">
-			<div class="span12"><br />
-				<h1>Register Page</h1>
-				<br/>
-			</div>
-		</div>
-	</div>
-</header>
-
-<body>
 	<p> <?php echo $statusmsg; ?>
 	<table width="100%" style="border-collapse:collapse" cellpadding="5">
 		<form method="post" id="Form" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">

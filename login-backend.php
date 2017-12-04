@@ -21,13 +21,14 @@ if (isset($_REQUEST['login'])){
 
 	$encpass = MD5($pass);
 
-	$stmt = $mysqli->prepare("SELECT UserID, UserName FROM ".ACCOUNT['table_name']." WHERE ".ACCOUNT['collumn']['username']."=? AND ". ACCOUNT['collumn']['password']." =?");
+	$stmt = $mysqli->prepare("SELECT UserID, UserName FROM ".ACCOUNT['table_name']." WHERE ".ACCOUNT['collumns']['username']."=? AND ". ACCOUNT['collumns']['password']." = ?");
 	$stmt->bind_param("ss", $user, $encpass);
 	$stmt->execute();
     $stmt->bind_result($UserID);
 	$stmt->store_result();
 
 	if ($stmt->num_rows > 0) {
+		session_start();
 		$_SESSION["user"] = "$user";
         $_SESSION["userID"] = "$UserID";
 		header("Location: createAccount.php"); //redirect

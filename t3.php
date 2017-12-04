@@ -1,76 +1,64 @@
 <?php
 include('t3-backend.php');
+include ('header.php');
 
 ?>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>Register</title>
-        
-    </head>
-    
-    <header>
-    
-    </header>
-    
-    <body>
-        <p> <?php echo $statusmsg; ?></p>
-        <table width="100%" style="border-collapse:collapse" cellpadding="5">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <H2>Please fill in this form</H2>
-                <tr>
-                    <td width="50%" style="text-align:right">First name:</td>
-                    <td style="text-align:left"><input type="text" name="first" maxlength="255" value=""/><span class="error">* <?php echo $firstErr;?></span></td>
-                </tr>
-                <tr>
-                    <td width="50%" style="text-align:right">Last Name:</td>
-                    <td style="text-align:left"><input type="text" name="last" maxlength="45" value=""/><span class="error">* <?php echo $lastErr;?></span></td>
-                </tr>
-                <tr>
-                    <td width="50%" style="text-align:right">Prefer Name:</td>
-                    <td style="text-align:left"><input type="text" name="prefer" maxlength="45" value=""/></td>
-                </tr>
-                <tr>
-                    <td width="50%" style="text-align:right">Date of Birth:</td>
-                    <td style="text-align:left"><input type="date" name="dob" maxlength="32" value=""/><span class="error">* <?php echo $dobErr;?></span></td>
-                </tr>
-                <tr>
-                    <td width="50%" style="text-align:right">Nationality:</td>
-                    <td style="text-align:left"><input type="text" name="nationality" maxlength="45" value=""/><span class="error">* <?php echo $nationalityErr;?></span></td>
-                </tr>
-                <tr>
-                    <td width="50%" style="text-align:right">Gender:</td>
-                    <td style="text-align:left"><input type="radio" id="male" name="gender" maxlength="45" value="Male"/>Male <input type="radio" id="female" name="gender" maxlength="45" value="Female"/>Female<span class="error">* <?php echo $genderErr;?></span></td>
-                </tr>
-                <tr>
-                    <td width="50%" style="text-align:right">Mobile:</td>
-                    <td style="text-align:left"><input type="number" name="mobile" maxlength="45" value=""/><span class="error">* <?php echo $mobileErr;?></span></td>
-                </tr>
-                <tr>
-                    <td width="50%" style="text-align:right">Email:</td>
-                    <td style="text-align:left"><input type="email" name="email" maxlength="45" value=""/><span class="error">* <?php echo $emailErr;?></span></td>
-                </tr>
-                <tr>
-                    <td width="50%" style="text-align:right">Who are you going to meet today:</td>
-                    <td style="text-align:left">
-                        <select id="who" name="who">
-                            <option value="">Select</option>
-                            <option value="michael">Michael</option>
-                            </select>
-                            <span class="error">* <?php echo $whoErr;?></span></td>
-                </tr>
-                <tr><td /></tr>
-                <tr>
-                    <td style="text-align:center" colspan="2">
-                        <input type="submit" name="submit" value="Submit"/>
-                        <br/><span class="error"><?php echo "<br/>*fields are mandatory";?></span>
-                    </td>
-                </tr>
-            </form>
-        </table>
-    </body>
+<p> <?php echo $statusmsg; ?></p>
+<table width="100%" style="border-collapse:collapse" cellpadding="5">
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <H2>Please fill in this form</H2>
+        <tr>
+            <td width="50%" style="text-align:right">First name:</td>
+            <td style="text-align:left"><input type="text" name="first" maxlength="255" value=""/><span class="error">* <?php echo $firstErr;?></span></td>
+        </tr>
+        <tr>
+            <td width="50%" style="text-align:right">Last Name:</td>
+            <td style="text-align:left"><input type="text" name="last" maxlength="45" value=""/><span class="error">* <?php echo $lastErr;?></span></td>
+        </tr>
+        <tr>
+            <td width="50%" style="text-align:right">Prefer Name:</td>
+            <td style="text-align:left"><input type="text" name="prefer" maxlength="45" value=""/></td>
+        </tr>
+        <tr>
+            <td width="50%" style="text-align:right">Date of Birth:</td>
+            <td style="text-align:left"><input type="date" name="dob" maxlength="32" value=""/><span class="error">* <?php echo $dobErr;?></span></td>
+        </tr>
+        <tr>
+            <td width="50%" style="text-align:right">Nationality:</td>
+            <td style="text-align:left"><input type="text" name="nationality" maxlength="45" value=""/><span class="error">* <?php echo $nationalityErr;?></span></td>
+        </tr>
+        <tr>
+            <td width="50%" style="text-align:right">Gender:</td>
+            <td style="text-align:left"><input type="radio" id="male" name="gender" maxlength="45" value="Male"/>Male <input type="radio" id="female" name="gender" maxlength="45" value="Female"/>Female<span class="error">* <?php echo $genderErr;?></span></td>
+        </tr>
+        <tr>
+            <td width="50%" style="text-align:right">Mobile:</td>
+            <td style="text-align:left"><input type="number" name="mobile" maxlength="45" value=""/><span class="error">* <?php echo $mobileErr;?></span></td>
+        </tr>
+        <tr>
+            <td width="50%" style="text-align:right">Email:</td>
+            <td style="text-align:left"><input type="email" name="email" maxlength="45" value=""/><span class="error">* <?php echo $emailErr;?></span></td>
+        </tr>
+        <tr>
+            <td width="50%" style="text-align:right">Who are you going to meet today:</td>
+            <td style="text-align:left">
+                <select id="who" name="who">
+                    <option value="">Select</option>
+                    <option value="michael">Michael</option>
+                </select>
+                <span class="error">* <?php echo $whoErr;?></span></td>
+            </tr>
+            <tr><td /></tr>
+            <tr>
+                <td style="text-align:center" colspan="2">
+                    <input type="submit" name="submit" value="Submit"/>
+                    <br/><span class="error"><?php echo "<br/>*fields are mandatory";?></span>
+                </td>
+            </tr>
+        </form>
+    </table>
+</body>
 
 </html>
