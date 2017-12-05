@@ -3,7 +3,7 @@
 
 
 include('_global.php');
-include('session.php');
+//include('session.php');
 
 
 //connect to mysql

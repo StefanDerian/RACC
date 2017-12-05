@@ -2,6 +2,7 @@
 
 
 include ('list2-backend.php');
+include('session.php');
 include ('header.php');
 
 ?>

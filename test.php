@@ -1,6 +1,7 @@
 <?php
 
 include ('test-backend.php');
+include('session.php');
 include ('header.php');
 ?>
 

@@ -1,5 +1,6 @@
 <?php
 include('t2-backend.php');
+include('session.php');
 include ('header.php');
 ?>
 
