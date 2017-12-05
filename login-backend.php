@@ -2,7 +2,7 @@
 ob_start();
 $authpage = TRUE;
 include('dbConnection.php'); //db connection
-//include('sessionControl.php');
+//include('session.php');
 ?>
 
 <?php
@@ -21,22 +21,34 @@ if (isset($_REQUEST['login'])){
 
 	$encpass = MD5($pass);
 
-	$stmt = $mysqli->prepare("SELECT UserID, UserName FROM ".ACCOUNT['table_name']." WHERE ".ACCOUNT['collumns']['username']."=? AND ". ACCOUNT['collumns']['password']." = ?");
-	$stmt->bind_param("ss", $user, $encpass);
-	$stmt->execute();
-    $stmt->bind_result($UserID);
-	$stmt->store_result();
 
-	if ($stmt->num_rows > 0) {
-		session_start();
-		$_SESSION["user"] = "$user";
-        $_SESSION["userID"] = "$UserID";
+	$sql = "SELECT ".ACCOUNT['collumns']['username']." , ".ACCOUNT['collumns']['user_id']." FROM ".ACCOUNT['table_name']." WHERE ".ACCOUNT['collumns']['username']."= '$user' AND ". ACCOUNT['collumns']['password']." = '$encpass'";
+
+
+
+	//echo $sql;
+
+	
+
+	$stmt = mysqli_query($connection, $sql);
+	
+
+	
+	if (mysqli_num_rows($stmt) > 0) {
+		
+		$row = mysqli_fetch_array($stmt, MYSQLI_ASSOC);
+		setSession($row);
+
+		
+		//print_r($_SESSION);
+
+
 		header("Location: createAccount.php"); //redirect
-        exit;
+		exit;
 	} else {
 		$loginstatus = "Incorrect username or password. Please try again.";
 	}
-	//$mysqli->close();
+
 }
 
 
