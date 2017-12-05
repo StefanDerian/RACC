@@ -1,6 +1,7 @@
 <?php
-include ('PointTest-backend.php');
 include('session.php');
+include ('PointTest-backend.php');
+
 include ('header.php');
 ?>
 

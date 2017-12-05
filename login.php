@@ -1,6 +1,7 @@
 <?php
-include ('login-backend.php');
 include('session.php');
+include ('login-backend.php');
+
 include ('header.php');
 ?>
 

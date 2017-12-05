@@ -23,10 +23,10 @@ function destroySession(){
 	echo "<script type='text/javascript'>alert('$message');</script>";
 
 }
-if(!isset($_SESSION['user']) && !isset($authpage)) {
-	header("localtion: login.php?redir=1");
-	exit();
-} 
+// if(!isset($_SESSION['user']) && !isset($authpage)) {
+// 	header("localtion: login.php");
+// 	exit();
+// } 
 
 
 

@@ -1,4 +1,5 @@
 <?php
+include('session.php');
 include('t3-backend.php');
 include ('header.php');
 

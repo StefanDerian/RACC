@@ -1,8 +1,8 @@
 <?php
 
-
-include ('list2-backend.php');
 include('session.php');
+include ('list2-backend.php');
+
 include ('header.php');
 
 ?>
