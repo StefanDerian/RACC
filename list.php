@@ -32,7 +32,7 @@ include ('header.php');
                 <td><?php echo $appointment["Mobile"] ?></td>
                 <td><?php echo $appointment["Email"] ?></td>
                 <td><?php echo $appointment["CurrentStatus"] ?></td>
-                <td><a href = "#">edit</a></td>
+                
             </tr>
             <?php } ?>
         </table>
