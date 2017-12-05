@@ -19,6 +19,7 @@ include ('header.php');
                 <th>Prefer Name</th>
                 <th>Mobile</th>
                 <th>Email</th>
+                <th>Status</th>
             </tr>
             
             
@@ -29,6 +30,8 @@ include ('header.php');
                 <td><?php echo $appointment["PreferName"] ?></td>
                 <td><?php echo $appointment["Mobile"] ?></td>
                 <td><?php echo $appointment["Email"] ?></td>
+                <td><?php echo $appointment["CurrentStatus"] ?></td>
+                <td><a href = "#">edit</a></td>
             </tr>
             <?php } ?>
         </table>

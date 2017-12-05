@@ -17,12 +17,13 @@ if(isset($_POST['Btsearch'])){
     $search_result = table($query);
 }
 
-$statement = $mysqli->prepare("SELECT UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email FROM user WHERE ConsultantID = ?");
+$statement = $mysqli->prepare("SELECT UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus FROM user WHERE ConsultantID = ?");
 //$statement->bind_param("i", $_SESSION['userID']);
-$a = 6;
+print_r($_SESSION);
+$a = $_SESSION['userID'];
 $statement->bind_param("i", $a);
 $result = $statement->execute();
-$statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail);
+$statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus);
 
 $appointments = array();
 
@@ -37,7 +38,8 @@ if ($result) {
             "Nationality" => $rNationality,
             "Gender" => $rGender,
             "Mobile" => $rMobile,
-            "Email" => $rEmail
+            "Email" => $rEmail,
+            "CurrentStatus" => $rCurrentStatus
         );
         
         array_push($appointments, $appointment);
