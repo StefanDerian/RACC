@@ -1,6 +1,6 @@
 <?php
 include ('editAppt-backend.php');
-include ('header.php');
+//include ('header.php');
 ?>
 
 
@@ -48,6 +48,9 @@ include ('header.php');
                         <td style="text_align:right">Course Completion Date:</td>
                         <td style="text_align:left"><input type="date" id="comp" name="comp" /><span class="error"><?php echo $compError;?></span></td>
                     </tr>
+
+
+                    <?php if(isset($_SESSION['UserID'])){?>
                     <tr>
                         <td style="text_align:right">Current Visa:</td>
                         <td style="text_align:left"><input type="text" id="visa" name="visa" maxlength="255" /><span class="error"><?php echo $visaError;?></span></td>
@@ -64,6 +67,9 @@ include ('header.php');
                         <td style="text_align:right">Passport Expiry Date:</td>
                         <td style="text_align:left"><input type="date" id="pexpiry" name="pexpiry" /><span class="error"><?php echo $pexpiryError;?></span></td>
                     </tr>
+
+
+                    <?php } ?>
                     <tr>
                         <td style="text_align:right">Current Address:</td>
                         <td style="text_align:left"><input type="text" id="caddress" name="caddress" maxlength="255" /><span class="error"><?php echo $caddressError;?></span></td>
