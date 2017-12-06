@@ -6,7 +6,7 @@ include('dbConnection.php'); //db connection
 ?>
 
 <?php
-$loginstatus = "Please login to access the portal";
+$loginstatus = "";
 //insert values into table
 
 if (isset($_GET['redir']) && $_GET['redir'] == 1) {
