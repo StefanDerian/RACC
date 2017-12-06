@@ -179,18 +179,19 @@ function insertClient($mysqli,$value,$admin = false){
 
 
 	if($mysqli->query($query)){
+		//redirect to the list page
 
 
-		echo "successfull";
+		if(isset($_SESSION['UserID'])){
+			header("Location: list.php?msg=Successfully Inserted the Client Data"); 
+			exit;
+		}else{
+			header("Location: welcomeMessage.php"); 
+			exit;
+		}
 
-
-
+		
 	}
-
-
-
-
-
 }
 
 function checkError($values, $admin = false){
@@ -377,10 +378,11 @@ if(isset($_SESSION['userID'])){
 				HomeAddress = '$haddress',
 				ConsultantID = '$consultant'
 				WHERE UserID = $id ";
+
+
+
 				if($mysqli->query($query)){
-					echo "successfull update";
-				}else{
-					echo "not successfull";
+					$GLOBALS['statusmsg'] = "Successfully Update the Client Data";
 				}
 
 			}
@@ -412,9 +414,9 @@ if(isset($_SESSION['userID'])){
 
 
 $statusmsg = "";
-if(isset($_GET["success"]) && $_GET["sucess"] == 1) {
-	$statusmsg = "modified successfully";
-}
+// if(isset($_GET["success"]) && $_GET["sucess"] == 1) {
+// 	$statusmsg = "modified successfully";
+// }
 
 
 

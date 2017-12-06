@@ -4,9 +4,9 @@ include ('editAppt-backend.php');
 include ('header.php');
 ?>
 
-
+ 
 <div>
-    <p><?php echo $statusmsg; ?></p>
+    <p> <span class = "message"><?php echo $statusmsg; ?></span></p></div>
     <table width="100%" style="border-collapse:collapse" cellpadding="5">
         <form method="post" name="form" action="<?php echo $action;?>" onsubmit="return confirm('Do you really want to submit the form?');">
             <tr>

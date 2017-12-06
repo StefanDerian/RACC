@@ -10,10 +10,10 @@
 <header>
 	<h1> this is a header</h1>
 	<ul>
-		<li><a href = "list2.php">Client</a></li>
+		<li><a href = "list.php"> Your Clients</a></li>
 		<li><a href = "#Notes">Notes</a></li>
 		<li><a href = "#Report">Report</a></li>
-		<li><a href = "#logout">Logout</a></li>
+		<li><a href = "logout.php">Logout</a></li>
 	</ul>
 
 
