@@ -8,7 +8,7 @@ include ('header.php');
 <div>
     <p><?php echo $statusmsg; ?></p>
     <table width="100%" style="border-collapse:collapse" cellpadding="5">
-        <form method="post" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return confirm('Do you really want to submit the form?');">
+        <form method="post" name="form" action="<?php echo $action;?>" onsubmit="return confirm('Do you really want to submit the form?');">
             <tr>
                 <td style="text_align:right">First Name:</td>
                 <td style="text_align:left"><input type="text" id="fname" name="fname" maxlength="255"
@@ -30,7 +30,7 @@ include ('header.php');
                         </tr>
                         <tr>
                             <td style="text-align:right">Gender:</td>
-                            <td style="text-align:left"><input type="radio" id="male" name="gender" maxlength="45" value="Male" />Male <input type="radio" id="female" name="gender"    maxlength="45" value="Female" />Female <span class="error"><?php echo isset($genderError)?$genderError:"";?></span></td>
+                            <td style="text-align:left"><input type="radio" id="male" name="gender" maxlength="45" value="Male" <?php echo isset($gender)&&$gender=="Male"?"checked":"";?>/>Male <input type="radio" id="female" name="gender"    maxlength="45" value="Female" <?php echo isset($gender)&&$gender=="Female"?"checked":"";?>/>Female <span class="error"><?php echo isset($genderError)?$genderError:"";?></span></td>
                         </tr>
                         <tr>
                             <td style="text_align:right">Date of Birth:</td>
@@ -103,28 +103,51 @@ include ('header.php');
                                                         <td style="text_align:left"><input type="text" id="haddress" name="haddress" maxlength="255" value = "<?php echo isset($haddress)?$haddress:"";  ?>"/><span class="error"><?php echo isset($haddressError)?$haddressError:"";?></span></td>
                                                     </tr>
 
-                                                    <tr>
-                                                        <select id="consultant" name="consultant" value = 6>
-                                                            <?php foreach($agents as $agent) { ?>
-                                                            <option value="<?php echo $agent["UserID"]; ?>" <?php echo isset($consultant)&&$consultant==$agent["UserID"]?"selected":"" ?>><?php echo $agent["DisplayName"]; ?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </tr>
-
-
                                                     <?php if(isset($_SESSION['userID'])){?>
                                                     <tr>
-                                                        <td style="text_align:right">Skill Migration - Point Test:</td>
-                                                        <td style="text_align:left"><input type="button" id="point" name="point" /><span class="error"><?php echo $pointError;?></span></td>
-                                                    </tr>
-                                                    <?php } ?>
+                                                       <td style="text_align:right">
+                                                        Status:
+                                                    </td>
+                                                    <td>
+                                                        <select id="status" name="status">
 
-                                                    <input type = "submit" value = "submit" >
+                                                            <option value= "not even in progress" <?php echo isset($status)&&$status=="not even in progress"?"selected":"" ?>>Not even in progress</option>
+                                                            <option value= "contacted" <?php echo isset($status)&&$status=="contacted"?"selected":"" ?>>Not even in progress</option>
+                                                            <option value= "on progress" <?php echo isset($status)&&$status=="on progress"?"selected":"" ?>> on progress</option>
+                                                            <option value= "successfull" <?php echo isset($status)&&$status=="successfull"?"selected":"" ?>> Successfull</option>
+                                                            <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option>
+
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <?php } ?>
+
+                                                
+                                                <tr>
+                                                    
+                                                    <select id="consultant" name="consultant" value = 6>
+                                                        <?php foreach($agents as $agent) { ?>
+                                                        <option value="<?php echo $agent["UserID"]; ?>" <?php echo isset($consultant)&&$consultant==$agent["UserID"]?"selected":"" ?>><?php echo $agent["DisplayName"]; ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </tr>
+                                               
 
 
 
-                                                </form>
-                                            </table>
-                                        </div>
-                                    </body>
-                                    </html>
+                                                <?php if(isset($_SESSION['userID'])){?>
+                                                <tr>
+                                                    <td style="text_align:right">Skill Migration - Point Test:</td>
+                                                    <td style="text_align:left"><input type="button" id="point" name="point" /><span class="error"><?php echo $pointError;?></span></td>
+                                                </tr>
+                                                <?php } ?>
+
+                                                <input type = "submit" value = "submit" >
+
+
+
+                                            </form>
+                                        </table>
+                                    </div>
+                                </body>
+                                </html>
