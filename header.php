@@ -10,10 +10,26 @@
 <header>
 	<h1> this is a header</h1>
 	<ul>
+
+		<?php if(isset($SESSION['userId'])){ ?>
+
+
 		<li><a href = "list.php"> Your Clients</a></li>
 		<li><a href = "#Notes">Notes</a></li>
 		<li><a href = "#Report">Report</a></li>
 		<li><a href = "logout.php">Logout</a></li>
+
+		<?php }else{ ?>
+
+
+
+
+
+		<li><a href = "createAccount.php">Create Account</a></li>
+		<li><a href = "login.php">Login</a></li>
+		<li><a href = "editAppt.php">Registration Page</a></li>
+
+		<?php } ?>
 	</ul>
 
 

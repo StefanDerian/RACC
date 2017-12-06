@@ -22,7 +22,7 @@ if (isset($_REQUEST['login'])){
 	$encpass = MD5($pass);
 
 
-	$sql = "SELECT ".ACCOUNT['collumns']['username']." , ".ACCOUNT['collumns']['user_id']." FROM ".ACCOUNT['table_name']." WHERE ".ACCOUNT['collumns']['username']."= '$user' AND ". ACCOUNT['collumns']['password']." = '$encpass'";
+	$sql = "SELECT * FROM ".ACCOUNT['table_name']." WHERE ".ACCOUNT['collumns']['username']."= '$user' AND ". ACCOUNT['collumns']['password']." = '$encpass'";
 
 
 
@@ -38,13 +38,14 @@ if (isset($_REQUEST['login'])){
 		
 		$row = mysqli_fetch_array($stmt, MYSQLI_ASSOC);
 		setSession($row);
-
-		
 		//print_r($_SESSION);
-
-
-		header("Location: createAccount.php"); //redirect
-		exit;
+		if($_SESSION['user_type'] == 'AGENT' ){
+			header("Location: list.php");
+			exit;
+		}else{
+			header("Location: createAccount.php.php");
+			exit;
+		}
 	} else {
 		$loginstatus = "Incorrect username or password. Please try again.";
 	}
