@@ -52,6 +52,10 @@ $statusError = "";
 
 
 
+
+$id = isset($_GET['user'])?$_GET['user']:"";
+
+
 function populateChouncelor($mysqli){
 
 
@@ -80,6 +84,28 @@ function getSingleUser( $id, $mysqli){
 	}
 	return $user;
 }
+function insertNotes($mysqli,$value){
+
+
+	$collumns = "Content,Writer,UserID";
+
+	$userId = $value['client'];
+	$content = $value ['content'];
+	$writer = $value['writer'];
+
+
+	$values = "'$content', '$writer','$userId'";
+
+	$query = "INSERT INTO contact ($collumns) 
+	VALUES ($values)";
+
+
+	if($mysqli->query($query)){
+		$statusmsg = "note Inserted";
+
+	}
+}
+
 
 
 
@@ -193,6 +219,8 @@ function insertClient($mysqli,$value,$admin = false){
 		
 	}
 }
+
+
 
 function checkError($values, $admin = false){
 
@@ -353,7 +381,7 @@ if(isset($_SESSION['userID'])){
 		$single_user = getSingleUser( $id, $mysqli);
 		assignFromDatabase($single_user);
 		$action .= "?user=$id";
-		if ($_SERVER["REQUEST_METHOD"] == "POST"){
+		if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['client']) ){
 
 			assignVars($_POST,true);
 
@@ -387,6 +415,28 @@ if(isset($_SESSION['userID'])){
 
 			}
 		}
+
+
+		if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['note'])){
+
+			
+			$clientId = $_GET['user'];
+			$values = array(
+				'content' => $_POST['content'],
+				'client' => $clientId,
+				'writer' => $_SESSION['userID']
+			);
+
+			insertNotes($mysqli, $values);
+
+
+		}
+
+
+
+
+
+
 	}else{
 
 		if ($_SERVER["REQUEST_METHOD"] == "POST"){

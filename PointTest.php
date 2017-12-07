@@ -5,7 +5,13 @@ include ('PointTest-backend.php');
 include ('header.php');
 ?>
 
-
+<?php if(isset($_SESSION['userID']) && isset($_GET['user'])){
+    ?>
+    <nav class="nav nav-tabs" id="myTab" role="tablist">
+        <a href=<?php echo "editAppt.php?user=$id"; ?> class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" >Edit Data</a>
+        <a href=<?php echo "PointTest.php?user=$id"; ?> class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Point Test</a>
+    </nav>
+    <?php } ?>
 
 <table width="100%" style="border-collapse:collapse" cellpadding="13">
     <form method="post">

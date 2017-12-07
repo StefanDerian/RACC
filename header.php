@@ -5,9 +5,11 @@
 	<title>Modify User</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<link rel = "stylesheet" type = "text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head> 
 
-<header>
+<!-- <header>
 	<h1> this is a header</h1>
 	<ul>
 
@@ -33,7 +35,28 @@
 	</ul>
 
 
-</header>
+</header> -->
+
+
+<nav class="nav">
+
+	<?php if(isset($_SESSION['userID'])){ ?>
+
+
+	<a class="nav-link" href = "list.php"> Your Clients</a>
+	<a class="nav-link" href = "#Notes">Notes</a>
+	<a class="nav-link" href = "#Report">Report</a>
+	<a class="nav-link" href = "logout.php">Logout</a>
+
+	<?php }else{ ?>
+
+	<a class="nav-link" href = "createAccount.php">Create Account</a>
+	<a class="nav-link" href = "login.php">Login</a></li>
+	<a class="nav-link" href = "editAppt.php">Registration Page</a>
+
+	<?php } ?>
+</nav>
+
 
 <body>
 

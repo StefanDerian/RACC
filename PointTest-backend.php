@@ -26,6 +26,8 @@ $Garea = $_POST["Garea"];
 $Csum = $_POST["Csum"];
 $Gsum = $_POST["Gsum"];
 
+$id = isset($_GET['user'])?$_GET['user']:"";
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $query = "INSERT INTO point(Cage, Gage, Cenglish, Genglish, Cwork, Gwork, Cqua, Gqua, Cstudy, Gstudy, Cnaati, Gnaati, Cpartner, Gpartner, Cpy, Gpy, Cstate, Gstate, Cfamily, Gfamily, Carea, Garea, Csum, Gsum) VALUES ('$Carea', '$Gage', '$Cenglish', '$Genglish', '$Cwork', '$Gwork', '$Cqua', '$Gqua', '$Cstudy', '$Gstudy', '$Cnaati', '$Gnaati', '$Cpartner', '$Gpartner', ''$Cfamily', '$Gfamily', '$Carea', '$Garea')";
     echo $query;
