@@ -91,7 +91,7 @@ if(isset($_SESSION['userID']) && isset($_GET['user'])){
                 <div class="row">
                     <div class="col-sm-6 form-group">
                         <label>Phone Number</label>
-                        <input type="text"  id="mobile" name="mobile" maxlength="45" value = "<?php echo isset($mobile)?$mobile:"";  ?>" placeholder="Enter Your Phone Number Here.." class="form-control">
+                        <input type="text"  id="mobile" name="mobile" maxlength="45" value = "<?php echo isset($mobile)?$mobile:"";  ?>" class="form-control">
                     </div>
                     <span class="error"><?php echo isset($mobileError)?$mobileError:"";?>
                     </span>     
@@ -102,6 +102,22 @@ if(isset($_SESSION['userID']) && isset($_GET['user'])){
                         </span>
                     </div>  
                 </div>  
+
+                <div class="form-group">
+                    <label>Current Address</label>
+                    <input type="text" class="form-control" id="caddress" name="caddress" maxlength="255" value = "<?php echo isset($caddress)?$caddress:"";  ?>">
+                    <span class="error"><?php echo isset($caddressError)?$caddressError:"";?>
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Home Country Address</label>
+                    <input type="text" class="form-control" id="haddress" name="haddress" maxlength="255" value = "<?php echo isset($haddress)?$haddress:"";  ?>">
+                    <span class="error"><?php echo isset($haddressError)?$haddressError:"";?>
+                    </span>
+                </div>
+
+
 
                 <h2 class="title2">Education Background</h2>
 
@@ -124,6 +140,11 @@ if(isset($_SESSION['userID']) && isset($_GET['user'])){
                     <span class="error"><?php echo isset($compError)?$compError:"";?>
                     </span>
                 </div>
+
+                
+
+
+
                 <button type="button" class="btn btn-lg btn-info">Submit</button>                   
                 </div>
             </form>
