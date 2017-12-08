@@ -3,8 +3,6 @@ include ('session.php');
 include ('editAppt-backend.php');
 include ('header.php');
 include_once('notes-backend.php');
-
-
 ?>
 
 <?php if(isset($_GET['msg'])){ ?>
@@ -32,190 +30,128 @@ if(isset($_SESSION['userID']) && isset($_GET['user'])){
     <?php } ?>
 
 
+<!DOCTYPE html>
+<head>
+  <title>Registration</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href = "css/editAppt.css" type = "text/css" rel = "stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
 
+<div class="container">
+    <div class="col-lg-12 well">
+    <h2 class="title2">Personal Information</h2>
+    <div class="row">
+        <form method="post" name="form" action="<?php echo $action;?>" onsubmit="return confirm('Do you really want to submit the form?');">
+            <input type="hidden" name="client" value="client" />
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>First Name</label>
+                        <input type="text" id = "fname" name = "fname" maxlength = "255" value = "<?php echo isset($fname)?$fname:"";  ?>" class="form-control">
+                    </div>
+                    <span class="error"><?php echo isset($fnameError)?$fnameError:"";?>
+                    </span>
+               
+                    <div class="col-sm-6 form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="lname" name="lname" maxlength="255" value = "<?php echo isset($lname)?$lname:"";  ?>" class="form-control">
+                    </div>
+                    <span class="error"><?php echo isset($lnameError)?$lnameError:"";?>
+                    </span>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Prefer Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <span class="error"><?php echo isset($pnameError)?$pnameError:"";?>
+                    </span>
+                </div>                   
+                <div class="row"> 
+                    <div class="col-sm-6 form-group">
+                        <label>Nationality</label>
+                        <input type="text" id="nationality" name="nationality" maxlength="255"  value = "<?php echo isset($nationality)?$nationality:"";  ?>" class="form-control">
+                        <span class="error"><?php echo isset($nationalityError)?$nationalityError:"";?>
+                        </span>
+                    </div>       
+                </div>
+                 <div class="row"> 
+                    <div class="col-sm-6 form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id = "dob" name="dob" value = "<?php echo isset($dob)?$dob:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
+                        <span class="error"><?php echo isset($dobError)?$dobError:"";?>
+                        </span>
+                    </div>       
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Phone Number</label>
+                        <input type="text"  id="mobile" name="mobile" maxlength="45" value = "<?php echo isset($mobile)?$mobile:"";  ?>" placeholder="Enter Your Phone Number Here.." class="form-control">
+                    </div>
+                    <span class="error"><?php echo isset($mobileError)?$mobileError:"";?>
+                    </span>     
+                    <div class="col-sm-6 form-group">
+                        <label>Email Address</label>
+                        <input type="text"id="email" name="email" maxlength="255" value = "<?php echo isset($email)?$email:"";  ?>" class="form-control">
+                        <span class="error"><?php echo isset($emailError)?$emailError:"";?>
+                        </span>
+                    </div>  
+                </div>  
 
-    <div class = "fluid-container">
-        <div class = "row">
-            <div class = "col-md-9">
-                <table width="50%" style="border-collapse:collapse" cellpadding="5">
-                    <form method="post" name="form" action="<?php echo $action;?>" onsubmit="return confirm('Do you really want to submit the form?');">
-                        <input type="hidden" name="client" value="client" />
-                        <tr>
-                            <td style="text_align:right">First Name:</td>
-                            <td style="text_align:left"><input type="text" id="fname" name="fname" maxlength="255"
-                                value = "<?php echo isset($fname)?$fname:"";  ?>"
+                <h2 class="title2">Education Background</h2>
 
-                                /><span class="error"><?php echo isset($fnameError)?$fnameError:"";?></span></td>
-                            </tr>
-                            <tr>
-                                <td style="text_align:right">Last Name:</td>
-                                <td style="text_align:left"><input type="text" id="lname" name="lname" maxlength="255" value = "<?php echo isset($lname)?$lname:"";  ?>" /><span class="error"
+                <div class="form-group">
+                    <label>University</label>
+                    <input type="text" class="form-control" id="uni" name="uni" maxlength="255" value = "<?php echo isset($uni)?$uni:"";  ?>">
+                    <span class="error"><?php echo isset($uniError)?$uniError:"";?>
+                    </span>
+                </div>      
+                <div class="form-group">
+                    <label>Course and Major</label>
+                    <input type="text" class="form-control" id="cam" name="cam" maxlength="255" value = "<?php echo isset($cam)?$cam:"";  ?>">
+                    <span class="error"><?php echo isset($camError)?$camError:"";?>
+                    </span>
 
-                                    ><?php echo isset($lnameError)?$lnameError:"";?></span></td>
-                                </tr>
-                                <tr>
-                                    <td style="text_align:right">Prefer Name:</td>
-                                    <td style="text_align:left"><input type="text" id="pname" name="pname" maxlength="255" value = "<?php echo isset($pname)?$pname:"";  ?>"/><span class="error"
-
-                                        ><?php echo isset($pnameError)?$pnameError:"";?></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:left">Gender:</td>
-                                        <td style="text-align:left"><input type="radio" id="male" name="gender" maxlength="45" value="Male" <?php echo isset($gender)&&$gender=="Male"?"checked":"";?>/>Male <input type="radio" id="female" name="gender"    maxlength="45" value="Female" <?php echo isset($gender)&&$gender=="Female"?"checked":"";?>/>Female <span class="error"><?php echo isset($genderError)?$genderError:"";?></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text_align:right">Date of Birth:</td>
-                                        <td style="text_align:left"><input type="date" id="dob" name="dob"
-                                            value = "<?php echo isset($dob)?$dob:"";  ?>"
-                                            /><span class="error"><?php echo isset($dobError)?$dobError:"";?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text_align:right">Nationality:</td>
-                                            <td style="text_align:left"><input type="text" id="nationality" name="nationality" maxlength="255"  value = "<?php echo isset($nationality)?$nationality:"";  ?>"/><span class="error"><?php echo isset($nationalityError)?$nationalityError:"";?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text_align:right">Mobile:</td>
-                                            <td style="text_align:left"><input type="tel" id="mobile" name="mobile" maxlength="45" value = "<?php echo isset($mobile)?$mobile:"";  ?>" /><span class="error"><?php echo isset($mobileError)?$mobileError:"";?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text_align:right">Email:</td>
-                                            <td style="text_align:left"><input type="email" id="email" name="email" maxlength="255"
-                                                value = "<?php echo isset($email)?$email:"";  ?>" /><span class="error"><?php echo isset($emailError)?$emailError:"";?></span></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text_align:right">Course and Major:</td>
-                                                <td style="text_align:left"><input type="text" id="cam" name="cam" maxlength="255" 
-                                                    value = "<?php echo isset($cam)?$cam:"";  ?>"
-                                                    /><span class="error"><?php echo isset($camError)?$camError:"";?></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text_align:right">University:</td>
-                                                    <td style="text_align:left"><input type="text" id="uni" name="uni" maxlength="255"
-                                                        value = "<?php echo isset($uni)?$uni:"";  ?>" /><span class="error"><?php echo isset($uniError)?$uniError:"";?></span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text_align:right">Course Completion Date:</td>
-                                                        <td style="text_align:left"><input type="date" id="comp" name="comp" 
-                                                            value = "<?php echo isset($comp)?$comp:"";  ?>"
-                                                            /><span class="error"><?php echo isset($compError)?$compError:"";?></span></td>
-                                                        </tr>
-
-                                                        <!-- this form only available when users are logged in -->
-                                                        <?php if(isset($_SESSION['userID'])){?>
-                                                        <tr>
-                                                            <td style="text_align:right">Current Visa:</td>
-                                                            <td style="text_align:left"><input type="text" id="visa" name="visa" maxlength="255" value = "<?php echo isset($visa)?$visa:"";  ?>"/><span class="error"><?php echo isset($visaError)?$visaError:"";?></span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="text_align:right">Visa Expiry Date:</td>
-                                                            <td style="text_align:left"><input type="date" id="vexpiry" name="vexpiry" value = "<?php echo isset($vexpiry)?$vexpiry:"";  ?>"/><span class="error"><?php echo isset($vexpiryError)?$vexpiryError:"";?></span></td>
-                                                        </tr>e
-                                                        <tr>
-                                                            <td style="text_align:right">Passport No.:</td>
-                                                            <td style="text_align:left"><input type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" /><span class="error"><?php echo isset($passportError)?$passportError:"";?></span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="text_align:right">Passport Expiry Date:</td>
-                                                            <td style="text_align:left"><input type="date" id="pexpiry" name="pexpiry" value = "<?php echo isset($pexpiry)?$pexpiry:"";  ?>" /><span class="error"><?php echo isset($pexpiryError)?$pexpiryError:"";?></span></td>
-                                                        </tr>
-
-
-                                                        <?php } ?>
-                                                        <tr>
-                                                            <td style="text_align:right">Current Address:</td>
-                                                            <td style="text_align:left"><input type="text" id="caddress" name="caddress" maxlength="255" value = "<?php echo isset($caddress)?$caddress:"";  ?>" /><span class="error"><?php echo isset($caddressError)?$caddressError:"";?></span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="text_align:right">Home Country Address:</td>
-                                                            <td style="text_align:left"><input type="text" id="haddress" name="haddress" maxlength="255" value = "<?php echo isset($haddress)?$haddress:"";  ?>"/><span class="error"><?php echo isset($haddressError)?$haddressError:"";?></span></td>
-                                                        </tr>
-
-                                                        <?php if(isset($_SESSION['userID'])){?>
-                                                        <tr>
-                                                           <td style="text_align:right">
-                                                            Status:
-                                                        </td>
-                                                        <td>
-                                                            <select id="status" name="status">
-
-                                                                <option value= "not even in progress" <?php echo isset($status)&&$status=="not even in progress"?"selected":"" ?>>Not even in progress</option>
-                                                                <option value= "contacted" <?php echo isset($status)&&$status=="contacted"?"selected":"" ?>>Not even in progress</option>
-                                                                <option value= "on progress" <?php echo isset($status)&&$status=="on progress"?"selected":"" ?>> on progress</option>
-                                                                <option value= "successfull" <?php echo isset($status)&&$status=="successfull"?"selected":"" ?>> Successfull</option>
-                                                                <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option>
-
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <?php } ?>
-
-
-                                                    <tr>
-                                                        <td>Consultant:</td>
-                                                        <td>
-                                                            <select id="consultant" name="consultant">
-                                                                <?php foreach($agents as $agent) { ?>
-                                                                <option value="<?php echo $agent["UserID"]; ?>" <?php echo isset($consultant)&&$consultant==$agent["UserID"]?"selected":"" ?>><?php echo $agent["DisplayName"]; ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-
-
-
-
-                                                    <!-- <?php if(isset($_SESSION['userID'])){?>
-                                                    <tr>
-                                                        <td style="text_align:right">Skill Migration - Point Test:</td>
-                                                        <td style="text_align:left"><input type="button" id="point" name="point" /><span class="error"><?php echo $pointError;?></span></td>
-                                                    </tr>
-                                                    <?php } ?> -->
-
-                                                    
-
-                                                </table>
-                                                <input type = "submit" class = "btn btn-primary" value = "submit" >
-                                            </form>
-                                        </div> 
-
-
-                                        <?php if(isset($_SESSION['userID']) && isset($_GET['user']) ){?>
-                                        <div class = "col-md-3">
-
-
-                                           
-                                            <?php 
-                                            
-                                            $noter = new Note($_GET['user']);
-                                            $noter->displayNotes();
-
-                                            ?>
-
-
-                                        </div>
-
-                                        <?php } ?>
-
-
-
-                                    </div>
-                                </div>
+                </div>  
+                <div class="form-group">
+                    <label>Completion Date</label>
+                    <input type="date" id="comp" name="comp" value = "<?php echo isset($comp)?$comp:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
+                    <span class="error"><?php echo isset($compError)?$compError:"";?>
+                    </span>
+                </div>
+                <button type="button" class="btn btn-lg btn-info">Submit</button>                   
+                </div>
+            </form>
+            <!-- Content below only available when users are logged in --> 
+            <?php if(isset($_SESSION['userID'])){?>
+            
+            <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label>Current Visa Type</label>
+                        <input type="text"  id="visa" name="visa" maxlength="255" value = "<?php echo isset($visa)?$visa:"";  ?>"  class="form-control">
+                    </div>
+                    <span class="error"><?php echo isset($visaError)?$visaError:"";?>
+                    </span>    
+                    <div class="col-sm-6 form-group">
+                        <label>Visa Expiry Date</label>
+                        <input type="text"id="email" name="email" maxlength="255" value = "<?php echo isset($email)?$email:"";  ?>" placeholder="Enter Your Email Address Here.." class="form-control">
+                        <span class="error"><?php echo isset($emailError)?$emailError:"";?>
+                        </span>
+                    </div>  
+                </div>
+            </div>
 
 
 
 
 
-                                <div class = ""
-
-
-
-
-
-
-
-
-
-
-                            </div>
-                        </body>
-                        </html>
+        </div>
+    </div>
+</div>
+</body>
+</html>
