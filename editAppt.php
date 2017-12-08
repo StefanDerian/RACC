@@ -86,7 +86,7 @@ if(isset($_SESSION['userID']) && isset($_GET['user'])){
                         <input type="date" id = "dob" name="dob" value = "<?php echo isset($dob)?$dob:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
                         <span class="error"><?php echo isset($dobError)?$dobError:"";?>
                         </span>
-                    </div>       
+                    </div>        
                 </div>
                 <div class="row">
                     <div class="col-sm-6 form-group">
@@ -127,30 +127,6 @@ if(isset($_SESSION['userID']) && isset($_GET['user'])){
                 <button type="button" class="btn btn-lg btn-info">Submit</button>                   
                 </div>
             </form>
-            <!-- Content below only available when users are logged in --> 
-            <?php if(isset($_SESSION['userID'])){?>
-            
-            <div class="row">
-                    <div class="col-sm-6 form-group">
-                        <label>Current Visa Type</label>
-                        <input type="text"  id="visa" name="visa" maxlength="255" value = "<?php echo isset($visa)?$visa:"";  ?>"  class="form-control">
-                    </div>
-                    <span class="error"><?php echo isset($visaError)?$visaError:"";?>
-                    </span>    
-                    <div class="col-sm-6 form-group">
-                        <label>Visa Expiry Date</label>
-                        <input type="text"id="email" name="email" maxlength="255" value = "<?php echo isset($email)?$email:"";  ?>" placeholder="Enter Your Email Address Here.." class="form-control">
-                        <span class="error"><?php echo isset($emailError)?$emailError:"";?>
-                        </span>
-                    </div>  
-                </div>
-            </div>
-
-
-
-
-
-        </div>
     </div>
 </div>
 </body>
