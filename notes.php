@@ -11,12 +11,12 @@
 
 ?>
 <script type="text/javascript" src = "note.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 
 
-<form  method="post" name="form" action="<?php echo $GLOBALS['action'];?>">
+
+
+<form  id = "note" name="form" action="<?php echo $GLOBALS['action'];?>" method = "post" > <!-- action="<?php echo $GLOBALS['action'];?>" -->
 	<input type="hidden" name="note" value="note" />
 	<div class="form-group">
 		<label for="exampleFormControlTextarea1">Example textarea</label>
@@ -26,22 +26,36 @@
 </form>
 
 
-<div class = "fluid-container">
+<div class = "fluid-container notes-list">
 
 
 
 
 	<?php foreach ($this->notes as $note) { ?>
-	# code...
-	<div class = "row">
+	
+	<div class = "row a-note">
 
 
 		<?php echo $note['content'] ;?>
 	</br>
 
 	<p>Written by :<?php echo $note['DisplayName']?></p>
-	</br>
-	<p>at : <?php echo $note['time']?></p>
+</br>
+<p>at : <?php echo $note['time']?></p>
+
+<a class = "btn btn-sm btn-danger delete-note" href = "note-delete.php?id=<?php echo $note['ID']?>&user=<?php echo $this->id ?>">
+
+	DELETE
+
+</a>
+<button class = "btn btn-sm btn-warning edit-note" data-toggle="modal" data-target="#noteModal" data-content = "<?php echo $note['content'] ; ?>"
+data-id = "<?php echo $note['ID'] ; ?>" data-user = "<?php echo $_GET['user'] ; ?>" data-writer = "<?php echo $_SESSION['userID'] ; ?>"
+
+ >
+
+	EDIT
+
+</button>
 
 
 
@@ -60,7 +74,47 @@
 
 </form>
 
-
+<div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="noteModalLabel">New message</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action ="note-update.php" method = "GET">
+          <!-- <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+        </div> -->
+        <div class="form-group">
+        	<label for="message-text" class="col-form-label">Message:</label>
+        	<textarea class="form-control content" width=100%  name ="content" id="message-text"></textarea>
+        </div>
+        <div class="form-group">
+        	<!-- <label for="message-text" class="col-form-label">Username:</label> -->
+        	<input type = "hidden" name ="user" class = "user form-control'">
+        </div>
+        <div class="form-group">
+        	<!-- <label for="message-text" class="col-form-label">Message:</label> -->
+        	<input type = "hidden" name ="noteId" class = "noteId form-control'">
+        </div>
+        <div class="form-group">
+        	<!-- <label for="message-text" class="col-form-label">Message:</label> -->
+        	<input type = "hidden" name ="writer" class = "writer form-control'">
+        </div>
+        <input type="submit" class = "btn btn-primary">
+    </form>
+</div>
+<div class="modal-footer">
+	<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	<button type="button" class="btn btn-primary">Update</button> -->
+</div>
+</div>
+</div>
+</div>
 
 
 

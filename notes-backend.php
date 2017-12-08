@@ -28,10 +28,13 @@ class Note{
 		$notes = array();
 		$query = "SELECT * FROM contact JOIN account ON 
 		account.UserID = contact.writer
-		WHERE contact.UserID = $id";
+		WHERE contact.UserID = $id
+		ORDER BY contact.time DESC
+		";
 		if ($result = $mysqli->query($query)) {
 			while ($row = $result->fetch_assoc()) {
 				$note = array(
+					"ID" => $row["ID"],
 					"content" => $row["Content"],
 					"time" => $row["Time"],
 					"UserName" => $row["UserName"],
