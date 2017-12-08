@@ -44,8 +44,6 @@
 
 
 	<a class="nav-link" href = "list.php"> Your Clients</a>
-	<a class="nav-link" href = "#Notes">Notes</a>
-	<a class="nav-link" href = "#Report">Report</a>
 	<a class="nav-link" href = "logout.php">Logout</a>
 
 	<?php }else{ ?>
