@@ -39,11 +39,11 @@ if (isset($_REQUEST['login'])){
 		$row = mysqli_fetch_array($stmt, MYSQLI_ASSOC);
 		setSession($row);
 		//print_r($_SESSION);
-		if($_SESSION['user_type'] == 'AGENT' ){
+		if($_SESSION['userType'] == 'AGENT' ){
 			header("Location: list.php");
 			exit;
 		}else{
-			header("Location: createAccount.php.php");
+			header("Location: createAccount.php");
 			exit;
 		}
 	} else {
