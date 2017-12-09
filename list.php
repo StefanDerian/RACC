@@ -6,27 +6,75 @@ include ('header.php');
 
 ?>
 
-<div>
+<div class = "container-fluid">
+    <div class="row">
 
+        <?php  if(isset($_GET['msg'])){ ?>
+        <span class = "alert alert-success">  <?php echo $_GET['msg']; ?></span>
+        <?php } ?>
 
-    <?php  if(isset($_GET['msg'])){ ?>
-    <span class = "message">  <?php echo $_GET['msg']; ?></span>
-    <?php } ?>
+        <form method="post" name="info" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            <div class="col-md-2" >
 
-    <form method="post" name="info" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <input type="text" name="search" placeholder="Search for client..."/>
-        <input type="submit" class ="btn btn-warning" name="Btsearch" value="Search"/>
-    </form>
-    <a href = "editAppt.php" class = "btn btn-primary pull-right"> Add Client</a>
-    <table width="100%" style="border-collapse:collapse" cellpadding="5">
-        <tr>
+                <div class = "form-group">
+                    <label> Enter Name:</label>
+
+                    <input type="text" class="form-control" name="search" placeholder="Search for client Name..."/>
+
+                </div>
+            </div> 
+            <div class="col-md-2" >
+
+                <div class = "form-group">
+                    <label> Enter Course:</label>
+                    <input type="text" class="form-control" name="course" placeholder="Course..."/>
+
+                </div>
+            </div>
+            <div class="col-md-2" >
+
+                <div class = "form-group">
+                    <label> Enter Visa Expiry Date:</label>
+                    <input type="date" class="form-control" name="vexpiry[begin]" placeholder="dd/mm/yyyy"/>
+                    To
+                    <input type="date" class="form-control" name="vexpiry[end]" placeholder="dd/mm/yyyy"/>
+                </div>
+            </div>  
+
+            <div class="col-md-2" >
+
+                <div class = "form-group">
+                    <label> Enter Last Contact Date:</label>
+                    <input type="date" class="form-control" name="lastContact[begin]" placeholder="dd/mm/yyyy"/>
+                    To
+                    <input type="date" class="form-control" name="lastContact[end]" placeholder="dd/mm/yyyy"/>
+                </div>
+            </div>  
+
+            <div class="col-md-2" >
+
+                <input type="submit" class ="btn btn-warning" name="Btsearch" value="Search"/>
+            </div>
+        </form>
+    </div>
+    <a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a>
+    <table width="100%" style="border-collapse:collapse" cellpadding="5" class="table table-hover">
+        <tr class = "info">
             <th>First Name</th>
             <th>Last Name</th>
             <th>Prefer Name</th>
             <th>Mobile</th>
             <th>Email</th>
             <th>Status</th>
+            <th>Visa Expiry Date</th>
+            <th>Course</th>
+            <th>Last Contact</th>
+
         </tr>
+        <?php if (empty($appointment)){ ?>
+
+            <span class = "alert alert-warning"> There is no match with your Search criteria</span>
+        <?php } else {?>
 
 
         <?php foreach($appointments as $appointment) { ?>
@@ -37,9 +85,14 @@ include ('header.php');
             <td><?php echo $appointment["Mobile"] ?></td>
             <td><?php echo $appointment["Email"] ?></td>
             <td><?php echo $appointment["CurrentStatus"] ?></td>
+            <td><?php echo $appointment["vexpiry"] ?></td>
+            <td><?php echo $appointment["course"] ?></td>
+            <td><?php echo $appointment["lastContacted"] ?></td>
 
         </tr>
         <?php } ?>
+        <?php } ?>
+
     </table>
     
 </div>

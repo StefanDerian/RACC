@@ -6,15 +6,14 @@ include_once('notes-backend.php');
 ?>
 
 <?php if(isset($_GET['msg'])){ ?>
-<div class = "p-3 mb-2 bg-success text-white message">
+<div class = "alert <?php echo $_GET['flag']==1?'alert-success':'alert-danger';?>">
+    <?php echo $_GET['msg']; ?>
+</div>
 
-
-
-
+<?php } ?> 
+<?php if(!empty($statusmsg)){ ?>
+<div class = "alert <?php echo $statusFlag==1?'alert-success':'alert-danger';?>">
     <?php echo $statusmsg; ?>
-
-    
-
 </div>
 
 <?php } ?> 
@@ -23,14 +22,14 @@ include_once('notes-backend.php');
 <?php if(isset($_SESSION['userID']) && isset($_GET['user'])){
     ?>
     <nav class="nav nav-tabs " id="myTab" role="tablist">
-        <li>
-         <a href=<?php echo "editAppt.php?user=$id"; ?> class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" >Edit Data</a>
-     </li>
-     <li>
-         <a href=<?php echo "PointTest.php?user=$id"; ?> class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Point Test</a>
-     </li>
- </nav>
- <?php } ?>
+        <li class = "active">
+            <a href=<?php echo "editAppt.php?user=$id"; ?> class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" >Edit Data</a>
+        </li>
+        <li >
+           <a href=<?php echo "PointTest.php?user=$id"; ?> class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Point Test</a>
+       </li>
+   </nav>
+   <?php } ?>
 
 
 <!--     <!DOCTYPE html>
@@ -70,10 +69,20 @@ include_once('notes-backend.php');
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label>Prefer Name</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control"  name="pname" value = "<?php echo isset($lname)?$lname:"";?>">
                             </div>
                             <span class="error"><?php echo isset($pnameError)?$pnameError:"";?>
                             </span>
+                        </div>
+                        <div class="radio col-sm-6 form-group">
+                            <label>Gender:</label>
+                            <label>
+                                <input type="radio" id="male" name="gender" maxlength="45" value="Male" <?php echo isset($gender)&&$gender=="Male"?"checked":"";?>/>Male 
+                            </label>
+                            <label>
+                                <input type="radio" id="female" name="gender"    maxlength="45" value="Female" <?php echo isset($gender)&&$gender=="Female"?"checked":"";?>/>Female 
+                            </label>
+                            <span class="error"><?php echo isset($genderError)?$genderError:"";?></span>
                         </div>                   
                         <div class="row"> 
                             <div class="col-sm-6 form-group">
@@ -154,11 +163,11 @@ include_once('notes-backend.php');
                             <span class="error"><?php echo isset($vexpiryError)?$vexpiryError:"";?></span>
                         </div>
                         <div class="form-group">
-                         <label>Passport No.:</label>
-                         <input class="form-control" type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" />
-                         <span class="error"><?php echo isset($passportError)?$passportError:"";?></span>
-                     </div>
-                     <div class="form-group">
+                           <label>Passport No.:</label>
+                           <input class="form-control" type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" />
+                           <span class="error"><?php echo isset($passportError)?$passportError:"";?></span>
+                       </div>
+                       <div class="form-group">
                         <label>Passport Expiry Date:</label>
                         <input class="form-control" type="date" id="pexpiry" name="pexpiry" value = "<?php echo isset($pexpiry)?$pexpiry:"";  ?>" />
                         <span class="error"><?php echo isset($pexpiryError)?$pexpiryError:"";?></span>

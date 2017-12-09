@@ -50,7 +50,7 @@ $haddressError = "";
 $consultantError = "";
 $statusError = "";
 
-
+$statusFlag = "";
 
 
 $id = isset($_GET['user'])?$_GET['user']:"";
@@ -101,7 +101,12 @@ function insertNotes($mysqli,$value){
 
 
 	if($mysqli->query($query)){
-		$statusmsg = "note Inserted";
+		$GLOBALS['statusmsg'] = "Successfully Inserting note";
+		$GLOBALS['statusFlag'] = 1;
+
+	}else{
+		$GLOBALS['statusmsg'] = "Failed Inserting note";
+		$GLOBALS['statusFlag'] = 0;
 
 	}
 }
@@ -202,13 +207,13 @@ function insertClient($mysqli,$value,$admin = false){
 
 	$query = "INSERT INTO USER ($collumns) 
 	VALUES ($values)";
-
+	//echo $query;
 
 	if($mysqli->query($query)){
 		//redirect to the list page
 
 
-		if(isset($_SESSION['UserID'])){
+		if(isset($_SESSION['userID'])){
 			header("Location: list.php?msg=Successfully Inserted the Client Data"); 
 			exit;
 		}else{
@@ -217,6 +222,14 @@ function insertClient($mysqli,$value,$admin = false){
 		}
 
 		
+	}else{
+		if(isset($_SESSION['UserID'])){
+			header("Location: list.php?msg=Failed Inserted the Client Data"); 
+			exit;
+		}else{
+			header("Location: editAppt.php"); 
+			exit;
+		}
 	}
 }
 
@@ -365,6 +378,7 @@ function checkError($values, $admin = false){
 			$GLOBALS['emailError'] = "Invalid email format"; 
 		}
 	}
+
 	if ($error > 0 ){
 		return false;
 	}else{
@@ -411,6 +425,10 @@ if(isset($_SESSION['userID'])){
 
 				if($mysqli->query($query)){
 					$GLOBALS['statusmsg'] = "Successfully Update the Client Data";
+					$GLOBALS['statusFlag'] = 1;
+				}else{
+					$GLOBALS['statusmsg'] = 'Failed Update Client Data';
+					$GLOBALS['statusFlag'] = 0;
 				}
 
 			}
@@ -454,7 +472,9 @@ if(isset($_SESSION['userID'])){
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST"){
 		assignVars($_POST);
+
 		if(checkError($_POST)){
+
 
 			insertClient($mysqli, $_POST);
 

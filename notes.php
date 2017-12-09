@@ -48,14 +48,14 @@
 	DELETE
 
 </a>
-<button class = "btn btn-sm btn-warning edit-note" data-toggle="modal" data-target="#noteModal" data-content = "<?php echo $note['content'] ; ?>"
+<a class = "btn btn-sm btn-warning edit-note" data-toggle="modal" data-target="#noteModal" data-content = "<?php echo $note['content'] ; ?>"
 data-id = "<?php echo $note['ID'] ; ?>" data-user = "<?php echo $_GET['user'] ; ?>" data-writer = "<?php echo $_SESSION['userID'] ; ?>"
 
  >
 
 	EDIT
 
-</button>
+</a>
 
 
 
