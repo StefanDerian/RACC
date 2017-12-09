@@ -22,36 +22,40 @@ include ('header.php');
 
 <?php if(isset($_SESSION['userID']) && isset($_GET['user'])){
     ?>
-    <nav class="nav nav-tabs" id="myTab" role="tablist">
-        <a href=<?php echo "editAppt.php?user=$id"; ?> class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" >Edit Data</a>
-        <a href=<?php echo "PointTest.php?user=$id"; ?> class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Point Test</a>
-    </nav>
-    <?php } ?>
+    <nav class="nav nav-tabs " id="myTab" role="tablist">
+        <li>
+           <a href=<?php echo "editAppt.php?user=$id"; ?> class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" >Edit Data</a>
+       </li>
+       <li class = "active">
+           <a href=<?php echo "PointTest.php?user=$id"; ?> class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Point Test</a>
+       </li>
+   </nav>
+   <?php } ?>
 
-    <table width="100%" style="border-collapse:collapse" cellpadding="13">
-        <form method="post">
-            <tr>
-                <th></th>
-                <th>Skills</th>
-                <th>Current Points</th>
-                <th>Notes</th>
-                <th>Goal Points</th>
-            </tr>
-
-
-            <?php foreach ($forms as $key => $value) {?>
-            <tr>
-                <td><?php echo $value['id']; ?></td>
-                <td><?php echo $value['name']; ?></td>
-                <td><input id="Cage" name="<?php echo $key.'[current]';?>" type="number" value="<?php echo $formValue[$key]['current'];?>"/></td>
-                <td><?php echo $value['note']; ?></td>
-                <td><input name="<?php echo $key.'[goal]'; ?>" type="number" value="<?php echo $formValue[$key]['goal'];?>" /></td>
-                <td><input name="<?php echo $key.'[id]'; ?>" type="hidden" value=<?php echo $value['id']; ?> /></td>
-            </tr>
+   <table width="100%" style="border-collapse:collapse" cellpadding="13">
+    <form method="post">
+        <tr>
+            <th></th>
+            <th>Skills</th>
+            <th>Current Points</th>
+            <th>Notes</th>
+            <th>Goal Points</th>
+        </tr>
 
 
+        <?php foreach ($forms as $key => $value) {?>
+        <tr>
+            <td><?php echo $value['id']; ?></td>
+            <td><?php echo $value['name']; ?></td>
+            <td><input id="Cage" name="<?php echo $key.'[current]';?>" type="number" value="<?php echo $formValue[$key]['current'];?>"/></td>
+            <td><?php echo $value['note']; ?></td>
+            <td><input name="<?php echo $key.'[goal]'; ?>" type="number" value="<?php echo $formValue[$key]['goal'];?>" /></td>
+            <td><input name="<?php echo $key.'[id]'; ?>" type="hidden" value=<?php echo $value['id']; ?> /></td>
+        </tr>
 
-            <?php } ?>
+
+
+        <?php } ?>
 
            <!--  <tr>
                 <td>1</td>

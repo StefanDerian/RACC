@@ -19,7 +19,7 @@
 <form  id = "note" name="form" action="<?php echo $GLOBALS['action'];?>" method = "post" > <!-- action="<?php echo $GLOBALS['action'];?>" -->
 	<input type="hidden" name="note" value="note" />
 	<div class="form-group">
-		<label for="exampleFormControlTextarea1">Example textarea</label>
+		<label for="exampleFormControlTextarea1">Enter Note</label>
 		<textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3"></textarea>
 	</div>
 	<input type = "submit" class = "btn btn-primary" value = "submit">
@@ -78,7 +78,7 @@ data-id = "<?php echo $note['ID'] ; ?>" data-user = "<?php echo $_GET['user'] ; 
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="noteModalLabel">New message</h5>
+				<h5 class="modal-title" id="noteModalLabel">Change Note</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -90,7 +90,7 @@ data-id = "<?php echo $note['ID'] ; ?>" data-user = "<?php echo $_GET['user'] ; 
             <input type="text" class="form-control" id="recipient-name">
         </div> -->
         <div class="form-group">
-        	<label for="message-text" class="col-form-label">Message:</label>
+        	<label for="message-text" class="col-form-label">Note:</label>
         	<textarea class="form-control content" width=100%  name ="content" id="message-text"></textarea>
         </div>
         <div class="form-group">

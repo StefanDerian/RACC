@@ -15,9 +15,9 @@ include ('header.php');
 
     <form method="post" name="info" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <input type="text" name="search" placeholder="Search for client..."/>
-        <input type="submit" name="Btsearch" value="Search"/>
+        <input type="submit" class ="btn btn-warning" name="Btsearch" value="Search"/>
     </form>
-    <a href = "editAppt.php"> Add Client</a>
+    <a href = "editAppt.php" class = "btn btn-primary pull-right"> Add Client</a>
     <table width="100%" style="border-collapse:collapse" cellpadding="5">
         <tr>
             <th>First Name</th>
