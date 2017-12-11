@@ -2,6 +2,7 @@
 include ('session.php');
 include ('editAppt-backend.php');
 include ('header.php');
+include ('editDate-backend.php');
 include_once('notes-backend.php');
 ?>
 
@@ -26,10 +27,10 @@ include_once('notes-backend.php');
             <a href=<?php echo "editAppt.php?user=$id"; ?> class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" >Edit Data</a>
         </li>
         <li >
-           <a href=<?php echo "PointTest.php?user=$id"; ?> class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Point Test</a>
-       </li>
-   </nav>
-   <?php } ?>
+         <a href=<?php echo "PointTest.php?user=$id"; ?> class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Point Test</a>
+     </li>
+ </nav>
+ <?php } ?>
 
 
 <!--     <!DOCTYPE html>
@@ -163,11 +164,11 @@ include_once('notes-backend.php');
                             <span class="error"><?php echo isset($vexpiryError)?$vexpiryError:"";?></span>
                         </div>
                         <div class="form-group">
-                           <label>Passport No.:</label>
-                           <input class="form-control" type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" />
-                           <span class="error"><?php echo isset($passportError)?$passportError:"";?></span>
-                       </div>
-                       <div class="form-group">
+                         <label>Passport No.:</label>
+                         <input class="form-control" type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" />
+                         <span class="error"><?php echo isset($passportError)?$passportError:"";?></span>
+                     </div>
+                     <div class="form-group">
                         <label>Passport Expiry Date:</label>
                         <input class="form-control" type="date" id="pexpiry" name="pexpiry" value = "<?php echo isset($pexpiry)?$pexpiry:"";  ?>" />
                         <span class="error"><?php echo isset($pexpiryError)?$pexpiryError:"";?></span>
@@ -205,27 +206,35 @@ include_once('notes-backend.php');
                         </select>
                         
                     </div>
-
-                    <input type="submit" class="btn btn-lg btn-info" value=" submit">                   
-                </div>
-
-                <?php if(isset($_SESSION['userID']) && isset($_GET['user']) ){?>
-                <div class = "col-md-3">
+                </form>
+                <input type="submit" class="btn btn-lg btn-info" value=" submit">   
 
 
+                <?php 
+                if(isset($_SESSION['userID']) && isset($_GET['user'])){
+                    $url = $_SERVER['PHP_SELF'];
+                    new editDate($id, "$url?user=$id");
+                } 
+                ?>               
+            </div>
 
-                    <?php 
-
-                    $noter = new Note($_GET['user']);
-                    $noter->displayNotes();
-                    ?>
+            <?php if(isset($_SESSION['userID']) && isset($_GET['user']) ){?>
+            <div class = "col-md-3">
 
 
-                </div>
-                <?php } ?>
+
+                <?php 
+
+                $noter = new Note($_GET['user']);
+                $noter->displayNotes();
+                ?>
 
 
-            </form>
+            </div>
+            <?php } ?>
+
+
+
         </div>
     </div>
 </body>
