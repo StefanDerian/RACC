@@ -82,18 +82,17 @@ include ('editDate-backend.php');
 
 
     <?php foreach($appointments as $appointment) { ?>
-    <tr class="listrow" onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'">
-        <td><?php echo $appointment["FirstName"] ?></td>
-        <td><?php echo $appointment["LastName"] ?></td>
-        <td><?php echo $appointment["PreferName"] ?></td>
-        <td><?php echo $appointment["Mobile"] ?></td>
-        <td><?php echo $appointment["Email"] ?></td>
-        <td><?php echo $appointment["CurrentStatus"] ?></td>
-        <td><?php echo $appointment["vexpiry"] ?></td>
-        <td><?php echo $appointment["course"] ?></td>
-        <td><?php echo $appointment["lastContacted"] ?></td>
-        <td><?php new editDate($appointment["UserID"], $_SERVER['PHP_SELF']) ?> </td>
-        <td><?php echo substr($_SERVER['PHP_SELF'], -4)  ?> </td>
+    <tr class="listrow">
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["FirstName"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["LastName"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["PreferName"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Mobile"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Email"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["CurrentStatus"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["vexpiry"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["course"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["lastContacted"] ?></td>
+        <td ><?php new editDate($appointment["UserID"], $_SERVER['PHP_SELF']) ?> </td>
 
     </tr>
 

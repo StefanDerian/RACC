@@ -22,15 +22,28 @@ include_once('notes-backend.php');
 
 <?php if(isset($_SESSION['userID']) && isset($_GET['user'])){
     ?>
-    <nav class="nav nav-tabs " id="myTab" role="tablist">
-        <li class = "active">
-            <a href=<?php echo "editAppt.php?user=$id"; ?> class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" >Edit Data</a>
-        </li>
-        <li >
-         <a href=<?php echo "PointTest.php?user=$id"; ?> class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Point Test</a>
-     </li>
- </nav>
- <?php } ?>
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+
+          <ul class="nav navbar-nav">
+             <li class = "active">
+                <a href=<?php echo "editAppt.php?user=$id"; ?>   >Edit Data</a>
+            </li>
+            <li >
+             <a href=<?php echo "PointTest.php?user=$id"; ?>  >Point Test</a>
+         </li>
+     </ul>
+ </div>
+</nav>
+<!-- <div class="btn-group">
+    <li class = "active">
+        <a href=<?php echo 'editAppt.php?user=$id'; ?> class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" >Edit Data</a>
+    </li>
+    <li >
+       <a href=<?php echo "PointTest.php?user=$id"; ?> class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Point Test</a>
+   </li>
+</div> -->
+<?php } ?>
 
 
 <!--     <!DOCTYPE html>
@@ -49,9 +62,9 @@ include_once('notes-backend.php');
         <div class="col-lg-12 well">
             <h2 class="title2">Personal Information</h2>
             <div class="row">
-                <form method="post" name="form" action="<?php echo $action;?>" onsubmit="return confirm('Do you really want to submit the form?');">
+                <form method="post" name="form" action="<?php echo $action;?>" >
                     <input type="hidden" name="client" value="client" />
-                    <div class="<?php echo isset($_GET['user'])?'col-md-9': 'col-md-12';?>">
+                    <div class="<?php echo isset($_GET['user'])?'col-md-5': 'col-md-12';?>">
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label>First Name</label>
@@ -219,7 +232,7 @@ include_once('notes-backend.php');
             </div>
 
             <?php if(isset($_SESSION['userID']) && isset($_GET['user']) ){?>
-            <div class = "col-md-3">
+            <div class = "col-md-7">
 
 
 

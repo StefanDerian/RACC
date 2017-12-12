@@ -22,19 +22,24 @@ include ('header.php');
 
 <?php if(isset($_SESSION['userID']) && isset($_GET['user'])){
     ?>
-    <nav class="nav nav-tabs " id="myTab" role="tablist">
-        <li>
-           <a href=<?php echo "editAppt.php?user=$id"; ?> class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" >Edit Data</a>
-       </li>
-       <li class = "active">
-           <a href=<?php echo "PointTest.php?user=$id"; ?> class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Point Test</a>
-       </li>
-   </nav>
-   <?php } ?>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
 
-   <table width="100%" style="border-collapse:collapse" cellpadding="13">
-    <form method="post">
-        <tr>
+          <ul class="nav navbar-nav">
+           <li class = "active">
+            <a href=<?php echo "editAppt.php?user=$id"; ?>   >Edit Data</a>
+        </li>
+        <li >
+           <a href=<?php echo "PointTest.php?user=$id"; ?>  >Point Test</a>
+       </li>
+   </ul>
+</div>
+</nav>
+<?php } ?>
+
+<table class ="table" width="100%" style="border-collapse:collapse" cellpadding="13">
+    <form method="post" onsubmit="return confirm('Do you really want to submit the form?');">
+        <tr class = "info">
             <th></th>
             <th>Skills</th>
             <th>Current Points</th>
@@ -47,9 +52,17 @@ include ('header.php');
         <tr>
             <td><?php echo $value['id']; ?></td>
             <td><?php echo $value['name']; ?></td>
-            <td><input id="Cage" name="<?php echo $key.'[current]';?>" type="number" value="<?php echo $formValue[$key]['current'];?>"/></td>
+            <td>
+                <div class ="form-group">
+                    <input class="form-control" id="Cage" name="<?php echo $key.'[current]';?>" type="number" value="<?php echo $formValue[$key]['current'];?>"/>
+                </div>
+            </td>
             <td><?php echo $value['note']; ?></td>
-            <td><input name="<?php echo $key.'[goal]'; ?>" type="number" value="<?php echo $formValue[$key]['goal'];?>" /></td>
+            <td>
+                <div class ="form-group">
+                    <input class ="form-control" name="<?php echo $key.'[goal]'; ?>" type="number" value="<?php echo $formValue[$key]['goal'];?>" />
+                </div>
+            </td>
             <td><input name="<?php echo $key.'[id]'; ?>" type="hidden" value=<?php echo $value['id']; ?> /></td>
         </tr>
 

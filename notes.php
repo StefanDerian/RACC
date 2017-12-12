@@ -26,7 +26,7 @@
 </form>
 
 
-<div class = "fluid-container notes-list">
+<div class = "container-fluid center notes-list">
 
 
 
@@ -43,7 +43,7 @@
 </br>
 <p>at : <?php echo $note['time']?></p>
 
-<a class = "btn btn-sm btn-danger delete-note" href = "note-delete.php?id=<?php echo $note['ID']?>&user=<?php echo $this->id ?>">
+<a data-target="#confirmModal" data-toggle="modal" class = "btn btn-sm btn-danger delete-note" data-content="Are you sure you want to delete this note? the change cannot be undone" data-url="note-delete.php?id=<?php echo $note['ID']?>&user=<?php echo $this->id ?>"  >
 
 	DELETE
 
@@ -73,6 +73,13 @@ data-id = "<?php echo $note['ID'] ; ?>" data-user = "<?php echo $_GET['user'] ; 
 
 
 </form>
+<?php   $note = "Are you sure you want to delete this note? the change cannot be undone "; ?>
+<?php new ConfirmationModal($note); ?> 
+
+
+
+
+
 
 <div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
