@@ -1,0 +1,20 @@
+/*@import url("header.css");*/
+.note-content{
+	overflow-wrap: break-word;
+	max-width: 365px;
+	max-height: 19px;
+	overflow: hidden;
+}
+.notes-list{
+	max-height: 1000px;
+	overflow: scroll;
+}
+
+.a-note{
+	background:#ffffff;
+}
+
+.navbar-new{
+	background-color: #0915a9 !important;
+	min-height: 101px !important;
+}

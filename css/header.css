@@ -1,3 +1,17 @@
+.navbar-new{
+	background-color: #0915a9 !important;
+	min-height: 101px !important;
+}
 
+.navbar-new li{
+	background-color: #0915a9 !important;
+	min-height: 101px !important;
+}
 
+.navbar-new li a{
+	color: #ffffff !important;
+}
 
+.navbar-new .navbar-nav{
+	min-height: 100px;
+}

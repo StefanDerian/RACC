@@ -1,3 +1,7 @@
+@import url(header.css);
+@import url(note.css);
+/*@import url(login.css);*/
+
 .pageheadding {
 	color:#000;
 	font-family:Calibri;

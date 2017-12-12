@@ -55,7 +55,7 @@ function updateValue ($mysqli){
 $formList = $mysqli->query("SELECT * FROM pointtype");
 
 
-while ($row = mysqli_fetch_assoc($result)) {
+while ($row = mysqli_fetch_assoc($formList)) {
 		# code...
 
 		// $current = $row['formname']."['current']";
@@ -77,11 +77,16 @@ while ($row = mysqli_fetch_assoc($result)) {
 	$GLOBALS['forms'][$row['formname']] = array(
 		'id' => $row['id'],
 		'name' => $row ['name'],
-		'note' => $row ['note'],
-		'current' => $row ['current'],
-		'goal' => $row ['goal'],
+		'note' => $row ['note']
+		// 'current' => $row ['current'],
+		// 'goal' => $row ['goal'],
 
 	);
+	// if($number > 0){
+	// 	$GLOBALS['forms'][$row['formname']]['current'] = $row ['current'];
+	// 	$GLOBALS['forms'][$row['formname']]['goal'] = $row ['goal'];
+	// //print_r($formValue);
+	// }
 }
 
 
