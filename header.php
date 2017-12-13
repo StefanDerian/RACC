@@ -101,10 +101,12 @@
 
 			<?php if(isset($_SESSION['userID'])){ ?>
 
+			
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="list.php">Clients</a></li>
 				
 			</ul>
+			
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 			</ul>

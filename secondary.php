@@ -6,7 +6,7 @@
 
           <ul class="nav navbar-nav">
              <li class = "active">
-                <a href=<?php echo "editAppt.php?user=$id"; ?>   >Edit Data</a>
+                <a href=<?php echo "editAppt.php?user=$id"; ?>   >Cient Information</a>
             </li>
             <li >
              <a href=<?php echo "PointTest.php?user=$id"; ?>  >Point Test</a>

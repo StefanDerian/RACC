@@ -46,14 +46,14 @@ include_once('notes-backend.php');
                             <span class="error"><?php echo isset($lnameError)?$lnameError:"";?>
                             </span>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label>Prefer Name</label>
                                 <input type="text" class="form-control"  name="pname" value = "<?php echo isset($lname)?$lname:"";?>">
                             </div>
                             <span class="error"><?php echo isset($pnameError)?$pnameError:"";?>
                             </span>
-                        </div>
+                        </div> -->
                         <div class="radio col-sm-6 form-group">
                             <label>Gender:</label>
                             <label>
@@ -82,7 +82,7 @@ include_once('notes-backend.php');
                         </div>
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <label>Phone Number</label>
+                                <label>Mobile Number</label>
                                 <input type="text"  id="mobile" name="mobile" maxlength="45" value = "<?php echo isset($mobile)?$mobile:"";  ?>" class="form-control">
                             </div>
                             <span class="error"><?php echo isset($mobileError)?$mobileError:"";?>
@@ -143,11 +143,11 @@ include_once('notes-backend.php');
                             <span class="error"><?php echo isset($vexpiryError)?$vexpiryError:"";?></span>
                         </div>
                         <div class="form-group">
-                         <label>Passport No.:</label>
-                         <input class="form-control" type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" />
-                         <span class="error"><?php echo isset($passportError)?$passportError:"";?></span>
-                     </div>
-                     <div class="form-group">
+                           <label>Passport No.:</label>
+                           <input class="form-control" type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" />
+                           <span class="error"><?php echo isset($passportError)?$passportError:"";?></span>
+                       </div>
+                       <div class="form-group">
                         <label>Passport Expiry Date:</label>
                         <input class="form-control" type="date" id="pexpiry" name="pexpiry" value = "<?php echo isset($pexpiry)?$pexpiry:"";  ?>" />
                         <span class="error"><?php echo isset($pexpiryError)?$pexpiryError:"";?></span>
@@ -167,13 +167,13 @@ include_once('notes-backend.php');
                             <option value= "not even in progress" <?php echo isset($status)&&$status=="new client"?"selected":"" ?>>new client</option>
                             <option value= "on progress" <?php echo isset($status)&&$status=="on progress"?"selected":"" ?>> app on progress</option>
                             <option value= "successfull" <?php echo isset($status)&&$status=="successfull"?"selected":"" ?>> Successfull</option>
-                           <!--  <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option> -->
+                            <!--  <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option> -->
 
                         </select>
                     </div>
 
                     <?php } ?>
-
+                    <?php if(!isset($_SESSION['userID'])){?>
                     <div class="form-group">
                         <label>Consultant:</label>
                         
@@ -184,16 +184,12 @@ include_once('notes-backend.php');
                         </select>
                         
                     </div>
+                    <?php } ?>
                 </form>
                 <input type="submit" class="btn btn-lg btn-info" value=" submit">   
 
 
-                <?php 
-                if(isset($_SESSION['userID']) && isset($_GET['user'])){
-                    $url = $_SERVER['PHP_SELF'];
-                    new editDate($id, "$url?user=$id");
-                } 
-                ?>               
+
             </div>
 
             <?php if(isset($_SESSION['userID']) && isset($_GET['user']) ){?>

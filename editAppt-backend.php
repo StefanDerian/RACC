@@ -117,7 +117,7 @@ function insertNotes($mysqli,$value){
 function assignVars ($value, $admin = false){
 	$GLOBALS['fname'] =$value['fname'];
 	$GLOBALS['lname'] = $value['lname'];
-	$GLOBALS['pname'] = $value['pname'];
+	// $GLOBALS['pname'] = $value['pname'];
 	$GLOBALS['gender'] = isset($value['gender'])?$value['gender']:"";
 	$GLOBALS['dob'] = $value['dob'];
 	$GLOBALS['nationality'] = $value['nationality'];
@@ -135,7 +135,11 @@ function assignVars ($value, $admin = false){
 	}
 	$GLOBALS['caddress'] = $value['caddress'];
 	$GLOBALS['haddress'] = $value['haddress'];
-	$GLOBALS['consultant'] = $value['consultant'];
+
+	if(!$admin){
+		$GLOBALS['consultant'] = $value['consultant'];
+	}
+	
 	
 }
 
@@ -143,7 +147,7 @@ function assignFromDatabase($value){
 
 	$GLOBALS['fname'] =$value['FirstName'];
 	$GLOBALS['lname'] = $value['LastName'];
-	$GLOBALS['pname'] = $value['PreferName'];
+	// $GLOBALS['pname'] = $value['PreferName'];
 	$GLOBALS['gender'] = $value['Gender'];
 	$GLOBALS['dob'] = $value['DateofBirth'];
 	$GLOBALS['nationality'] = $value['Nationality'];
@@ -171,12 +175,13 @@ function insertClient($mysqli,$value,$admin = false){
 	$statusInsert = "";
 
 	if(!$admin){
-		$statusInsert = "not even in progress";
+		$statusInsert = "new client";
+		$consultant = $value['consultant'];
 	}
 
 	$fname = $value['fname'];
 	$lname = $value['lname'];
-	$pname = $value['pname'];
+	// $pname = $value['pname'];
 	$gender = $value['gender'];
 	$dob = $value['dob'];
 	$nationality = $value['nationality'];
@@ -194,7 +199,7 @@ function insertClient($mysqli,$value,$admin = false){
 	}
 	$caddress = $value['caddress'];
 	$haddress = $value['haddress'];
-	$consultant = $value['consultant'];
+	
 
 
 
@@ -265,17 +270,17 @@ function checkError($values, $admin = false){
 	}
 
 
-	if (empty($values["pname"])) {
-		$error++;
-		$GLOBALS['pnameError'] = "Preference name is required";
-	} else {
-		$last = $values["pname"];
-		// check if name contains a letter
-		if (!preg_match("/[a-zA-Z ]/",$last)) {
-			$error++;
-			$GLOBALS['pnameError'] = "Preference must contain a letter";
-		}
-	}
+	// if (empty($values["pname"])) {
+	// 	$error++;
+	// 	$GLOBALS['pnameError'] = "Preference name is required";
+	// } else {
+	// 	$last = $values["pname"];
+	// 	// check if name contains a letter
+	// 	if (!preg_match("/[a-zA-Z ]/",$last)) {
+	// 		$error++;
+	// 		$GLOBALS['pnameError'] = "Preference must contain a letter";
+	// 	}
+	// }
 
 	
 

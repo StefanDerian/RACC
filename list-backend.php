@@ -11,10 +11,18 @@ function table($query){
 
 <?php
 
+
+
+
+
+
+
 $a = $_SESSION['userID'];
 
-$query = "SELECT UserID FROM user ";
+$query = "SELECT user.UserID FROM user ";
 $parameter = "";
+$lastContactParam ="";
+
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -27,25 +35,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if(!empty($_POST['search'])){
         $search = $_POST['search'];
-        $parameter .= empty($parameter)?"":"OR";
+        $parameter .= empty($parameter)?"":"AND";
         $parameter .= " FirstName LIKE '%$search%' OR LastName LIKE '%$search%' OR PreferName LIKE '%$search%' OR Mobile LIKE '%$search%' OR  Email LIKE '%$search%' ";
-    }    
-    if(!empty($_POST['course'])){
-        $course = $_POST['course'];
-        $parameter .= empty($parameter)?"":"OR";
-        $parameter .= " course = '$course' ";
     }
-    if(!empty($_POST['lastContact']['begin']) && !empty($_POST['lastContact']['end'])){
-        $lastContactB = $_POST['lastContact']['begin'];
-        $lastContactedE = $_POST['lastContact']['end'];
-        $parameter .= empty($parameter)?"":"OR";
-        $parameter .= " (lastContacted BETWEEN '$lastContactB' AND '$lastContactedE')";
+    if(!empty($_POST['phone'])){
+        $phone = $_POST['phone'];
+        $parameter .= empty($parameter)?"":"AND";
+        $parameter .= " mobile = '$phone' ";
+    } 
+    if(!empty($_POST['dob'])){
+        $dob = $_POST['dob'];
+        $parameter .= empty($parameter)?"":"AND";
+        $parameter .= " DOB = '$dob' ";
     }
-    if(!empty($_POST['vexpiry']['begin']) && !empty($_POST['vexpiry']['end'])){
-        $vexpiryB = $_POST['vexpiry']['begin'];
-        $vexpiryE = $_POST['vexpiry']['end'];
-        $parameter .= empty($parameter)?"":"OR";
-        $parameter .= " (Vexpiry BETWEEN '$vexpiryB' AND '$vexpiryE')";
+    if(!empty($_POST['lastContact'])){
+        $lastContactDate = $_POST['lastContact'];
+        $lastContactParam .= "HAVING MAX(time) >= DATE_ADD(NOW(), INTERVAL $lastContactDate MONTH)";
+    }
+    if(!empty($_POST['vexpiry'])){
+        $vexpiryB = $_POST['vexpiry'];
+        $parameter .= empty($parameter)?"":"AND";
+        $parameter .= "Vexpiry = '$vexpiryE')";
+    }
+    if(empty($parameter)){
+        $query .= "1";
     }
 
     $query .= $parameter;
@@ -59,18 +72,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 // echo "SELECT UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, lastContacted,Course FROM user WHERE ConsultantID = $a AND UserID IN ($query)";
 
 
-$statement = $mysqli->prepare("SELECT UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, lastContacted,Course FROM user WHERE ConsultantID = ? AND UserID IN ($query) ORDER BY lastContacted DESC");
+$statement = $mysqli->prepare("SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam");
+// echo "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
+
+// echo "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
 //$statement->bind_param("i", $_SESSION['userID']);
 // print_r($_SESSION);
 //$a = $_SESSION['userID'];
 $statement->bind_param("i", $a);
 $result = $statement->execute();
-$statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $lastContacted ,$course);
+$statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted);
 
 $appointments = array();
 
 if ($result) {
     while ($statement->fetch()) {
+
+
+
+
+
+
+
+
+
         $appointment = array(
             "UserID" => $rUserID, 
             "FirstName" => $rFirstName,

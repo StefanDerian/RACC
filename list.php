@@ -27,31 +27,49 @@ include ('editDate-backend.php');
 
             </div>
         </div> 
-        <div class="col-md-2" >
+    <!--     <div class="col-md-2" >
 
             <div class = "form-group">
                 <label> Enter Course:</label>
                 <input type="text" class="form-control" name="course" placeholder="Course..."/>
 
             </div>
-        </div>
+        </div> -->
+        <div class="col-md-2" >
+
+            <div class = "form-group">
+                <label> Date Of Birth:</label>
+                <input type="date" class="form-control" name="dob" placeholder="dd/mm/yyyy"/>
+            </div>
+        </div>  
+        <div class="col-md-2" >
+
+            <div class = "form-group">
+                <label> phone number:</label>
+                <input type="tel" class="form-control" name="phone" placeholder="dd/mm/yyyy"/>
+            </div>
+        </div>  
         <div class="col-md-2" >
 
             <div class = "form-group">
                 <label> Enter Visa Expiry Date:</label>
-                <input type="date" class="form-control" name="vexpiry[begin]" placeholder="dd/mm/yyyy"/>
-                To
-                <input type="date" class="form-control" name="vexpiry[end]" placeholder="dd/mm/yyyy"/>
+                <input type="date" class="form-control" name="vexpiry" placeholder="dd/mm/yyyy"/>
             </div>
         </div>  
 
         <div class="col-md-2" >
 
             <div class = "form-group">
-                <label> Enter Last Contact Date:</label>
-                <input type="date" class="form-control" name="lastContact[begin]" placeholder="dd/mm/yyyy"/>
-                To
-                <input type="date" class="form-control" name="lastContact[end]" placeholder="dd/mm/yyyy"/>
+                <label> Enter Last Contact Date In:</label>
+                <select id="status" name="lastContacted" class = "form-control">
+
+                    <option value= "">Any Month</option>
+                    <option value= "-1" >Last 1 Months</option>
+                    <option value= "-2" >Last 2 Months</option>
+                    <option value= "-3" > Last 3 Months</option>
+                    <!--  <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option> -->
+
+                </select>
             </div>
         </div>  
 
@@ -66,7 +84,7 @@ include ('editDate-backend.php');
     <tr class = "info">
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Prefer Name</th>
+        <!-- <th>Prefer Name</th> -->
         <th>Mobile</th>
         <th>Email</th>
         <th>Status</th>
@@ -85,14 +103,14 @@ include ('editDate-backend.php');
     <tr class="listrow">
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["FirstName"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["LastName"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["PreferName"] ?></td>
+        
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Mobile"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Email"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["CurrentStatus"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["vexpiry"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["course"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["lastContacted"] ?></td>
-        <td ><?php new editDate($appointment["UserID"], $_SERVER['PHP_SELF']) ?> </td>
+        
 
     </tr>
 

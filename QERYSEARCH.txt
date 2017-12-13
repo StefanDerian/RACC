@@ -1,0 +1,1 @@
+SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, lastContacted,Course, MAX(time) as tim FROM user JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = 2 GROUP BY user.UserID HAVING MAX(time) >= DATE_ADD(NOW(), INTERVAL -3 MONTH)
