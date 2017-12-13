@@ -164,11 +164,10 @@ include_once('notes-backend.php');
 
                         <select id="status" name="status" class = "form-control">
 
-                            <option value= "not even in progress" <?php echo isset($status)&&$status=="not even in progress"?"selected":"" ?>>Not even in progress</option>
-                            <option value= "contacted" <?php echo isset($status)&&$status=="contacted"?"selected":"" ?>>Not even in progress</option>
-                            <option value= "on progress" <?php echo isset($status)&&$status=="on progress"?"selected":"" ?>> on progress</option>
+                            <option value= "not even in progress" <?php echo isset($status)&&$status=="new client"?"selected":"" ?>>new client</option>
+                            <option value= "on progress" <?php echo isset($status)&&$status=="on progress"?"selected":"" ?>> app on progress</option>
                             <option value= "successfull" <?php echo isset($status)&&$status=="successfull"?"selected":"" ?>> Successfull</option>
-                            <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option>
+                           <!--  <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option> -->
 
                         </select>
                     </div>
