@@ -86,6 +86,7 @@ include ('editDate-backend.php');
         <th>Last Name</th>
         <!-- <th>Prefer Name</th> -->
         <th>Mobile</th>
+        <th>DOB</th>
         <th>Email</th>
         <th>Status</th>
         <th>Visa Expiry Date</th>
@@ -105,6 +106,7 @@ include ('editDate-backend.php');
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["LastName"] ?></td>
         
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Mobile"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["DateofBirth"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Email"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["CurrentStatus"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["vexpiry"] ?></td>
