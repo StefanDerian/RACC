@@ -169,14 +169,14 @@ function assignFromDatabase($value){
 function insertClient($mysqli,$value,$admin = false){
 
 
-	$collumns = "FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, Course, Uni, Uni_compl, CurrentAddress,HomeAddress, ConsultantID, CurrentStatus";
+	$collumns = "FirstName, LastName, DateofBirth, Nationality, Gender, Mobile, Email, Course, Uni, Uni_compl, CurrentAddress,HomeAddress, ConsultantID, CurrentStatus";
 	$collumns .= $admin?",Visa,Vexpiry,Passport,Pexpiry":"";
 
 	$statusInsert = "";
 
 	if(!$admin){
 		$statusInsert = "new client";
-		$consultant = $value['consultant'];
+		
 	}
 
 	$fname = $value['fname'];
@@ -201,19 +201,18 @@ function insertClient($mysqli,$value,$admin = false){
 	$haddress = $value['haddress'];
 	
 
+	$consultant = isset($_SESSION['userID'])?$_SESSION['userID']:$value['consultant'];
 
 
 
 
-
-	$values = "'$fname', '$lname','$pname', '$dob', '$nationality', '$gender', '$mobile', '$email', '$cam', '$uni', '$comp','$caddress','$haddress','$consultant','$statusInsert'";
+	$values = "'$fname', '$lname', '$dob', '$nationality', '$gender', '$mobile', '$email', '$cam', '$uni', '$comp','$caddress','$haddress','$consultant','$statusInsert'";
 	$values .= $admin?",'$visa','$vexpiry','$passport','$pexpiry'":"";
 
 
 	$query = "INSERT INTO USER ($collumns) 
 	VALUES ($values)";
-	//echo $query;
-
+	
 	if($mysqli->query($query)){
 		//redirect to the list page
 
@@ -357,8 +356,9 @@ function checkError($values, $admin = false){
 
 	if (!isset($values["gender"])) {
 		$error++;
-		$GLOBALS['$genderError'] = "Gender is required.";
+		$GLOBALS['genderError'] = "Gender is required.";
 	}
+
 
 	if (empty($values["mobile"])) {
 		$error++;
@@ -407,8 +407,7 @@ if(isset($_SESSION['userID'])){
 			if(checkError($_POST,true)){
 				$query = "UPDATE USER SET 
 				FirstName = '$fname', 
-				LastName = '$lname', 
-				PreferName = '$pname', 
+				LastName = '$lname',  
 				DateofBirth = '$dob', 
 				Nationality = '$nationality', 
 				Gender = '$gender', 
@@ -422,9 +421,9 @@ if(isset($_SESSION['userID'])){
 				Passport = '$passport',
 				Pexpiry = '$pexpiry',
 				CurrentAddress = '$caddress',
-				HomeAddress = '$haddress',
-				ConsultantID = '$consultant'
+				HomeAddress = '$haddress'
 				WHERE UserID = $id ";
+
 
 
 
@@ -477,7 +476,7 @@ if(isset($_SESSION['userID'])){
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST"){
 		assignVars($_POST);
-
+		
 		if(checkError($_POST)){
 
 

@@ -48,8 +48,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $parameter .= empty($parameter)?"":"AND";
         $parameter .= " DOB = '$dob' ";
     }
-    if(!empty($_POST['lastContact'])){
-        $lastContactDate = $_POST['lastContact'];
+    if(!empty($_POST['lastContacted'])){
+        $lastContactDate = $_POST['lastContacted'];
         $lastContactParam .= "HAVING MAX(time) >= DATE_ADD(NOW(), INTERVAL $lastContactDate MONTH)";
     }
     if(!empty($_POST['vexpiry'])){
@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 // echo "SELECT UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, lastContacted,Course FROM user WHERE ConsultantID = $a AND UserID IN ($query)";
 
 
-$statement = $mysqli->prepare("SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam");
+$statement = $mysqli->prepare("SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam");
 // echo "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
 
 // echo "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";

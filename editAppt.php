@@ -9,7 +9,12 @@ include_once('notes-backend.php');
 <?php include('secondary.php'); ?>
 
 
+<?php if(!empty($statusmsg)){ ?>
+<div class = "alert <?php echo $statusFlag==1?'alert-success':'alert-danger';?>">
+    <?php echo $statusmsg; ?>
+</div>
 
+<?php } ?> 
 
 
 <!--     <!DOCTYPE html>

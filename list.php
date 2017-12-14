@@ -7,7 +7,7 @@ include ('header.php');
 include ('editDate-backend.php');
 
 ?>
-
+<script type="text/javascript" src = "list.js"></script>
 <div class = "container-fluid">
     <div class="row">
 
@@ -80,7 +80,8 @@ include ('editDate-backend.php');
     </form>
 </div>
 <a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a>
-<table width="100%" style="border-collapse:collapse" cellpadding="5" class="table table-hover">
+<button  class = "btn btn-lg btn-primary pull-right" onclick = "printData()"> Generate Report</button>
+<table width="100%" style="border-collapse:collapse" cellpadding="5" class="table table-hover" id="clients-list">
     <tr class = "info">
         <th>First Name</th>
         <th>Last Name</th>
