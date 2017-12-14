@@ -7,7 +7,10 @@ include ('header.php');
 include ('editDate-backend.php');
 
 ?>
+<script type="text/javascript" src = "./printMe/jquery-printme.js"></script>
 <script type="text/javascript" src = "list.js"></script>
+
+
 <div class = "container-fluid">
     <div class="row">
 
@@ -80,8 +83,8 @@ include ('editDate-backend.php');
     </form>
 </div>
 <a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a>
-<button  class = "btn btn-lg btn-primary pull-right" onclick = "printData()"> Generate Report</button>
-<table width="100%" style="border-collapse:collapse" cellpadding="5" class="table table-hover" id="clients-list">
+<button  class = "btn btn-lg btn-primary pull-right" id ="gen-report"> Generate Report</button>
+<table width="100%" style="border-collapse:collapse" cellpadding="5" id = "clients-list" class="table table-hover">
     <tr class = "info">
         <th>First Name</th>
         <th>Last Name</th>
