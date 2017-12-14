@@ -157,6 +157,14 @@ include ('header.php');
                 </td>
             </tr>
             <tr>
+                <td colspan="5">
+                    <label>Feedback:</label>
+                    <div class ="form-group">
+                        <textarea class="form-control"></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <input type = "submit" value = "submit" class = "btn btn-lg btn-primary pull-right">
                 </td>
