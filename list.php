@@ -14,8 +14,8 @@ include ('editDate-backend.php');
 <div class = "container-fluid">
     <div class="row">
 
-       <?php if(isset($_GET['msg'])){ ?>
-       <div class = "alert <?php echo $_GET['flag']==1?'alert-success':'alert-danger';?>">
+     <?php if(isset($_GET['msg'])){ ?>
+     <div class = "alert <?php echo $_GET['flag']==1?'alert-success':'alert-danger';?>">
         <?php echo $_GET['msg']; ?>
     </div>
     <?php } ?>
@@ -97,6 +97,12 @@ include ('editDate-backend.php');
         <th>Course</th>
         <th>Last Contact</th>
 
+
+        <?php if($_SESSION["userType"] != "AGENT"){?>
+
+        <th>Consultant</th>
+        <?php }?>
+
     </tr>
     <?php if (empty($appointment)){ ?>
 
@@ -116,7 +122,14 @@ include ('editDate-backend.php');
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["vexpiry"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["course"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["lastContacted"] ?></td>
-        
+
+
+
+        <?php if($_SESSION["userType"] != "AGENT"){?>
+
+
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["consultant"] ?></td>
+        <?php }?>
 
     </tr>
 

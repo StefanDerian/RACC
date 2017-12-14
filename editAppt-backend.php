@@ -136,7 +136,7 @@ function assignVars ($value, $admin = false){
 	$GLOBALS['caddress'] = $value['caddress'];
 	$GLOBALS['haddress'] = $value['haddress'];
 
-	if(!$admin){
+	if(!isset($_SESSION['userType']) || $_SESSION['userType'] != "AGENT"){
 		$GLOBALS['consultant'] = $value['consultant'];
 	}
 	
@@ -201,11 +201,13 @@ function insertClient($mysqli,$value,$admin = false){
 	$haddress = $value['haddress'];
 	
 
-	$consultant = isset($_SESSION['userID'])?$_SESSION['userID']:$value['consultant'];
+
+//if the user not logged in the consultant or the logged in user is a manager will be selected based on the dropdown otherwise it is taken from session 
+	$consultant = isset($_SESSION['userID']) && $_SESSION['userType'] == "AGENT"?$_SESSION['userID']:$value['consultant'];
 
 
 
-
+//getting all values and collumn
 	$values = "'$fname', '$lname', '$dob', '$nationality', '$gender', '$mobile', '$email', '$cam', '$uni', '$comp','$caddress','$haddress','$consultant','$statusInsert'";
 	$values .= $admin?",'$visa','$vexpiry','$passport','$pexpiry'":"";
 

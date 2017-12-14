@@ -42,10 +42,8 @@ if (isset($_REQUEST['login'])){
 		if($_SESSION['userType'] == 'AGENT' ){
 			header("Location: list.php");
 			exit;
-		}else{
-			header("Location: createAccount.php");
-			exit;
 		}
+		
 	} else {
 		$loginstatus = "Incorrect username or password. Please try again.";
 	}

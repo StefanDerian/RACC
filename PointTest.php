@@ -156,14 +156,16 @@ include ('header.php');
                     <?php echo isset($totals['goal'])?$totals['goal']:"0";?> 
                 </td>
             </tr>
+            <?php if($_SESSION['userType'] != "AGENT"){ ?>
             <tr>
                 <td colspan="5">
                     <label>Feedback:</label>
                     <div class ="form-group">
-                        <textarea class="form-control"></textarea>
+                        <textarea class="form-control" name="feedback"></textarea>
                     </div>
                 </td>
             </tr>
+            <?php } ?>
             <tr>
                 <td>
                     <input type = "submit" value = "submit" class = "btn btn-lg btn-primary pull-right">

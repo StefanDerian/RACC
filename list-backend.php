@@ -11,7 +11,7 @@ function table($query){
 
 <?php
 
-
+error_reporting(0);
 
 
 
@@ -71,17 +71,55 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 // echo "SELECT UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, lastContacted,Course FROM user WHERE ConsultantID = $a AND UserID IN ($query)";
 
+$list_query = "";
+$statement;
 
-$statement = $mysqli->prepare("SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam");
+if($_SESSION["userType"] != "AGENT"){
+
+
+    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
+    JOIN account ON account.UserID = user.ConsultantID
+    WHERE user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
+
+
+
+}else{
+
+    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
+
+
+
+}
+
+
+
+
+
+$statement = $mysqli->prepare($list_query);
 // echo "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
 
 // echo "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
 //$statement->bind_param("i", $_SESSION['userID']);
 // print_r($_SESSION);
 //$a = $_SESSION['userID'];
-$statement->bind_param("i", $a);
+
+
+if($statement->bind_param("i", $a)){
+
+}
+
+
+
+
 $result = $statement->execute();
-$statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted);
+
+if($statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted)){
+
+    
+
+}else{
+    $statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted, $consultantName);
+}
 
 $appointments = array();
 
@@ -111,6 +149,10 @@ if ($result) {
             "lastContacted" => $lastContacted,
             "course" => $course
         );
+        if($_SESSION["userType"] != "AGENT"){
+            $appointment['consultant'] = $consultantName;
+
+        }
         
         array_push($appointments, $appointment);
     }
