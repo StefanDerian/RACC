@@ -39,10 +39,10 @@ if (isset($_REQUEST['login'])){
 		$row = mysqli_fetch_array($stmt, MYSQLI_ASSOC);
 		setSession($row);
 		//print_r($_SESSION);
-		if($_SESSION['userType'] == 'AGENT' ){
-			header("Location: list.php");
-			exit;
-		}
+		
+		header("Location: list.php");
+		exit;
+		
 		
 	} else {
 		$loginstatus = "Incorrect username or password. Please try again.";
