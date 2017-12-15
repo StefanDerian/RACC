@@ -13,6 +13,22 @@ function table($query){
 
 error_reporting(0);
 
+$consultants = array();
+$consultantQuery = "SELECT * FROM account";
+if ($result = $mysqli->query($consultantQuery)) {
+    while ($row = $result->fetch_assoc()) {
+        $consultant = array();
+        foreach ($row as $key => $value) {
+            # code...
+            $consultant[$key] = $value;
+        }
+        array_push($consultants, $consultant);
+
+    }
+}
+
+
+
 
 
 
@@ -46,16 +62,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!empty($_POST['dob'])){
         $dob = $_POST['dob'];
         $parameter .= empty($parameter)?"":"AND";
-        $parameter .= " DOB = '$dob' ";
+        $parameter .= " DateofBirth = '$dob' ";
     }
     if(!empty($_POST['lastContacted'])){
         $lastContactDate = $_POST['lastContacted'];
-        $lastContactParam .= "HAVING MAX(time) >= DATE_ADD(NOW(), INTERVAL $lastContactDate MONTH)";
+        $lastContactParam .= " HAVING MAX(time) >= DATE_ADD(NOW(), INTERVAL $lastContactDate MONTH) ";
     }
     if(!empty($_POST['vexpiry'])){
-        $vexpiryB = $_POST['vexpiry'];
+        $vexpiry = $_POST['vexpiry'];
         $parameter .= empty($parameter)?"":"AND";
-        $parameter .= "Vexpiry = '$vexpiryE')";
+        $parameter .= " Vexpiry = '$vexpiry' ";
+    } 
+    if( isset($_POST['consultant']) && !empty($_POST['consultant'])){
+        $consultant = $_POST['consultant'];
+        $parameter .= empty($parameter)?"":"AND";
+        $parameter .= " ConsultantID = '$consultant' ";
     }
     if(empty($parameter)){
         $query .= "1";
@@ -93,8 +114,6 @@ if($_SESSION["userType"] != "AGENT"){
 
 
 
-
-
 $statement = $mysqli->prepare($list_query);
 // echo "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
 
@@ -115,7 +134,7 @@ $result = $statement->execute();
 
 if($statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted)){
 
-    
+
 
 }else{
     $statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted, $consultantName);

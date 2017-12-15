@@ -74,7 +74,33 @@ include ('editDate-backend.php');
 
                 </select>
             </div>
+        </div>
+
+        <?php if($_SESSION['userType'] != "AGENT"){ ?>
+        <div class="col-md-2" >
+
+            <div class = "form-group">
+                <label> Enter Consultant Name:</label>
+                <select id="consultant" name="consultant" class = "form-control">
+                    <option value= ""> Any </option>
+                    <?php foreach ($consultants as $key => $value) {?>
+
+                    <option value= "<?php echo $value['UserID'];?>"> <?php echo $value['DisplayName'];?></option>
+
+
+
+
+
+
+                    <?php } ?>
+                    
+                    <!--  <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option> -->
+
+                </select>
+            </div>
         </div>  
+
+        <?php } ?>
 
         <div class="col-md-2" >
 
