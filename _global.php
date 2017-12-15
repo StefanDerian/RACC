@@ -3,13 +3,10 @@
 
 
 
-<<<<<<< HEAD
-const EMAIL = "tploek@gmail.com";
-const EMAIL_PASSWORD = "JOCOT MESUM";
-=======
+
 const EMAIL = "raccdesign02@gmail.com";
 const EMAIL_PASSWORD = "raccaustralia";
->>>>>>> 99e330a228f258c51b257a0bee2286aa50d9896c
+
 
 
 const SERVER_IP = "localhost";
