@@ -2,7 +2,8 @@
 include('session.php');
 include('list-backend.php');
 
-include ('header.php');
+// include ('header.php');
+include ('header2.php');
 
 include ('editDate-backend.php');
 
@@ -69,7 +70,7 @@ include ('editDate-backend.php');
                     <option value= "">Any Month</option>
                     <option value= "-1" >Last 1 Months</option>
                     <option value= "-2" >Last 2 Months</option>
-                    <option value= "-3" > Last 3 Months</option>
+                    <option value= "-3" >Last 3 Months</option>
                     <!--  <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option> -->
 
                 </select>
@@ -108,8 +109,8 @@ include ('editDate-backend.php');
         </div>
     </form>
 </div>
-<a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a>
-<button  class = "btn btn-lg btn-primary pull-right" id ="gen-report"> Generate Report</button>
+<!-- <a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a> -->
+<!-- <button  class = "btn btn-lg btn-primary pull-right" id ="gen-report"> Generate Report</button> -->
 <table width="100%" style="border-collapse:collapse" cellpadding="5" id = "clients-list" class="table table-hover">
     <tr class = "info">
         <th>First Name</th>

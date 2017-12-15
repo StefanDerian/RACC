@@ -4,7 +4,7 @@
 
 
 const EMAIL = "tploek@gmail.com";
-const EMAIL_PASSWORD = "JOCOT MESUM"
+const EMAIL_PASSWORD = "JOCOT MESUM";
 
 
 const SERVER_IP = "localhost";

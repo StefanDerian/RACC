@@ -14,6 +14,9 @@
 	background:#ffffff;
 }
 
+
+
+
 .navbar-header{
 	width: 40%;
 	color: #ffffff !important;
@@ -28,13 +31,24 @@
 
 .navbar-new li{
 	background-color: rgb(51, 122, 183) !important;
+
 }
 
 .navbar-new li a{
 	color: #ffffff !important;
 	line-height: 60px;
-	margin-top: 10px;
 }
+
+.navbar-new li a:active{
+	background-color: rgb(88, 122, 183)
+	
+}
+
+.navbar-new li a:hover{
+	background-color: rgb(88, 122, 183)
+	
+}
+
 
 
 img{ 
