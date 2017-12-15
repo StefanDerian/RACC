@@ -97,29 +97,34 @@
 	<nav class="navbar navbar-new">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"><img src= "image/racc.png" id = "racc"></a>
+				<div class = "row">
+					<a class="navbar-header" href="#"><img src= "image/racc.png" id = "racc"></a>
+					<h1 style="margin-top: 30px">RACC Australia</h1>
+					
+				</div>
+				
 			</div>
 
 			<?php if(isset($_SESSION['userID'])){ ?>
 
 			
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="list.php">Clients</a></li>
+				<li class="active"><a href="list.php">CLIENTS</a></li>
 				
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> LOGOUT</a></li>
 			</ul>
 
 			<?php }else{ ?>
 			<ul class="nav navbar-nav">
-				<li><a href="editAppt.php">Registration Form</a></li>
+				<li><a href="editAppt.php">REGISTRATION FORM</a></li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
 				<!-- <li><a href="createAccount.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
-				<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
 			</ul>
 
 			<?php } ?>

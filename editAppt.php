@@ -174,10 +174,21 @@ include_once('notes-backend.php');
 
 
                     <?php } ?>
-
-                    <?php if(isset($_SESSION['userID'])){?>
-                    
                     <div class = "row">
+                         <?php if(!isset($_SESSION['userID']) || $_SESSION['userType'] != "AGENT" ){?>
+                        <div class="col-sm-6 form-group">
+                            <label>Consultant:</label>
+                            
+                            <select id="consultant" name="consultant" class = "form-control">
+                                <?php foreach($agents as $agent) { ?>
+                                <option value="<?php echo $agent["UserID"]; ?>" <?php echo isset($consultant)&&$consultant==$agent["UserID"]?"selected":"" ?>><?php echo $agent["DisplayName"]; ?></option>
+                                <?php } ?>
+                            </select>
+                            
+                        </div>
+                        <?php } ?>
+
+                        <?php if(isset($_SESSION['userID'])){?>
                         <div class="col-sm-6 form-group">
                             <label>Status:</label>
 
@@ -192,40 +203,31 @@ include_once('notes-backend.php');
                         </div>
 
                         <?php } ?>
-                        <?php if(!isset($_SESSION['userID']) || $_SESSION['userType'] != "AGENT" ){?>
-                        <div class="col-sm-6 form-group">
-                            <label>Consultant:</label>
-                            
-                            <select id="consultant" name="consultant" class = "form-control">
-                                <?php foreach($agents as $agent) { ?>
-                                <option value="<?php echo $agent["UserID"]; ?>" <?php echo isset($consultant)&&$consultant==$agent["UserID"]?"selected":"" ?>><?php echo $agent["DisplayName"]; ?></option>
-                                <?php } ?>
-                            </select>
-                            
-                        </div>
-                        <?php } ?>
+                       
                     </form>
+                  
 
 
-                    <div align="center">
-                        <input type="submit" class="btn btn-primary btn-lg activ" value=" submit">
-                    </div>
-            </div>
                     
+            </div>
 
-            <?php if(isset($_SESSION['userID']) && isset($_GET['user']) ){?>
-            <div class = "col-md-12">
-
-
-
+            <div class="row">
+                <div align="center">
+                    <input type="submit" class="btn btn-primary btn-lg activ" value=" submit">
+                    </div>
+             </div>
+                    
+            <div class = "row">
+                 <div class = "col-md-12">
+                <?php if(isset($_SESSION['userID']) && isset($_GET['user']) ){?>
                 <?php 
 
                 $noter = new Note($_GET['user']);
                 $noter->displayNotes();
                 ?>
-
-
+                </div>
             </div>
+           
             <?php } ?>
 
 
