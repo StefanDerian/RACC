@@ -1,5 +1,6 @@
 <?php
 include('dbConnection.php');
+include('_global.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -215,8 +216,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = '108.177.97.108';  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'tploek@gmail.com';                 // SMTP username
-    $mail->Password = 'JOCOT MESUM';                           // SMTP password
+    $mail->Username = EMAIL;                 // SMTP username
+    $mail->Password = PASSWORD;                           // SMTP password
     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 465;                                    // TCP port to connect to
 
