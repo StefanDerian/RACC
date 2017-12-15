@@ -3,8 +3,8 @@
 
 
 
-const EMAIL = "tploek@gmail.com";
-const EMAIL_PASSWORD = "JOCOT MESUM"
+const EMAIL = "raccdesign02@gmail.com";
+const EMAIL_PASSWORD = "raccaustralia";
 
 
 const SERVER_IP = "localhost";

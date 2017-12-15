@@ -1,12 +1,19 @@
 <?php
 include('dbConnection.php');
-include('_global.php');
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require './PHPMailer/src/Exception.php';
 require './PHPMailer/src/PHPMailer.php';
 require './PHPMailer/src/SMTP.php';
+
+
+
+error_reporting(0);
+
+
+
 
 
 $id = isset($_GET['user'])?$_GET['user']:"";
@@ -23,9 +30,16 @@ $forms = array();
 
 $msg = "";
 
-function getEmail(){
-	
-}
+
+
+$userResult = $mysqli->query("SELECT * FROM user WHERE UserID = $id");
+$userDetail = mysqli_fetch_assoc($userResult);
+
+
+
+
+
+
 function updateValue ($mysqli){
 	$id = $GLOBALS['id'];
 	$result = $mysqli->query("SELECT * FROM pointtype JOIN clientpoint cp on cp.pointid = pointtype.id WHERE clientid = $id");
@@ -190,19 +204,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	if($number > 0){
 		
 
-		//print_r($_POST);
+		
 
 		foreach ($_POST as $key => $value) {
 		# code...
 			//if the client has been assessed, only update required 
-			$query = "UPDATE clientpoint SET ";
-			$pointid = $value['id'];
-			$goal = $value['goal'];
-			$current = $value['current'];
-			$query .= "current = $current, goal = $goal WHERE clientid = $id AND pointid = $pointid ";
+			// print_r($value);
 
-			$mysqli->query($query);
+			if(!isset($value['feedback'])){
+				$query = "UPDATE clientpoint SET ";
+				$pointid = $value['id'];
+				$goal = $value['goal'];
+				$current = $value['current'];
+				$query .= "current = $current, goal = $goal WHERE clientid = $id AND pointid = $pointid ";
+
+				$mysqli->query($query);
+
+			}else{
+
+			}
+
+			
 		}
+
+
+		$msg = "The Point is successfully Inserted new record created";
+		updateValue($mysqli);
+		$totals = calculateTotals($id);
+		updateValue($mysqli);
+		$msg = "The Point is successfully Updated";
+
+
+
+
 		$message = "Line 1\r\nLine 2\r\nLine 3";
 
 // In case any of our lines are larger than 70 characters, we should use wordwrap()
@@ -212,12 +246,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 		try {
     //Server settings
-    $mail->SMTPDebug = 4;                                 // Enable verbose debug output
+    //$mail->SMTPDebug = 4;                                 // Enable verbose debug output
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = '108.177.97.108';  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = EMAIL;                 // SMTP username
-    $mail->Password = PASSWORD;                           // SMTP password
+    $mail->Password = EMAIL_PASSWORD;                           // SMTP password
     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 465;                                    // TCP port to connect to
 
@@ -231,8 +265,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     		'allow_self_signed' => true
     	)
     );
-    $mail->setFrom('tploek@gmail.com', 'Mailer');
-    $mail->addAddress('stefan.derian@gmail.com', 'Joe User');     // Add a recipient
+    $mail->setFrom(EMAIL, 'RACC');
+    $mail->addAddress($userDetail['Email'], $userDetail['FirstName']." ".$userDetail['LastName'] );     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');
     // $mail->addCC('cc@example.com');
@@ -244,30 +278,85 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Your PTE update and feedback';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    $mail->Subject = 'Your PTE Update and feedback';
+    $mail->Body    = 'Your Result Update And Some Feedback';
+
+
+    $mail->Body .= '<html>';
+    $mail->Body .= '<head>';
+    $mail->Body .= '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />';
+    $mail->Body .= '</head>';
+    $mail->Body .= '<body>';
+    $mail->Body .= '<p> Hello '. $userDetail['FirstName']. ' '.$userDetail['LastName'].', </p>';
+    $mail->Body .= '<table class ="table" width="100%" style="border-collapse:collapse" cellpadding="13">';
+
+    $mail->Body .= '<tr class = "info">
+    <th></th>
+    <th>Skills</th>
+    <th>Current Points</th>
+    <th>Notes</th>
+    <th>Goal Points</th>
+    </tr>';
+    foreach ($forms as $key => $value) {
+    	$mail->Body .= '<tr>';
+    	$mail->Body .= "<td>". $value['id'] ."</td>";
+    	$mail->Body .= "<td>".  $value['name'] ."</td>";
+    	$mail->Body .= "<td>".
+    	$formValue[$key]['current']
+    	."</td>";
+    	$mail->Body .= "<td>".$value['note']."</td>";
+    	$mail->Body .= '<td>';
+    	$mail->Body .= $formValue[$key]['goal'];
+
+    	$mail->Body .= '</td>';
+    	$mail->Body .= '</tr>';
+
+
+    } 
+    $mail->Body .= '<tr>';
+    $mail->Body .= '<td colspan ="5">';
+    $mail->Body .= '<h5>Your Feedback</h5>';
+    $mail->Body .= '<p>'.$_POST['feedback'].'</p>';
+    $mail->Body .= '</td>';
+
+
+
+    $mail->Body .= '</tr>';
+
+
+
+
+    $mail->Body .= '</table>';
+
+    $mail->Body .= '<p> Regards,    </p>';
+    $mail->Body .= '</br>';
+    $mail->Body .= '</br>';
+    $mail->Body .= '</br>';
+    $mail->Body .= '</br>';
+
+    $mail->Body .= '<p> Michael Moedjianto</p>';
+    $mail->Body .= '</br>';
+    $mail->addAttachment('image/racc.png');
+
+
+    $mail->Body .= '</body>';
+    $mail->Body .= '</html>';
+
+
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
-    echo 'Message has been sent';
+    
 } catch (Exception $e) {
 	echo 'Message could not be sent.';
 	echo 'Mailer Error: ' . $mail->ErrorInfo;
 }
-exit;
-
-$msg = "The Point is successfully Inserted new record created";
-updateValue($mysqli);
-$totals = calculateTotals($id);
-updateValue($mysqli);
-$msg = "The Point is successfully Updated";
-
 
 }else{
-		//if the client has not been assessed
+//if the client has not been assessed
 	$query = "INSERT INTO clientpoint(pointid,current,goal,clientid) VALUES ";
 	foreach ($_POST as $key => $value) {
-		# code...
+# code...
 		$pointid = $value['id'];
 		$goal = $value['goal'];
 		$current = $value['current'];
@@ -288,8 +377,8 @@ $msg = "The Point is successfully Updated";
 
 
 
-	// $query = "INSERT INTO point(Cage, Gage, Cenglish, Genglish, Cwork, Gwork, Cqua, Gqua, Cstudy, Gstudy, Cnaati, Gnaati, Cpartner, Gpartner, Cpy, Gpy, Cstate, Gstate, Cfamily, Gfamily, Carea, Garea, Csum, Gsum) VALUES ('$Carea', '$Gage', '$Cenglish', '$Genglish', '$Cwork', '$Gwork', '$Cqua', '$Gqua', '$Cstudy', '$Gstudy', '$Cnaati', '$Gnaati', '$Cpartner', '$Gpartner', ''$Cfamily', '$Gfamily', '$Carea', '$Garea')";
-	// echo $query;
+// $query = "INSERT INTO point(Cage, Gage, Cenglish, Genglish, Cwork, Gwork, Cqua, Gqua, Cstudy, Gstudy, Cnaati, Gnaati, Cpartner, Gpartner, Cpy, Gpy, Cstate, Gstate, Cfamily, Gfamily, Carea, Garea, Csum, Gsum) VALUES ('$Carea', '$Gage', '$Cenglish', '$Genglish', '$Cwork', '$Gwork', '$Cqua', '$Gqua', '$Cstudy', '$Gstudy', '$Cnaati', '$Gnaati', '$Cpartner', '$Gpartner', ''$Cfamily', '$Gfamily', '$Carea', '$Garea')";
+// echo $query;
 
 }
 
