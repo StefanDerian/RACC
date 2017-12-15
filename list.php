@@ -11,7 +11,7 @@ include ('editDate-backend.php');
 <script type="text/javascript" src = "./printMe/jquery-printme.js"></script>
 <script type="text/javascript" src = "list.js"></script>
 
-
+<br>
 <div class = "container-fluid">
     <div class="row">
 
@@ -103,14 +103,16 @@ include ('editDate-backend.php');
 
         <?php } ?>
 
-        <div class="col-md-2" >
-
-            <input type="submit" class ="btn btn-warning" name="Btsearch" value="Search"/>
+        <div class="form-group" >
+            <div align="center">
+                <input type="submit" class ="btn btn-warning" name="Btsearch" value="Search"/>
+            </div>
         </div>
     </form>
 </div>
 <!-- <a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a> -->
 <!-- <button  class = "btn btn-lg btn-primary pull-right" id ="gen-report"> Generate Report</button> -->
+<br>
 <table width="100%" style="border-collapse:collapse" cellpadding="5" id = "clients-list" class="table table-hover">
     <tr class = "info">
         <th>First Name</th>

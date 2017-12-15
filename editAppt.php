@@ -15,7 +15,6 @@ include_once('notes-backend.php');
 </div>
 
 <?php } ?> 
-
     <div class="container">
         <div class="col-lg-12 well">
             <h2 class="title2">Personal Information</h2>
@@ -214,7 +213,7 @@ include_once('notes-backend.php');
             <div class="row">
                 <div align="center">
                     <input type="submit" class="btn btn-primary btn-lg activ" value=" confirm">
-                    </div>
+                </div>
              </div>
                     
             <div class = "row">
