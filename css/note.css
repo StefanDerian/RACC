@@ -36,7 +36,7 @@
 
 .navbar-new li a{
 	color: #ffffff !important;
-	line-height: 60px;
+	line-height: 75px;
 }
 
 .navbar-new li a:active{
@@ -49,8 +49,35 @@
 	
 }
 
+.navbar-new li a:visited{
+	background-color: rgb(88, 122, 183)
+}
 
 
+.navbar-new span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.navbar-new span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.navbar-new:hover span {
+  padding-right: 25px;
+}
+
+.navbar-new:hover span:after {
+  opacity: 1;
+  right: 0;
+}
 img{ 
 	filter: alpha(opacity=100); opacity:1; 
 	float: right;
