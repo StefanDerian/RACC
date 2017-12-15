@@ -213,7 +213,7 @@ include_once('notes-backend.php');
 
             <div class="row">
                 <div align="center">
-                    <input type="submit" class="btn btn-primary btn-lg activ" value=" submit">
+                    <input type="submit" class="btn btn-primary btn-lg activ" value=" confirm">
                     </div>
              </div>
                     
