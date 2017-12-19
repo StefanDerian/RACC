@@ -175,7 +175,7 @@ include_once('notes-backend.php');
                     <?php } ?>
                     <div class = "row">
                          <?php if(!isset($_SESSION['userID']) || $_SESSION['userType'] != "AGENT" ){?>
-                        <div class="col-sm-6 form-group">
+                        <div class="col-sm-4 form-group">
                             <label>Consultant:</label>
                             
                             <select id="consultant" name="consultant" class = "form-control">
@@ -212,7 +212,7 @@ include_once('notes-backend.php');
 
             <div class="row">
                 <div align="center">
-                    <input type="submit" class="btn btn-primary btn-lg activ" value=" confirm">
+                    <input type="submit" class="btn btn-primary btn-lg activ pull-left" style:"margin-left:15px" value=" confirm">
                 </div>
              </div>
                     
