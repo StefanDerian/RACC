@@ -9,18 +9,20 @@ include ('login-backend.php');
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Login</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href = "css/login.css" type = "text/css" rel = "stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href = "css/login.css" type = "text/css" rel = "stylesheet">
 </head>
 
 
 <body>
 	<div class="container-fluid">
-		<p><?php echo $loginstatus; ?></p>
+		<?php if(!empty($loginstatus)){ ?>
+		<p class = "alert alert-danger" ><?php echo $loginstatus; ?></p>
+		<?php } ?>
 		
 		<div class="container"> 
 			<!-- Form Start -->
@@ -36,7 +38,7 @@ include ('login-backend.php');
 
 				<div class = "checkbox">
 					<lable>
-						<input type = "checkbox"> Remeber Me
+						<input type = "checkbox" color:"white"> Remember Me
 					</lable>
 				</div>
 				<Button type = "submit" class = "btn btn-success btn-block" name = "login"> Login </Button>
@@ -44,6 +46,7 @@ include ('login-backend.php');
 			<!-- Form End -->
 		</div>
 	</div>
+	<a class ="btn btn-warning btn-lg" href = "editAppt.php">Registration Form</a>
 </body>
 </html>
 
