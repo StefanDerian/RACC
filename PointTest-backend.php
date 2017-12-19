@@ -257,13 +257,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Recipients
 
 
-				$mail->SMTPOptions = array(
-					'ssl' => array(
-						'verify_peer' => false,
-						'verify_peer_name' => false,
-						'allow_self_signed' => true
-					)
-				);
+				// $mail->SMTPOptions = array(
+				// 	'ssl' => array(
+				// 		'verify_peer' => false,
+				// 		'verify_peer_name' => false,
+				// 		'allow_self_signed' => true
+				// 	)
+				// );
 				$mail->setFrom($_POST['emailUserName'], 'RACC');
 				$mail->addAddress($userDetail['Email'], $userDetail['FirstName']." ".$userDetail['LastName'] );     
     // Add a recipient
