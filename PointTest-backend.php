@@ -348,7 +348,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 				$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-				$mail->send();
+				if($mail->send()){
+					$mail .= " and email sent successfully";
+
+				}else{
+					$mail .= " but the email is not sent";
+				}
+
+
 			}catch (Exception $e) {
 				echo 'Message could not be sent.';
 				echo 'Mailer Error: ' . $mail->ErrorInfo;
