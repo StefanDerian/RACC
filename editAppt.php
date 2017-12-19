@@ -18,7 +18,7 @@ include_once('notes-backend.php');
     <div class="container">
         <div class="col-lg-12 well">
             <h2 class="title2">Personal Information</h2>
-            <div class="row">
+            <div class="row" id = "form">
                 <form method="post" name="form" action="<?php echo $action;?>" >
                     <input type="hidden" name="client" value="client" />
                     <div class="<?php echo isset($_GET['user'])?'col-md-12': 'col-md-12';?>">
@@ -127,6 +127,9 @@ include_once('notes-backend.php');
                                 <span class="error"><?php echo isset($camError)?$camError:"";?>
                                 </span>
                             </div>
+                        </div>
+
+                        <div class = "row">
                             <div class="col-sm-4 form-group">
                                 <label>Completion Date</label>
                                 <input type="date" id="comp" name="comp" value = "<?php echo isset($comp)?$comp:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
@@ -175,7 +178,7 @@ include_once('notes-backend.php');
                     <?php } ?>
                     <div class = "row">
                          <?php if(!isset($_SESSION['userID']) || $_SESSION['userType'] != "AGENT" ){?>
-                        <div class="col-sm-6 form-group">
+                        <div class="col-sm-4 form-group">
                             <label>Consultant:</label>
                             
                             <select id="consultant" name="consultant" class = "form-control">
@@ -211,9 +214,9 @@ include_once('notes-backend.php');
             </div>
 
             <div class="row">
-                <div align="center">
-                    <input type="submit" class="btn btn-primary btn-lg activ" value=" confirm">
-                </div>
+                <!-- <div align="center"> -->
+                    <input type="submit" class="btn btn-primary btn-lg activ" style = "margin-left: 30%;" value=" Submit">
+               <!--  </div> -->
              </div>
                     
             <div class = "row">
