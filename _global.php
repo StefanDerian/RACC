@@ -4,8 +4,7 @@
 
 
 
-const EMAIL = "raccdesign02@gmail.com";
-const EMAIL_PASSWORD = "raccaustralia";
+
 
 
 
