@@ -237,11 +237,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			// Passing `true` enables exceptions
 			try {
     //Server settings
-				$mail->SMTPDebug = 4;                                 
+				// $mail->SMTPDebug = 4;                                 
     // Enable verbose debug output
 				$mail->isSMTP();                                      
     // Set mailer to use SMTP
-				$mail->Host = 'smtp.gmail.com';  
+				$mail->Host = 'smtp.live.com';  
     // Specify main and backup SMTP servers
 				$mail->SMTPAuth = true;                               
     // Enable SMTP authentication
@@ -249,21 +249,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // SMTP username
 				$mail->Password = $_POST['emailPassword'];                           
     // SMTP password
-				$mail->SMTPSecure = 'ssl';                            
+				$mail->SMTPSecure = 'tls';                            
     // Enable TLS encryption, `ssl` also accepted
-				$mail->Port = 465;                                    
+				$mail->Port = 587;                                    
     // TCP port to connect to
 
     //Recipients
 
 
-				$mail->SMTPOptions = array(
-					'ssl' => array(
-						'verify_peer' => false,
-						'verify_peer_name' => false,
-						'allow_self_signed' => true
-					)
-				);
+				// $mail->SMTPOptions = array(
+				// 	'ssl' => array(
+				// 		'verify_peer' => false,
+				// 		'verify_peer_name' => false,
+				// 		'allow_self_signed' => true
+				// 	)
+				// );
 				$mail->setFrom($_POST['emailUserName'], 'RACC');
 				$mail->addAddress($userDetail['Email'], $userDetail['FirstName']." ".$userDetail['LastName'] );     
     // Add a recipient
