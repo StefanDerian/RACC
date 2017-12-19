@@ -159,8 +159,16 @@ include ('header.php');
             <?php if($_SESSION['userType'] != "AGENT"){ ?>
             <tr>
                 <td colspan="5">
-                    <label>Feedback:</label>
                     <div class ="form-group">
+                        <label>Email:</label>
+                        <input type ="email" class="form-control" name="emailUserName">
+                    </div>
+                    <div class ="form-group">
+                        <label>Password:</label>
+                        <input type ="password" class="form-control" name="emailPassword">
+                    </div>
+                    <div class ="form-group">
+                        <label>Feedback:</label>
                         <textarea class="form-control" name="feedback"></textarea>
                     </div>
                 </td>
