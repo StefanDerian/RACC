@@ -1,5 +1,6 @@
 
 <?php
+
 include ('header.php');
 ?>
 <div class="container">
@@ -9,3 +10,7 @@ include ('header.php');
 
 	</div>
 </div>
+
+<?php
+
+?>

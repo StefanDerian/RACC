@@ -16,6 +16,10 @@
 	<script src="confirmation-modal.js"></script>
 	<script src="//cdn.quilljs.com/1.3.4/quill.js"></script>
 	<script src="//cdn.quilljs.com/1.3.4/quill.min.js"></script>
+	<?php if(basename($_SERVER['PHP_SELF']) == 'welcomeMessage.php'){ ?>
+
+	<meta http-equiv="refresh" content="2;url=editAppt.php">
+	<?php } ?>
 	<!-- <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet"> -->
 
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
