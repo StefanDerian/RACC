@@ -8,6 +8,7 @@
 	<link href = "css/editAppt.css" type = "text/css" rel = "stylesheet">
 	<link rel = "stylesheet" type="text/css" href = "./css/header.css"/>
 	<link rel = "stylesheet" type="text/css" href = "./css/note.css"/>
+	<link rel = "stylesheet" type="text/css" href = "./css/editAppt.css"/>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
