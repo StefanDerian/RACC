@@ -50,7 +50,7 @@ include ('editDate-backend.php');
 
             <div class = "form-group">
                 <label> phone number:</label>
-                <input type="tel" class="form-control" name="phone" placeholder="dd/mm/yyyy"/>
+                <input type="tel" class="form-control" name="phone"/>
             </div>
         </div>  
         <div class="col-md-2" >
