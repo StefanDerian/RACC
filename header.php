@@ -127,10 +127,10 @@
 				<li><a href="editAppt.php">REGISTRATION FORM</a></li>
 			</ul>
 
-			<ul class="nav navbar-nav navbar-right">
-				<!-- <li><a href="createAccount.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+			<!-- <ul class="nav navbar-nav navbar-right">
+				<li><a href="createAccount.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 				<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
-			</ul>
+			</ul> -->
 
 			<?php } ?>
 		</div>
