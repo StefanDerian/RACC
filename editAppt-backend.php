@@ -407,6 +407,11 @@ if(isset($_SESSION['userID'])){
 			assignVars($_POST,true);
 
 			if(checkError($_POST,true)){
+
+				$consultantParam = $_SESSION['userType'] != "AGENT"?", ConsultantID = '$consultant' ":"";
+
+
+
 				$query = "UPDATE USER SET 
 				FirstName = '$fname', 
 				LastName = '$lname',  
@@ -423,10 +428,12 @@ if(isset($_SESSION['userID'])){
 				Passport = '$passport',
 				Pexpiry = '$pexpiry',
 				CurrentAddress = '$caddress',
-				HomeAddress = '$haddress'
+				HomeAddress = '$haddress',
+				CurrentStatus = '$status'
+				$consultantParam
 				WHERE UserID = $id ";
 
-
+				
 
 
 				if($mysqli->query($query)){

@@ -140,24 +140,24 @@ include ('editDate-backend.php');
 
 
     <?php foreach($appointments as $appointment) { ?>
-    <tr class="listrow">
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["FirstName"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["LastName"] ?></td>
+    <tr class="listrow" onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'">
+        <td><?php echo $appointment["FirstName"] ?></td>
+        <td><?php echo $appointment["LastName"] ?></td>
         
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Mobile"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["DateofBirth"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Email"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["CurrentStatus"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["vexpiry"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["course"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["lastContacted"] ?></td>
+        <td><?php echo $appointment["Mobile"] ?></td>
+        <td><?php echo $appointment["DateofBirth"] ?></td>
+        <td><?php echo $appointment["Email"] ?></td>
+        <td><?php echo $appointment["CurrentStatus"] ?></td>
+        <td><?php echo $appointment["vexpiry"]=="0000-00-00"?"<i><font color='grey'>There is no information yet</font></i>": $appointment["vexpiry"] ?></td>
+        <td><?php echo $appointment["course"] ?></td>
+        <td><?php echo empty($appointment["lastContacted"])?"<i><font color='grey'>There is still no contact </font</i>": $appointment["lastContacted"] ?></td>
 
 
 
         <?php if($_SESSION["userType"] != "AGENT"){?>
 
 
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["consultant"] ?></td>
+        <td><?php echo empty($appointment["consultant"])?"<i><font color='grey'>Not assigned</font></i>":$appointment["consultant"] ?></td>
         <?php }?>
 
     </tr>

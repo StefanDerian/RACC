@@ -99,8 +99,8 @@ if($_SESSION["userType"] != "AGENT"){
 
 
     $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
-    JOIN account ON account.UserID = user.ConsultantID
-    WHERE user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
+    LEFT JOIN account ON account.UserID = user.ConsultantID
+    WHERE user.UserID IN ($query) GROUP BY user.UserID $lastContactParam ORDER BY user.Created DESC";
 
 
 
