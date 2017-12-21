@@ -110,6 +110,12 @@
 			
 			<ul class="nav navbar-nav">
 				<li><a href="list.php">CLIENTS</a></li>
+				<?php if($_SESSION['userType'] == "MANAGER"){ ?>
+
+				<li><a href="#">AGENTS</a></li>
+
+
+				<?php } ?>
 				<li id = "gen-report"><a href="javascript:void(0);">GENERATE REPORT</a></li>
 				<li><a href="editAppt.php">ADD CLIENT</a></li>
 				
