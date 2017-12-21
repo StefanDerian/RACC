@@ -37,7 +37,6 @@ include_once('notes-backend.php');
                             </span>
                         </div>
                     </div>
-
                     <div class = "row">
                         <div class="col-sm-3 form-group">
                             <label>Gender:</label>
@@ -220,8 +219,10 @@ include_once('notes-backend.php');
 
 
 
+<br>
+
     <div class = "row">
-       <div class = "col-md-12">
+       <div class = "col-md-12" style="width: 760px; margin-left: 180px">
         <?php if(isset($_SESSION['userID']) && isset($_GET['user']) ){?>
         <?php 
 
