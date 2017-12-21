@@ -34,4 +34,18 @@ if(!isset($_SESSION['userID']) && $pageName != "editAppt.php" && $pageName != "l
 	exit;
 } 
 
+if($pageName == "createAccount.php" && $_SESSION['userType'] != "MANAGER"){
+
+
+
+	header("Location: list.php");
+	exit;
+
+}
+
+
+
+
+
+
 ?>

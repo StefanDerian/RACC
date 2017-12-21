@@ -1,6 +1,6 @@
 <?php
 include('dbConnection.php'); //db connection
-
+require 'vendor/stefangabos/zebra_pagination/Zebra_Pagination.php';
 //function to connect and execute the query
 function table($query){
     include('dbConnection.php'); //db connection
@@ -176,5 +176,28 @@ if ($result) {
         array_push($appointments, $appointment);
     }
 }
+
+
+// how many records should be displayed on a page?
+$records_per_page = 14;
+
+
+
+// instantiate the pagination object
+$pagination = new Zebra_Pagination();
+
+// the number of total records is the number of records in the array
+$pagination->records(count($appointments));
+
+// records per page
+$pagination->records_per_page($records_per_page);
+
+$appointments = array_slice(
+    $appointments,
+    (($pagination->get_page() - 1) * $records_per_page),
+    $records_per_page
+);
+
+
 
 ?>

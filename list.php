@@ -15,8 +15,8 @@ include ('editDate-backend.php');
 <div class = "container-fluid">
     <div class="row">
 
-     <?php if(isset($_GET['msg'])){ ?>
-     <div class = "alert <?php echo $_GET['flag']==1?'alert-success':'alert-danger';?>">
+       <?php if(isset($_GET['msg'])){ ?>
+       <div class = "alert <?php echo $_GET['flag']==1?'alert-success':'alert-danger';?>">
         <?php echo $_GET['msg']; ?>
     </div>
     <?php } ?>
@@ -113,6 +113,7 @@ include ('editDate-backend.php');
 <!-- <a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a> -->
 <!-- <button  class = "btn btn-lg btn-primary pull-right" id ="gen-report"> Generate Report</button> -->
 <br>
+<?php $pagination->render(); ?> 
 <table width="100%" style="border-collapse:collapse" cellpadding="5" id = "clients-list" class="table table-hover">
     <tr class = "info">
         <th>First Name</th>
@@ -154,20 +155,20 @@ include ('editDate-backend.php');
 
 
 
-        <?php if($_SESSION["userType"] != "AGENT"){?>
+            <?php if($_SESSION["userType"] != "AGENT"){?>
 
 
-        <td><?php echo empty($appointment["consultant"])?"<i><font color='grey'>Not assigned</font></i>":$appointment["consultant"] ?></td>
-        <?php }?>
+            <td><?php echo empty($appointment["consultant"])?"<i><font color='grey'>Not assigned</font></i>":$appointment["consultant"] ?></td>
+            <?php }?>
 
-    </tr>
+        </tr>
 
 
-    <?php } ?>
-    <?php } ?>
+        <?php } ?>
+        <?php } ?>
 
-</table>
-
+    </table>
+    <?php $pagination->render(); ?> 
 </div>
 
 

@@ -9,6 +9,8 @@
 	<link rel = "stylesheet" type="text/css" href = "./css/header.css"/>
 	<link rel = "stylesheet" type="text/css" href = "./css/note.css"/>
 	<link rel = "stylesheet" type="text/css" href = "./css/editAppt.css"/>
+	<link rel="stylesheet" href="vendor/stefangabos/zebra_pagination/public/css/zebra_pagination.css" type="text/css">
+	<script type="text/javascript" src="vendor/stefangabos/zebra_pagination/public/js/zebra_pagination.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

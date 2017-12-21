@@ -484,5 +484,53 @@
             "migrations",
             "phinx"
         ]
+    },
+    {
+        "name": "stefangabos/zebra_pagination",
+        "version": "2.2.3",
+        "version_normalized": "2.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/stefangabos/Zebra_Pagination.git",
+            "reference": "d1426ca9d2d8aba949ac30bfbea18d6391ff47fb"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/stefangabos/Zebra_Pagination/zipball/d1426ca9d2d8aba949ac30bfbea18d6391ff47fb",
+            "reference": "d1426ca9d2d8aba949ac30bfbea18d6391ff47fb",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5"
+        },
+        "time": "2017-05-20T20:00:28+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "Zebra_Pagination.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Stefan Gabos",
+                "email": "contact@stefangabos.ro",
+                "homepage": "https://github.com/stefangabos",
+                "role": "Developer"
+            }
+        ],
+        "description": "A generic, Twitter Bootsrap compatible, PHP pagination library that automatically generates navigation links",
+        "homepage": "https://github.com/stefangabos/Zebra_Pagination",
+        "keywords": [
+            "paginate",
+            "pagination",
+            "paginator",
+            "paging",
+            "php"
+        ]
     }
 ]

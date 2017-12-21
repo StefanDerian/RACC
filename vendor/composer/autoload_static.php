@@ -62,11 +62,16 @@ class ComposerStaticInit30ec1caded04cc035dfdb2233b25fe54
         ),
     );
 
+    public static $classMap = array (
+        'Zebra_Pagination' => __DIR__ . '/..' . '/stefangabos/zebra_pagination/Zebra_Pagination.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit30ec1caded04cc035dfdb2233b25fe54::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit30ec1caded04cc035dfdb2233b25fe54::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit30ec1caded04cc035dfdb2233b25fe54::$classMap;
 
         }, null, ClassLoader::class);
     }

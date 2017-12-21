@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7cd209ff68719fc2caa366c33595e8c",
+    "content-hash": "611cdd8f095c20e69d0040d3642182be",
     "packages": [
         {
             "name": "psr/log",
@@ -122,6 +122,52 @@
                 "phinx"
             ],
             "time": "2017-09-09T13:54:33+00:00"
+        },
+        {
+            "name": "stefangabos/zebra_pagination",
+            "version": "2.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stefangabos/Zebra_Pagination.git",
+                "reference": "d1426ca9d2d8aba949ac30bfbea18d6391ff47fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stefangabos/Zebra_Pagination/zipball/d1426ca9d2d8aba949ac30bfbea18d6391ff47fb",
+                "reference": "d1426ca9d2d8aba949ac30bfbea18d6391ff47fb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Zebra_Pagination.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Stefan Gabos",
+                    "email": "contact@stefangabos.ro",
+                    "homepage": "https://github.com/stefangabos",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A generic, Twitter Bootsrap compatible, PHP pagination library that automatically generates navigation links",
+            "homepage": "https://github.com/stefangabos/Zebra_Pagination",
+            "keywords": [
+                "paginate",
+                "pagination",
+                "paginator",
+                "paging",
+                "php"
+            ],
+            "time": "2017-05-20T20:00:28+00:00"
         },
         {
             "name": "symfony/config",
