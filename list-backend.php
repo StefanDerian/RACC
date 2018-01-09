@@ -191,7 +191,8 @@ $pagination->records(count($appointments));
 
 // records per page
 $pagination->records_per_page($records_per_page);
-
+$appointmentsPrint = $appointments;
+$_SESSION["clients"] = $appointmentsPrint;
 $appointments = array_slice(
     $appointments,
     (($pagination->get_page() - 1) * $records_per_page),

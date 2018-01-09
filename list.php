@@ -9,7 +9,7 @@ include ('editDate-backend.php');
 
 ?>
 <script type="text/javascript" src = "./printMe/jquery-printme.js"></script>
-<script type="text/javascript" src = "list.js"></script>
+<!-- <script type="text/javascript" src = "list.js"></script> -->
 
 <br>
 <div class = "container-fluid">
@@ -114,6 +114,14 @@ include ('editDate-backend.php');
 <!-- <button  class = "btn btn-lg btn-primary pull-right" id ="gen-report"> Generate Report</button> -->
 <br>
 <?php $pagination->render(); ?> 
+<?php $b =  base64_encode(serialize($appointments)); ?>
+
+
+<!-- <?php print_r(unserialize(base64_decode($b))); ?> -->
+
+
+
+
 <table width="100%" style="border-collapse:collapse" cellpadding="5" id = "clients-list" class="table table-hover">
     <tr class = "info">
         <th>First Name</th>

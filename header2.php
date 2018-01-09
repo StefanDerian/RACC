@@ -11,6 +11,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src = "list.js"></script>
 	<!-- <link href = "css/style.css" type = "text/css" rel = "stylesheet"> -->
 	
 	<script src="confirmation-modal.js"></script>
@@ -116,7 +117,7 @@
 
 
 				<?php } ?>
-				<li id = "gen-report"><a href="javascript:void(0);">GENERATE REPORT</a></li>
+				<li><a href="genReport.php">GENERATE REPORT</a></li>
 				<li><a href="editAppt.php">ADD CLIENT</a></li>
 				
 			</ul>

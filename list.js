@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 
 	$("#gen-report").click(function(){
+		console.log('ok');
 		var divToPrint=document.getElementById("clients-list");
 
 		var newWin=window.open('','Print-Window');
@@ -17,9 +18,7 @@ $(document).ready(function(){
 		// setTimeout(function(){newWin.close();},10);
 	});
 
-	function print1(){
-		
-	}
+
 
 
 
