@@ -289,10 +289,10 @@ function checkError($values, $admin = false){
 		$error++;
 		$GLOBALS['dobError'] = "Date of Birth is required";
 	}
-	if (empty($values["comp"])) {
-		$error++;
-		$GLOBALS['compError'] = "Course Completion is required";
-	}  
+	// if (empty($values["comp"])) {
+	// 	$error++;
+	// 	$GLOBALS['compError'] = "Course Completion is required";
+	// }  
 	if (empty($values["cam"])) {
 		$error++;
 		$GLOBALS['camError'] = "Course is required";
