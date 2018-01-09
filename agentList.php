@@ -9,8 +9,7 @@ include('header.php');
 	<tr class = "info">
 		<th>Display Name</th>
 		<th>User Name</th>
-		<th>Phone Number</th>
-		<th>Email</th>
+		
 	</tr>
 	<?php foreach ($agents as $key => $value) { ?>
 	

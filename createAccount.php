@@ -40,7 +40,7 @@ include('createAccount-backend.php');
                 <span class="error">* <?php echo $userErr;?></span>
             </div>
         </div>
-        <div class = "form-group">
+        <!-- <div class = "form-group">
             <label>Phone Number:</label>
             <div style="text-align:left">
                 <input type="tel" class = "form-control" name="phone" maxlength="255" value="" width="50%" value = "<?php echo $phone; ?>"/>
@@ -53,7 +53,7 @@ include('createAccount-backend.php');
                 <input type="email" class = "form-control" name="email" maxlength="255" value="" width="50%" value = "<?php echo $email; ?>"/>
                 <span class="error">* <?php echo $emailErr;?></span>
             </div>
-        </div>
+        </div> -->
         <div class = "form-group">
             <label>Spoken Language:</label>
             <div style="text-align:left">
