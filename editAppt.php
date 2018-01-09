@@ -130,7 +130,7 @@ include_once('notes-backend.php');
 
                         <div class = "row">
                             <div class="col-sm-4 form-group">
-                                <label>Completion Date</label>
+                                <label>Estimated Completion Date</label>
                                 <input type="date" id="comp" name="comp" value = "<?php echo isset($comp)?$comp:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
                                 <span class="error"><?php echo isset($compError)?$compError:"";?>
                                 </span>
