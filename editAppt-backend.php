@@ -304,33 +304,33 @@ function checkError($values, $admin = false){
 
 	if($admin){
 
-		if (empty($values["passport"])) {
-			$error++;
-			$GLOBALS['passportError'] = "Passport Number is required";
-		} 
+		// if (empty($values["passport"])) {
+		// 	$error++;
+		// 	$GLOBALS['passportError'] = "Passport Number is required";
+		// } 
 
-		if (empty($values["visa"])) {
-			$error++;
-			$GLOBALS['visaError'] = "Visa is required";
-		} else {
-			$first = $values["visa"];
-		// check if name contains a letter
-			if (!preg_match("/[a-zA-Z ]/",$first)) {
-				$error++;
-				$GLOBALS['visaError'] = "visa must contain a letter";
-			}
-		}
+		// if (empty($values["visa"])) {
+		// 	$error++;
+		// 	$GLOBALS['visaError'] = "Visa is required";
+		// } else {
+		// 	$first = $values["visa"];
+		// // check if name contains a letter
+		// 	if (!preg_match("/[a-zA-Z ]/",$first)) {
+		// 		$error++;
+		// 		$GLOBALS['visaError'] = "visa must contain a letter";
+		// 	}
+		// }
 
 
 
-		if (empty($values["vexpiry"])) {
-			$error++;
-			$GLOBALS['vexpiryError'] = "Visa Expiry Date is required";
-		} 
-		if (empty($values["pexpiry"])) {
-			$error++;
-			$GLOBALS['pexpiryError'] = "Passport Expiry date is required";
-		} 
+		// if (empty($values["vexpiry"])) {
+		// 	$error++;
+		// 	$GLOBALS['vexpiryError'] = "Visa Expiry Date is required";
+		// } 
+		// if (empty($values["pexpiry"])) {
+		// 	$error++;
+		// 	$GLOBALS['pexpiryError'] = "Passport Expiry date is required";
+		// } 
 		
 
 	}
