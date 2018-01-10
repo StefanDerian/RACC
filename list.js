@@ -18,9 +18,36 @@ $(document).ready(function(){
 		// setTimeout(function(){newWin.close();},10);
 	});
 
+	$('.urgent-switch').bootstrapSwitch();
+
+	$('.urgent-switch').on('switchChange.bootstrapSwitch', function(event, state) {
+
+		
+		var id = $(this).data('id');
+
+		var value = 0;
+		if(state){
+			$(this).closest('.listrow').addClass('danger');
+			value = 1;
+
+		}else{
+			$(this).closest('.listrow').removeClass('danger');
+			value = 0;
+		}
+		$.post("list-urgent.php", 
+		{
+			id:id,
+			value: value,
+
+		}, 
+		function(data, status){
+			
+		});
 
 
 
+
+	});
 
 });
 

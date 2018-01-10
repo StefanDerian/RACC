@@ -10,21 +10,17 @@
 	<link rel = "stylesheet" type="text/css" href = "./css/note.css"/>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src = "list.js"></script>	
+		
 	<script src="confirmation-modal.js"></script>
 	<script src="//cdn.quilljs.com/1.3.4/quill.js"></script>
 	<script src="//cdn.quilljs.com/1.3.4/quill.min.js"></script>
-	<link href="bootstrap.css" rel="stylesheet">
-	<link href="bootstrap-switch.css" rel="stylesheet">
-	<script src="jquery.js"></script>
-	<script src="bootstrap-switch.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
 
-	<link href="bootstrap.css" rel="stylesheet">
-	<link href="bootstrap-switch.css" rel="stylesheet">
-	<script src="jquery.js"></script>
-	<script src="bootstrap-switch.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
+	<script type="text/javascript" src = "list.js"></script>
+	
 
 </head> 
 
