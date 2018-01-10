@@ -35,8 +35,19 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<div class = "row">
-					<a class="navbar-header" href="editAppt.php"><img src= "image/racc.png" id = "racc"></a>
-					<h1 style="margin-top: 30px">RACC Australia</h1>					
+					<div class="col-sm-2" style="margin-top: 32px">
+						<input class = "goBackBtn" type = "image" src = "image/bback-32.png" onclick="goBack()">
+						<script>
+						function goBack()
+						  {
+						  window.history.back()
+						  }
+						</script>
+					</div>
+					<div class="col-sm-10">
+						<a class="navbar-header" href="editAppt.php"><img src= "image/racc.png" id = "racc"></a>
+						<h1 style="margin-top: 30px">RACC Australia</h1>
+					</div>					
 				</div>				
 			</div>
 

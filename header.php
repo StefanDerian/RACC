@@ -35,8 +35,8 @@
 				
 
 				<div class = "row">
-					<div class="col-sm-2" style="margin-top: 20px">
-						<input type = "image" src = "image/back-48.png" onclick="goBack()">
+					<div class="col-sm-2" style="margin-top: 32px">
+						<input class = "goBackBtn" type = "image" src = "image/back-24.png" onclick="goBack()">
 						<script>
 						function goBack()
 						  {
