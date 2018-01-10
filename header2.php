@@ -35,7 +35,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<div class = "row">
-					<a class="navbar-header" href="#"><img src= "image/racc.png" id = "racc"></a>
+					<a class="navbar-header" href="editAppt.php"><img src= "image/racc.png" id = "racc"></a>
 					<h1 style="margin-top: 30px">RACC Australia</h1>					
 				</div>				
 			</div>
