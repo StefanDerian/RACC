@@ -32,7 +32,6 @@ include ('editDate-backend.php');
             </div>
         </div> 
         <div class="col-md-2" >
-
             <div class = "form-group">
                 <label> Date Of Birth:</label>
                 <input type="date" class="form-control" name="dob" placeholder="dd/mm/yyyy"/>
@@ -94,6 +93,7 @@ include ('editDate-backend.php');
         </div>
     </form>
 </div>
+
 <!-- <a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a> -->
 <!-- <button  class = "btn btn-lg btn-primary pull-right" id ="gen-report"> Generate Report</button> -->
 
@@ -109,10 +109,7 @@ include ('editDate-backend.php');
         <th>Visa Expiry Date</th>
         <th>Course</th>
         <th>Last Contact</th>
-
-
         <?php if($_SESSION["userType"] != "AGENT"){?>
-
         <th>Consultant</th>
         <?php }?>
 
@@ -122,10 +119,33 @@ include ('editDate-backend.php');
     <span class = "alert alert-warning"> There is no match with your Search criteria</span>
     <?php } else {?>
 
-
     <?php foreach($appointments as $appointment) { ?>
-    <tr class="listrow">
-        <td><input type="checkbox" name="my-checkbox" checked></td>
+    <tr class="listrow" id = "list-Client">
+        <script>
+        {
+          function over()
+          {
+             var aa = document.getElementById("list-Client");
+             aa.style.background = 'yellow';
+            
+          }
+            function select()
+          {
+             var aa = document.getElementById("list-Client");
+             var bb = document.getElementById('bb');
+             if(bb.checked)
+             {
+                 aa.style.background = 'yellow';
+             }
+             else
+             {
+                 aa.style.background = 'white';
+             }
+            
+          } 
+}
+</script>
+        <td id ='aa' onMouseOver="over()" onMouseOut="select()"><input type="checkbox" id ='bb' /></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["FirstName"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["LastName"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Mobile"] ?></td>
