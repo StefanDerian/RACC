@@ -3,7 +3,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class ModifyAccount extends AbstractMigration
+class NewUserCollumn extends AbstractMigration
 {
     /**
      * Change Method.
@@ -27,9 +27,10 @@ class ModifyAccount extends AbstractMigration
      * with the Table class.
      */
     public function change()
-    {
-        $table = $this->table('account');
-        $table->addColumn('language', 'string', ['limit' => 30])
+    { 
+        $table = $this->table('user');
+        $table->addColumn('know', 'string')
+        ->addColumn('urgent', 'integer')
         ->update();
     }
 }
