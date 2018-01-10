@@ -226,7 +226,10 @@ function insertClient($mysqli,$value,$admin = false){
 
 
 		if(isset($_SESSION['userID'])){
-			header("Location: list.php?msg=Successfully Inserted the Client Data"); 
+		
+			//header("Location: list.php?msg=Successfully Inserted the Client Data");
+			$last_id = $mysqli->insert_id; 
+			header("Location: PointTest.php?user=$last_id"); 
 			exit;
 		}else{
 			header("Location: welcomeMessage.php"); 
