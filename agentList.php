@@ -1,7 +1,7 @@
 <?php 
 include('session.php');
 include('agentList-backend.php');
-include('header.php');
+include('header2.php');
 ?>
 
 <?php $pagination->render(); ?> 
