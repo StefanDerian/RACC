@@ -28,8 +28,9 @@ class ModifyAccount extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('account');
-        $table->addColumn('language', 'string', ['limit' => 30])
+        $table = $this->table('user');
+        $table->addColumn('know', 'string')
+        ->addColumn('urgent', 'integer')
         ->update();
     }
 }
