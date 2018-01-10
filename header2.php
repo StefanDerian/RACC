@@ -113,7 +113,7 @@
 				<li><a href="list.php">CLIENTS</a></li>
 				<?php if($_SESSION['userType'] == "MANAGER"){ ?>
 
-				<li><a href="#">AGENTS</a></li>
+				<li><a href="agentList.php">AGENTS</a></li>
 
 
 				<?php } ?>

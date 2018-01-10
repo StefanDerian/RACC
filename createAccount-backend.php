@@ -4,7 +4,8 @@ $authpage = TRUE;
 $queryStatus = "";
 $queryFlag = 1;
 $agent = array();
-
+$display = $user = $pass = $repass = $lang = "";
+$displayErr = $userErr = $passErr = $repassErr = $langErr = "";
 function assignVars($value){
     $GLOBALS['display'] = $value["display"];
     $GLOBALS['pass'] = $value["pass"];
@@ -21,7 +22,7 @@ function assignVarsFromDB($value){
 function checkError($value){
     $error = 0;
     //check if it's empty
-    assignVars($value);
+    
 
 
 
@@ -94,6 +95,7 @@ function getSingleUser( $id, $mysqli){
             $user = $row;
         }
     }
+    
     return $user;
 }
 
@@ -101,6 +103,9 @@ function getSingleUser( $id, $mysqli){
 
 if(isset($_GET['id'])){
     $agent = getSingleUser($_GET['id'], $mysqli );
+
+    assignVarsFromDB($agent);
+
 }
 
 
@@ -110,9 +115,9 @@ if(isset($_GET['id'])){
 $statusmsg = "";
 
 //defining variables and setting empty values
-$display = $user = $pass = $repass = $lang = "";
+
 $role = "AGENT";
-$displayErr = $userErr = $passErr = $repassErr = $langErr = "";
+
 
 if(isset($_GET["success"]) && $_GET["success"] == 1) {
     $statusmsg = "Account creation was successful.";

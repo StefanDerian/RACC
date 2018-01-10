@@ -25,18 +25,18 @@ include('createAccount-backend.php');
 
 <div class = "container jumbotron create-account-container">
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <H2>Create a new user account</H2>
+        <H2><?php echo isset($_GET['id'])?'Update Agent':'Create a new user account'; ?></H2>
         <div class = "form-group">
             <label>Display name:</label>
             <div style="text-align:left">
-                <input type="text" class = "form-control" name="display" maxlength="255" value="" width="50%" value = "<?php echo $display; ?>" />
+                <input type="text" class = "form-control" name="display" maxlength="255"  width="50%" value = "<?php echo $display; ?>" />
                 <span class="error">* <?php echo $displayErr;?></span>
             </div>
         </div>
         <div class = "form-group">
             <label>User name:</label>
             <div style="text-align:left">
-                <input type="text" class = "form-control" name="user" maxlength="255" value="" width="50%" value = "<?php echo $user; ?>" />
+                <input type="text" class = "form-control" name="user" maxlength="255"  width="50%" value = "<?php echo $user; ?>" />
                 <span class="error">* <?php echo $userErr;?></span>
             </div>
         </div>
@@ -57,7 +57,7 @@ include('createAccount-backend.php');
         <div class = "form-group">
             <label>Spoken Language:</label>
             <div style="text-align:left">
-                <input type="text" class = "form-control" name="lang" maxlength="255" value="" width="50%" value = "<?php echo $lang; ?>"/>
+                <input type="text" class = "form-control" name="lang" maxlength="255"  width="50%" value = "<?php echo $lang; ?>"/>
                 <span class="error">* <?php echo $langErr;?></span>
             </div>
         </div> 
@@ -72,6 +72,10 @@ include('createAccount-backend.php');
             </div>
         </div>
         <?php } ?>
+
+
+
+
         <div class = "form-group">
             <label>Password:</label>
             <div style="text-align:left">
