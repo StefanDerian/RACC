@@ -27,6 +27,7 @@ $caddress = "";
 $haddress = "";
 $consultant = "";
 $status = "";
+$know = "";
 
 $agents = populateChouncelor($mysqli);
 
@@ -135,6 +136,7 @@ function assignVars ($value, $admin = false){
 	}
 	$GLOBALS['caddress'] = $value['caddress'];
 	$GLOBALS['haddress'] = $value['haddress'];
+	$GLOBALS['know'] = $value['know'];
 
 	if(!isset($_SESSION['userType']) || $_SESSION['userType'] != "AGENT"){
 		$GLOBALS['consultant'] = $value['consultant'];
@@ -164,6 +166,7 @@ function assignFromDatabase($value){
 	$GLOBALS['haddress'] = $value['HomeAddress'];
 	$GLOBALS['consultant'] = $value['ConsultantID'];
 	$GLOBALS['status'] = $value['CurrentStatus'];
+	$GLOBALS['know'] = $value['know'];
 }
 
 function insertClient($mysqli,$value,$admin = false){
@@ -171,11 +174,13 @@ function insertClient($mysqli,$value,$admin = false){
 
 	$collumns = "FirstName, LastName, DateofBirth, Nationality, Gender, Mobile, Email, Course, Uni, Uni_compl, CurrentAddress,HomeAddress, ConsultantID, CurrentStatus";
 	$collumns .= $admin?",Visa,Vexpiry,Passport,Pexpiry":"";
+	$collumns .= $admin?"":",know";
 
 	$statusInsert = "";
 
 	if(!$admin){
 		$statusInsert = "new client";
+		$know = $value['know'];
 		
 	}
 
@@ -210,6 +215,7 @@ function insertClient($mysqli,$value,$admin = false){
 //getting all values and collumn
 	$values = "'$fname', '$lname', '$dob', '$nationality', '$gender', '$mobile', '$email', '$cam', '$uni', '$comp','$caddress','$haddress','$consultant','$statusInsert'";
 	$values .= $admin?",'$visa','$vexpiry','$passport','$pexpiry'":"";
+	$values .= $admin?"":",'$know'";
 
 
 	$query = "INSERT INTO USER ($collumns) 
@@ -220,7 +226,10 @@ function insertClient($mysqli,$value,$admin = false){
 
 
 		if(isset($_SESSION['userID'])){
-			header("Location: list.php?msg=Successfully Inserted the Client Data"); 
+		
+			//header("Location: list.php?msg=Successfully Inserted the Client Data");
+			$last_id = $mysqli->insert_id; 
+			header("Location: PointTest.php?user=$last_id"); 
 			exit;
 		}else{
 			header("Location: welcomeMessage.php"); 

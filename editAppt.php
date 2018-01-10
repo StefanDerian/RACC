@@ -135,6 +135,16 @@ include_once('notes-backend.php');
                                 <span class="error"><?php echo isset($compError)?$compError:"";?>
                                 </span>
                             </div> 
+                            <?php if(!isset($_SESSION['userID'])){?>
+
+                            <div class="col-sm-4 form-group">
+                                <label>How can you know RACC:</label>
+                                <input type="text" class="form-control" id="know" name="know" maxlength="255" value = "<?php echo isset($know)?$know:"";  ?>">
+                                <!-- <span class="error"><?php echo isset($compError)?$compError:"";?> -->
+                                </span>
+                            </div> 
+
+                            <?php } ?>
                         </div>
 
 
@@ -171,6 +181,7 @@ include_once('notes-backend.php');
 
 
                 <?php } ?>
+
                 <div class = "row">
                    <?php if(!isset($_SESSION['userID']) || $_SESSION['userType'] != "AGENT" ){?>
                    <div class="col-sm-4 form-group">
@@ -220,7 +231,7 @@ include_once('notes-backend.php');
 
 
 
-<br>
+    <br>
 
     <div class = "row">
        <div class = "col-md-12" style="width: 760px; margin-left: 180px">
