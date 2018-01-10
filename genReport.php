@@ -2,11 +2,11 @@
 <?php 
 
 include('genReport-backend.php');
-include('header2.php');
+include('header3.php');
 ?>
 
 
-<button  class = "btn btn-lg btn-primary" id="gen-report">Print</button>
+<!-- <button  class = "btn btn-lg btn-primary" id="gen-report">Print</button> -->
 <table width="100%" style="border-collapse:collapse" cellpadding="5" id = "clients-list" class="table table-hover">
     <tr class = "info">
         <th>First Name</th>
