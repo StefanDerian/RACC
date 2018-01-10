@@ -113,7 +113,10 @@
 					}
 					</script> -->
 
-				<input type="image" src="image/back-32.png" onclick="history.back(-1)" />
+					<button type="button" class="btn btn-default" aria-label="Left Align">
+ 						 <span class="glyphicon glyphicon-chevron-left"></span>
+					</button>
+
 					<a class="navbar-header" href="#"><img src= "image/racc.png" id = "racc"></a>
 					<h1 style="margin-top: 30px">RACC Australia</h1>
 					
@@ -129,7 +132,7 @@
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> LOGOUT</a></li>
+				<li><a href="logout.php"><span class="glyphicon glyphicon-log-in" id ="logoutimage"></span> LOGOUT</a></li>
 			</ul>
 
 			<?php }else{ ?>

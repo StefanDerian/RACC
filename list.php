@@ -31,14 +31,6 @@ include ('editDate-backend.php');
 
             </div>
         </div> 
-    <!--     <div class="col-md-2" >
-
-            <div class = "form-group">
-                <label> Enter Course:</label>
-                <input type="text" class="form-control" name="course" placeholder="Course..."/>
-
-            </div>
-        </div> -->
         <div class="col-md-2" >
 
             <div class = "form-group">
@@ -62,7 +54,6 @@ include ('editDate-backend.php');
         </div>  
 
         <div class="col-md-2" >
-
             <div class = "form-group">
                 <label> Enter Last Contact Date In:</label>
                 <select id="status" name="lastContacted" class = "form-control">
@@ -72,7 +63,6 @@ include ('editDate-backend.php');
                     <option value= "-2" >Last 2 Months</option>
                     <option value= "-3" >Last 3 Months</option>
                     <!--  <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option> -->
-
                 </select>
             </div>
         </div>
@@ -109,6 +99,7 @@ include ('editDate-backend.php');
 
 <table width="100%" style="border-collapse:collapse" cellpadding="5" id = "clients-list" class="table table-hover">
     <tr class = "info">
+        <th>Emergency</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Mobile</th>
@@ -133,17 +124,17 @@ include ('editDate-backend.php');
 
 
     <?php foreach($appointments as $appointment) { ?>
-    <tr class="listrow" onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'">
-        <td><?php echo $appointment["FirstName"] ?></td>
-        <td><?php echo $appointment["LastName"] ?></td>
-        
-        <td><?php echo $appointment["Mobile"] ?></td>
-        <td><?php echo $appointment["DateofBirth"] ?></td>
-        <td><?php echo $appointment["Email"] ?></td>
-        <td><?php echo $appointment["CurrentStatus"] ?></td>
-        <td><?php echo $appointment["vexpiry"]=="0000-00-00"?"<i><font color='grey'>There is no information yet</font></i>": $appointment["vexpiry"] ?></td>
-        <td><?php echo $appointment["course"] ?></td>
-        <td><?php echo empty($appointment["lastContacted"])?"<i><font color='grey'>There is still no contact </font</i>": $appointment["lastContacted"] ?></td>
+    <tr class="listrow">
+        <td><input type="checkbox" name="my-checkbox" checked></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["FirstName"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["LastName"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Mobile"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["DateofBirth"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Email"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["CurrentStatus"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["vexpiry"]=="0000-00-00"?"<i><font color='grey'>There is no information yet</font></i>": $appointment["vexpiry"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["course"] ?></td>
+        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo empty($appointment["lastContacted"])?"<i><font color='grey'>There is still no contact </font</i>": $appointment["lastContacted"] ?></td>
             <?php if($_SESSION["userType"] != "AGENT"){?>
 
 
