@@ -203,9 +203,10 @@ include_once('notes-backend.php');
 
                 <?php } ?>
             </div>
+            <br>
             <div class="row">
                 <!-- <div align="center"> -->
-                    <input type="submit" class="btn btn-primary btn-lg activ pull-left" style = "margin-left: 1%;" value=" Submit">
+                    <input type="submit" class="btn btn-primary btn-lg activ pull-left" style = "margin-left: 28%;" value=" Submit">
                     <!--  </div> -->
                 </div>
 

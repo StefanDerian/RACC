@@ -104,7 +104,16 @@
 	<nav class="navbar navbar-new">
 		<div class="container-fluid">
 			<div class="navbar-header">
+
 				<div class = "row">
+					<!-- <button onclick="goBack()">Go Back</button>
+					<script>
+					function goBack() {
+					    window.history.back();
+					}
+					</script> -->
+
+				<input type="image" src="image/back-32.png" onclick="history.back(-1)" />
 					<a class="navbar-header" href="#"><img src= "image/racc.png" id = "racc"></a>
 					<h1 style="margin-top: 30px">RACC Australia</h1>
 					

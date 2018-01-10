@@ -9,7 +9,7 @@ include ('editDate-backend.php');
 
 ?>
 <script type="text/javascript" src = "./printMe/jquery-printme.js"></script>
-<!-- <script type="text/javascript" src = "list.js"></script> -->
+<script type="text/javascript" src = "list.js"></script>
 
 <br>
 <div class = "container-fluid">
@@ -27,7 +27,7 @@ include ('editDate-backend.php');
             <div class = "form-group">
                 <label> Enter Name:</label>
 
-                <input type="text" class="form-control" name="search" placeholder="Search for client Name..."/>
+                <input type="text" class="form-control" name="search" placeholder="Search by Name..."/>
 
             </div>
         </div> 
@@ -50,7 +50,7 @@ include ('editDate-backend.php');
 
             <div class = "form-group">
                 <label> phone number:</label>
-                <input type="tel" class="form-control" name="phone"/>
+                <input type="tel" class="form-control" name="phone" placeholder="Search by Phone Number..."/>
             </div>
         </div>  
         <div class="col-md-2" >
@@ -87,12 +87,6 @@ include ('editDate-backend.php');
                     <?php foreach ($consultants as $key => $value) {?>
 
                     <option value= "<?php echo $value['UserID'];?>"> <?php echo $value['DisplayName'];?></option>
-
-
-
-
-
-
                     <?php } ?>
                     
                     <!--  <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option> -->
@@ -112,21 +106,11 @@ include ('editDate-backend.php');
 </div>
 <!-- <a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a> -->
 <!-- <button  class = "btn btn-lg btn-primary pull-right" id ="gen-report"> Generate Report</button> -->
-<br>
-<?php $pagination->render(); ?> 
-<?php $b =  base64_encode(serialize($appointments)); ?>
-
-
-<!-- <?php print_r(unserialize(base64_decode($b))); ?> -->
-
-
-
 
 <table width="100%" style="border-collapse:collapse" cellpadding="5" id = "clients-list" class="table table-hover">
     <tr class = "info">
         <th>First Name</th>
         <th>Last Name</th>
-        <!-- <th>Prefer Name</th> -->
         <th>Mobile</th>
         <th>DOB</th>
         <th>Email</th>
@@ -160,9 +144,6 @@ include ('editDate-backend.php');
         <td><?php echo $appointment["vexpiry"]=="0000-00-00"?"<i><font color='grey'>There is no information yet</font></i>": $appointment["vexpiry"] ?></td>
         <td><?php echo $appointment["course"] ?></td>
         <td><?php echo empty($appointment["lastContacted"])?"<i><font color='grey'>There is still no contact </font</i>": $appointment["lastContacted"] ?></td>
-
-
-
             <?php if($_SESSION["userType"] != "AGENT"){?>
 
 
@@ -171,12 +152,12 @@ include ('editDate-backend.php');
 
         </tr>
 
-
         <?php } ?>
         <?php } ?>
-
     </table>
-    <?php $pagination->render(); ?> 
+    <div align="center">
+        <?php $pagination->render(); ?>
+    </div> 
 </div>
 
 
