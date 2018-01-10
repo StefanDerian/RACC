@@ -98,7 +98,7 @@ $statement;
 if($_SESSION["userType"] != "AGENT"){
 
 
-    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
+    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName, urgent FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
     LEFT JOIN account ON account.UserID = user.ConsultantID
     WHERE user.UserID IN ($query) GROUP BY user.UserID $lastContactParam ORDER BY user.Created DESC";
 
@@ -106,7 +106,7 @@ if($_SESSION["userType"] != "AGENT"){
 
 }else{
 
-    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
+    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, urgent FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
 
 
 
@@ -132,12 +132,12 @@ if($statement->bind_param("i", $a)){
 
 $result = $statement->execute();
 
-if($statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted)){
+if($statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted,$urgent)){
 
 
 
 }else{
-    $statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted, $consultantName);
+    $statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted, $consultantName,$urgent);
 }
 
 $appointments = array();
@@ -166,7 +166,8 @@ if ($result) {
             "CurrentStatus" => $rCurrentStatus,
             "vexpiry" => $vexpiry,
             "lastContacted" => $lastContacted,
-            "course" => $course
+            "course" => $course,
+            "urgent" => $urgent
         );
         if($_SESSION["userType"] != "AGENT"){
             $appointment['consultant'] = $consultantName;

@@ -120,32 +120,9 @@ include ('editDate-backend.php');
     <?php } else {?>
 
     <?php foreach($appointments as $appointment) { ?>
-    <tr class="listrow" id = "list-Client">
-        <script>
-        {
-          function over()
-          {
-             var aa = document.getElementById("list-Client");
-             aa.style.background = 'yellow';
-            
-          }
-            function select()
-          {
-             var aa = document.getElementById("list-Client");
-             var bb = document.getElementById('bb');
-             if(bb.checked)
-             {
-                 aa.style.background = 'yellow';
-             }
-             else
-             {
-                 aa.style.background = 'white';
-             }
-            
-          } 
-}
-</script>
-        <td id ='aa' onMouseOver="over()" onMouseOut="select()"><input type="checkbox" id ='bb' /></td>
+    <tr class="listrow <?php echo $appointment["urgent"] == 1?'danger':''; ?>" id = "list-Client">
+     
+        <td ><input type="checkbox" class="urgent-switch" <?php echo $appointment["urgent"] == 1?'checked':''; ?> data-id='<?php echo $appointment["UserID"]; ?>' ></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["FirstName"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["LastName"] ?></td>
         <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Mobile"] ?></td>
