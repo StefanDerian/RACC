@@ -1,7 +1,7 @@
 <?php
 include ('session.php');
 include ('editAppt-backend.php');
-include ('header.php');
+include ('header2.php');
 include ('editDate-backend.php');
 include_once('notes-backend.php');
 ?>
@@ -37,7 +37,7 @@ include_once('notes-backend.php');
                             </span>
                         </div>
                     </div>
-                    <div class = "row">
+                    <!-- <div class = "row">
                         <div class="col-sm-3 form-group">
                             <label>Gender:</label>
                             <label class = "maleRadio" style="font-weight: 100">
@@ -51,7 +51,7 @@ include_once('notes-backend.php');
                             </div>
 
                         </div>
-                    </div>
+                    </div> -->
                             <!-- <div class="row">
                                 <div class="col-sm-6 form-group">
                                     <label>Prefer Name</label>
@@ -217,7 +217,10 @@ include_once('notes-backend.php');
             <br>
             <div class="row">
                 <!-- <div align="center"> -->
-                    <input type="submit" class="btn btn-primary btn-lg activ pull-left" style = "margin-left: 28%;" value=" Submit">
+                    <input type="submit" class="btn btn-primary btn-lg activ pull-left" name="submitBtn" style = "margin-left: 28%;" value="<?php echo isset($_GET['user'])?'Save':'Submit' ?>">
+                    
+                    <input type="submit" class="btn btn-danger btn-lg activ pull-left" name="submitBtn" style = "margin-left: 3%;"  value="Cancel">
+                    
                     <!--  </div> -->
                 </div>
 

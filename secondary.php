@@ -1,5 +1,5 @@
 
-<?php if(isset($_SESSION['userID']) && isset($_GET['user'])){
+<?php if(isset($_SESSION['userID'])){
     ?>
     <nav class="navbar navbar-default">
       <div class="container">

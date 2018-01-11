@@ -136,7 +136,10 @@ function assignVars ($value, $admin = false){
 	}
 	$GLOBALS['caddress'] = $value['caddress'];
 	$GLOBALS['haddress'] = $value['haddress'];
-	$GLOBALS['know'] = $value['know'];
+	if(!$admin){
+		$GLOBALS['know'] = $value['know'];
+	}
+	
 
 	if(!isset($_SESSION['userType']) || $_SESSION['userType'] != "AGENT"){
 		$GLOBALS['consultant'] = $value['consultant'];
@@ -226,7 +229,7 @@ function insertClient($mysqli,$value,$admin = false){
 
 
 		if(isset($_SESSION['userID'])){
-		
+
 			//header("Location: list.php?msg=Successfully Inserted the Client Data");
 			$last_id = $mysqli->insert_id; 
 			header("Location: PointTest.php?user=$last_id"); 
@@ -344,14 +347,18 @@ function checkError($values, $admin = false){
 
 	}
 
+
+// deleted as not required
 	if (empty($values["caddress"])) {
 		$error++;
 		$GLOBALS['caddressError'] = "Current Address is required";
 	} 
-	if (empty($values["haddress"])) {
-		$error++;
-		$GLOBALS['haddressError'] = "Home Address is required";
-	}
+
+	// deleted as not required
+	// if (empty($values["haddress"])) {
+	// 	$error++;
+	// 	$GLOBALS['haddressError'] = "Home Address is required";
+	// }
 
 	if (empty($values["nationality"])) {
 		$error++;
@@ -365,10 +372,10 @@ function checkError($values, $admin = false){
 		}
 	}
 
-	if (!isset($values["gender"])) {
-		$error++;
-		$GLOBALS['genderError'] = "Gender is required.";
-	}
+	// if (!isset($values["gender"])) {
+	// 	$error++;
+	// 	$GLOBALS['genderError'] = "Gender is required.";
+	// }
 
 
 	if (empty($values["mobile"])) {
@@ -415,44 +422,48 @@ if(isset($_SESSION['userID'])){
 
 			assignVars($_POST,true);
 
-			if(checkError($_POST,true)){
+			if($_POST['submitBtn'] != "Cancel"){
+				if(checkError($_POST,true)){
 
-				$consultantParam = $_SESSION['userType'] != "AGENT"?", ConsultantID = '$consultant' ":"";
-
-
-
-				$query = "UPDATE USER SET 
-				FirstName = '$fname', 
-				LastName = '$lname',  
-				DateofBirth = '$dob', 
-				Nationality = '$nationality', 
-				Gender = '$gender', 
-				Mobile = '$mobile', 
-				Email = '$email', 
-				Course = '$cam', 
-				Uni = '$uni', 
-				Uni_compl = '$comp',
-				Visa = '$visa',
-				Vexpiry = '$vexpiry',
-				Passport = '$passport',
-				Pexpiry = '$pexpiry',
-				CurrentAddress = '$caddress',
-				HomeAddress = '$haddress',
-				CurrentStatus = '$status'
-				$consultantParam
-				WHERE UserID = $id ";
-
-				
+					$consultantParam = $_SESSION['userType'] != "AGENT"?", ConsultantID = '$consultant' ":"";
 
 
-				if($mysqli->query($query)){
-					$GLOBALS['statusmsg'] = "Successfully Update the Client Data";
-					$GLOBALS['statusFlag'] = 1;
-				}else{
-					$GLOBALS['statusmsg'] = 'Failed Update Client Data';
-					$GLOBALS['statusFlag'] = 0;
+
+					$query = "UPDATE USER SET 
+					FirstName = '$fname', 
+					LastName = '$lname',  
+					DateofBirth = '$dob', 
+					Nationality = '$nationality', 
+					Gender = '$gender', 
+					Mobile = '$mobile', 
+					Email = '$email', 
+					Course = '$cam', 
+					Uni = '$uni', 
+					Uni_compl = '$comp',
+					Visa = '$visa',
+					Vexpiry = '$vexpiry',
+					Passport = '$passport',
+					Pexpiry = '$pexpiry',
+					CurrentAddress = '$caddress',
+					HomeAddress = '$haddress',
+					CurrentStatus = '$status'
+					$consultantParam
+					WHERE UserID = $id ";
+
+
+
+
+					if($mysqli->query($query)){
+						$GLOBALS['statusmsg'] = "Successfully Update the Client Data";
+						$GLOBALS['statusFlag'] = 1;
+					}else{
+						$GLOBALS['statusmsg'] = 'Failed Update Client Data';
+						$GLOBALS['statusFlag'] = 0;
+					}
+
 				}
-
+			}else{
+				header("Location: list.php");
 			}
 		}
 
@@ -484,22 +495,37 @@ if(isset($_SESSION['userID'])){
 
 			assignVars($_POST,true);
 
-			if(checkError($_POST,true)){
+			if($_POST['submitBtn'] != "Cancel"){
+				if(checkError($_POST,true)){
 
-				insertClient($mysqli, $_POST, true);
+
+					insertClient($mysqli, $_POST, true);
+				}
+			}else{
+
+				header("Location: list.php");
+
+
+
+
 			}
+
+			
 		}
 	}
 }else {
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST"){
 		assignVars($_POST);
-		
-		if(checkError($_POST)){
+		if($_POST['submitBtn'] != "Cancel"){
+			if(checkError($_POST)){
 
 
-			insertClient($mysqli, $_POST);
+				insertClient($mysqli, $_POST);
 
+			}
+		}else{
+			header("Location: editAppt.php");
 		}
 	}
 }
