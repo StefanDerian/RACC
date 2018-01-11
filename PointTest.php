@@ -2,7 +2,7 @@
 include('session.php');
 include ('PointTest-backend.php');
 
-include ('header.php');
+include ('header2.php');
 ?>
 
 <?php include('secondary.php'); ?>
@@ -19,11 +19,56 @@ include ('header.php');
 </div>
 <?php } ?>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+     function calculateTotal() {
+        var currents = $('.current').val();
+        var goals = $('.goal').val();
 
+
+        for(var i = 0 ; i < currents.length;i++){
+            console.log(currents[i]);
+        }
+        for(var i = 0 ; i < goals.length;i++){
+            console.log(goals[i]);
+        }
+
+    }
+
+    $('.current').on('input',function(){
+        var currents = $('.current');
+        var currentSum = 0;
+        
+        for(var i = 0 ; i < currents.length;i++){
+            //console.log( parseInt($(currents[i]).val()));
+            if(!isNaN(parseInt($(currents[i]).val())))
+                currentSum += parseInt($(currents[i]).val());
+        }
+        $('#current').text(currentSum);
+
+    });
+
+    $('.goal').on('input',function(){
+
+        var goals = $('.goal');
+        var goalSum = 0;
+
+        for(var i = 0 ; i < goals.length;i++){
+            //console.log($(goals[i]).val());
+            if(!isNaN(parseInt($(goals[i]).val())))
+                goalSum += parseInt($(goals[i]).val());
+        }
+        $('#goal').text(goalSum);
+
+    });
+});
+
+
+</script>
 
 <div class = "container">
     <table class ="table" width="100%" style="border-collapse:collapse" cellpadding="13">
-        <form method="post" onsubmit="return confirm('Do you really want to submit the form?');">
+        <form method="post" >
             <tr class = "info">
                 <th></th>
                 <th>Skills</th>
@@ -39,13 +84,13 @@ include ('header.php');
                 <td><?php echo $value['name']; ?></td>
                 <td>
                     <div class ="form-group">
-                        <input class="form-control" id="Cage" name="<?php echo $key.'[current]';?>" type="number" value="<?php echo $formValue[$key]['current'];?>"/>
+                        <input class="form-control current"  name="<?php echo $key.'[current]';?>" type="number" value="<?php echo isset($formValue[$key]['current'])?$formValue[$key]['current']:0;?>" />
                     </div>
                 </td>
                 <td><?php echo $value['note']; ?></td>
                 <td>
                     <div class ="form-group">
-                        <input class ="form-control" name="<?php echo $key.'[goal]'; ?>" type="number" value="<?php echo $formValue[$key]['goal'];?>" />
+                        <input class ="form-control goal" name="<?php echo $key.'[goal]'; ?>" type="number" value="<?php echo isset($formValue[$key]['goal'])?$formValue[$key]['goal']:0;?>" />
                     </div>
                 </td>
                 <td><input name="<?php echo $key.'[id]'; ?>" type="hidden" value=<?php echo $value['id']; ?> /></td>
@@ -146,15 +191,25 @@ include ('header.php');
             <tr>
                 <td></td>
                 <td style="text-align:right">Total</td>
-                <td>
+                <td id ="current">
                     <?php echo isset($totals['current'])?$totals['current']:"0";?>
                 </td>
                 <td> 
                     Total Goal
                 </td>
-                <td>
+                <td id ="goal">
                     <?php echo isset($totals['goal'])?$totals['goal']:"0";?> 
                 </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type = "submit" name = "submitBtn" value = "Update Point" class = "btn btn-lg btn-primary pull-right">
+                </td>
+                <?php if($number > 0 ){?>
+                <td>
+                    <input type = "submit" name = "submitBtn" value = "Cancel" class = "btn btn-lg btn-danger pull-right">
+                </td>
+                <?php } ?>
             </tr>
             <?php if($_SESSION['userType'] != "AGENT"){ ?>
             <tr>
@@ -173,26 +228,15 @@ include ('header.php');
                     </div>
                 </td>
             </tr>
-            <?php } ?>
             <tr>
                 <td>
-                    <input type = "submit" value = "submit" class = "btn btn-lg btn-primary pull-right">
+                    <input type = "submit" name = "submitBtn" value = "Send Email" class = "btn btn-lg btn-primary pull-right">
                 </td>
             </tr>
+            <?php } ?>
+            
         </form>
     </table>
 </div>
-    <!-- <script type="text/javascript">
 
-        function calculateTotal() {
-            age = parseInt(document.getElementById("Cage").value);
-            english = parseInt(document.getElementById("Cenglish").value);
-
-            total = document.getElementById("Csum");
-
-            calculatedValue = (age + english);
-            total.value = calculatedValue;
-
-        }
-    </script> -->
 </body>

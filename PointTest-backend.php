@@ -169,7 +169,7 @@ if($number > 0){
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-
+	if($_POST['submitBtn'] != "Cancel"){
 
 	// $Cage = $_POST["Cage"];
 	// $Gage = $_POST["Gage"];
@@ -196,62 +196,62 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	// $Csum = $_POST["Csum"];
 	// $Gsum = $_POST["Gsum"];
 
-	$query = "";
+		$query = "";
 
 
 
 
-	if($number > 0){
-		foreach ($_POST as $key => $value) {
+		if($number > 0){
+			foreach ($_POST as $key => $value) {
 		# code...
 			//if the client has been assessed, only update required 
 			// print_r($value);
 
-			if(!isset($value['feedback']) && !isset($value['emailUserName']) && !isset($value['feedback']) ){
-				$query = "UPDATE clientpoint SET ";
-				$pointid = $value['id'];
-				$goal = $value['goal'];
-				$current = $value['current'];
-				$query .= "current = $current, goal = $goal WHERE clientid = $id AND pointid = $pointid ";
+				if(!isset($value['feedback']) && !isset($value['emailUserName']) && !isset($value['feedback']) ){
+					$query = "UPDATE clientpoint SET ";
+					$pointid = $value['id'];
+					$goal = $value['goal'];
+					$current = $value['current'];
+					$query .= "current = $current, goal = $goal WHERE clientid = $id AND pointid = $pointid ";
 
-				$mysqli->query($query);
+					$mysqli->query($query);
+
+				}
 
 			}
 
-		}
 
-
-		$msg = "The Point is successfully Inserted new record created";
-		updateValue($mysqli);
-		$totals = calculateTotals($id);
-		updateValue($mysqli);
-		$msg = "The Point is successfully Updated";
+			$msg = "The Point is successfully Inserted new record created";
+			updateValue($mysqli);
+			$totals = calculateTotals($id);
+			updateValue($mysqli);
+			$msg = "The Point is successfully Updated";
 
 
 
 
 
 //only the advisor can send the email
-		if ($_SESSION['userType'] != "AGENT") {
-			$mail = new PHPMailer(true);                              
+			if ($_SESSION['userType'] != "AGENT" && $_POST['submitBtn'] == "Send Email") {
+				$mail = new PHPMailer(true);                              
 			// Passing `true` enables exceptions
-			try {
+				try {
     //Server settings
 				// $mail->SMTPDebug = 4;                                 
     // Enable verbose debug output
-				$mail->isSMTP();                                      
+					$mail->isSMTP();                                      
     // Set mailer to use SMTP
-				$mail->Host = 'smtp.live.com';  
+					$mail->Host = 'smtp.live.com';  
     // Specify main and backup SMTP servers
-				$mail->SMTPAuth = true;                               
+					$mail->SMTPAuth = true;                               
     // Enable SMTP authentication
-				$mail->Username = $_POST['emailUserName'];                 
+					$mail->Username = $_POST['emailUserName'];                 
     // SMTP username
-				$mail->Password = $_POST['emailPassword'];                           
+					$mail->Password = $_POST['emailPassword'];                           
     // SMTP password
-				$mail->SMTPSecure = 'tls';                            
+					$mail->SMTPSecure = 'tls';                            
     // Enable TLS encryption, `ssl` also accepted
-				$mail->Port = 587;                                    
+					$mail->Port = 587;                                    
     // TCP port to connect to
 
     //Recipients
@@ -264,8 +264,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 				// 		'allow_self_signed' => true
 				// 	)
 				// );
-				$mail->setFrom($_POST['emailUserName'], 'RACC');
-				$mail->addAddress($userDetail['Email'], $userDetail['FirstName']." ".$userDetail['LastName'] );     
+					$mail->setFrom($_POST['emailUserName'], 'RACC');
+					$mail->addAddress($userDetail['Email'], $userDetail['FirstName']." ".$userDetail['LastName'] );     
     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');
@@ -279,112 +279,114 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Optional name
 
     //Content
-				$mail->isHTML(true);                                  
+					$mail->isHTML(true);                                  
     // Set email format to HTML
-				$mail->Subject = 'Your PTE Update and feedback';
-				$mail->Body    = 'Your Result Update And Some Feedback';
+					$mail->Subject = 'Your PTE Update and feedback';
+					$mail->Body    = 'Your Result Update And Some Feedback';
 
 
-				$mail->Body .= '<html>';
-				$mail->Body .= '<head>';
-				$mail->Body .= '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />';
-				$mail->Body .= '</head>';
-				$mail->Body .= '<body>';
-				$mail->Body .= '<p> Hello '. $userDetail['FirstName']. ' '.$userDetail['LastName'].', </p>';
-				$mail->Body .= '<table class ="table" width="100%" style="border-collapse:collapse" cellpadding="13">';
+					$mail->Body .= '<html>';
+					$mail->Body .= '<head>';
+					$mail->Body .= '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />';
+					$mail->Body .= '</head>';
+					$mail->Body .= '<body>';
+					$mail->Body .= '<p> Hello '. $userDetail['FirstName']. ' '.$userDetail['LastName'].', </p>';
+					$mail->Body .= '<table class ="table" width="100%" style="border-collapse:collapse" cellpadding="13">';
 
-				$mail->Body .= '<tr class = "info">
-				<th></th>
-				<th>Skills</th>
-				<th>Current Points</th>
-				<th>Notes</th>
-				<th>Goal Points</th>
-				</tr>';
-				foreach ($forms as $key => $value) {
+					$mail->Body .= '<tr class = "info">
+					<th></th>
+					<th>Skills</th>
+					<th>Current Points</th>
+					<th>Notes</th>
+					<th>Goal Points</th>
+					</tr>';
+					foreach ($forms as $key => $value) {
+						$mail->Body .= '<tr>';
+						$mail->Body .= "<td>". $value['id'] ."</td>";
+						$mail->Body .= "<td>".  $value['name'] ."</td>";
+						$mail->Body .= "<td>".
+						$formValue[$key]['current']
+						."</td>";
+						$mail->Body .= "<td>".$value['note']."</td>";
+						$mail->Body .= '<td>';
+						$mail->Body .= $formValue[$key]['goal'];
+
+						$mail->Body .= '</td>';
+						$mail->Body .= '</tr>';
+
+
+					} 
 					$mail->Body .= '<tr>';
-					$mail->Body .= "<td>". $value['id'] ."</td>";
-					$mail->Body .= "<td>".  $value['name'] ."</td>";
-					$mail->Body .= "<td>".
-					$formValue[$key]['current']
-					."</td>";
-					$mail->Body .= "<td>".$value['note']."</td>";
-					$mail->Body .= '<td>';
-					$mail->Body .= $formValue[$key]['goal'];
-
+					$mail->Body .= '<td colspan ="5">';
+					$mail->Body .= '<h5>Your Feedback</h5>';
+					$mail->Body .= '<p>'.$_POST['feedback'].'</p>';
 					$mail->Body .= '</td>';
+
+
+
 					$mail->Body .= '</tr>';
 
 
-				} 
-				$mail->Body .= '<tr>';
-				$mail->Body .= '<td colspan ="5">';
-				$mail->Body .= '<h5>Your Feedback</h5>';
-				$mail->Body .= '<p>'.$_POST['feedback'].'</p>';
-				$mail->Body .= '</td>';
 
 
+					$mail->Body .= '</table>';
 
-				$mail->Body .= '</tr>';
+					$mail->Body .= '<p> Regards,    </p>';
+					$mail->Body .= '</br>';
+					$mail->Body .= '</br>';
+					$mail->Body .= '</br>';
+					$mail->Body .= '</br>';
 
-
-
-
-				$mail->Body .= '</table>';
-
-				$mail->Body .= '<p> Regards,    </p>';
-				$mail->Body .= '</br>';
-				$mail->Body .= '</br>';
-				$mail->Body .= '</br>';
-				$mail->Body .= '</br>';
-
-				$mail->Body .= '<p> Michael Moedjianto</p>';
-				$mail->Body .= '</br>';
-				$mail->addAttachment('image/racc.png');
+					$mail->Body .= '<p> Michael Moedjianto</p>';
+					$mail->Body .= '</br>';
+					$mail->addAttachment('image/racc.png');
 
 
-				$mail->Body .= '</body>';
-				$mail->Body .= '</html>';
+					$mail->Body .= '</body>';
+					$mail->Body .= '</html>';
 
 
-				$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+					$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-				if($mail->send()){
-					$mail .= " and email sent successfully";
+					if($mail->send()){
+						$mail .= " and email sent successfully";
 
-				}else{
-					$mail .= " but the email is not sent";
+					}else{
+						$mail .= " but the email is not sent";
+					}
+
+
+				}catch (Exception $e) {
+					echo 'Message could not be sent.';
+					echo 'Mailer Error: ' . $mail->ErrorInfo;
 				}
 
-
-			}catch (Exception $e) {
-				echo 'Message could not be sent.';
-				echo 'Mailer Error: ' . $mail->ErrorInfo;
 			}
 
-		} 
-
-	}else{
+		}else{
 //if the client has not been assessed
-		$query = "INSERT INTO clientpoint(pointid,current,goal,clientid) VALUES ";
-		foreach ($_POST as $key => $value) {
+			$query = "INSERT INTO clientpoint(pointid,current,goal,clientid) VALUES ";
+			foreach ($_POST as $key => $value) {
 # code...
-			$pointid = $value['id'];
-			$goal = $value['goal'];
-			$current = $value['current'];
-			$query .= "('$pointid','$current','$goal','$id'),";
+				$pointid = $value['id'];
+				$goal = $value['goal'];
+				$current = $value['current'];
+				$query .= "('$pointid','$current','$goal','$id'),";
+
+			}
+			$mysqli->query(substr($query,0, -1));
+			updateValue($mysqli);
+			$totals = calculateTotals($id);
+			updateValue($mysqli);
+
+
 
 		}
-		$mysqli->query(substr($query,0, -1));
-		updateValue($mysqli);
-		$totals = calculateTotals($id);
-		updateValue($mysqli);
 
 
-
+	}else{
+		header('Location:list.php');
 	}
-
-
-
 
 
 
