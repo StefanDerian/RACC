@@ -61,7 +61,7 @@ include('createAccount-backend.php');
                 <span class="error">* <?php echo $langErr;?></span>
             </div>
         </div> 
-        <?php if(!isset($_GET)){ ?>
+        <!-- <?php if(!isset($_GET)){ ?> -->
         <div class = "form-group">
             <label>Role:</label>
             <div style="text-align:left">
@@ -71,7 +71,7 @@ include('createAccount-backend.php');
                 </select>
             </div>
         </div>
-        <?php } ?>
+        <!-- <?php } ?> -->
 
 
 
