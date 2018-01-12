@@ -42,11 +42,12 @@ include ('login-backend.php');
 					</lable>
 				</div>
 				<Button type = "submit" class = "btn btn-success btn-block" name = "login"> Login </Button>
+				<a class ="btn btn-warning btn-block" href = "editAppt.php">Registration Form</a>
 			</form>
 			<!-- Form End -->
 		</div>
 	</div>
-	<a class ="btn btn-warning btn-lg" href = "editAppt.php">Registration Form</a>
+	
 </body>
 </html>
 
