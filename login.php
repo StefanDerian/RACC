@@ -28,7 +28,7 @@ include ('login-backend.php');
 			<!-- Form Start -->
 			<form class = "form-container" method="post" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 				<img src= "image/racc.png" id = "racc">
-				<div calss = "form-group">
+				<div class = "form-group">
 					<input type = "text" class = "form-control" name = "user" placeholder = "Username">
 				</div>
 				
