@@ -47,7 +47,7 @@ include ('login-backend.php');
 				</div>
 				<div>
 					<Button type = "submit" class = "btn btn-success btn-lg" name = "login"> Login </Button>
-					<Button class ="btn btn-warning btn-lg" href = "editAppt.php">Registration Form</Button>
+					<a class ="btn btn-warning btn-lg" href = "editAppt.php">Registration Form</a>
 					<br>
 					<br>
 				</div>
