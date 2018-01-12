@@ -55,11 +55,11 @@
   transition: 0.5s;
 }
 
-.navbar-new:hover span {
+.navbar-new:hover gen-report {
   padding-right: 25px;
 }
 
-.navbar-new:hover span:after {
+.navbar-new:hover gen-report:after {
   opacity: 1;
   right: 0;
 }

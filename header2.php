@@ -67,6 +67,7 @@
 			<?php }else{ ?>
 			<ul class="nav navbar-nav">
 				<li><a href="editAppt.php">REGISTRATION FORM</a></li>
+				<li><a href="consultationRegister.php">CONSULTATION REGISTER</a></li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
