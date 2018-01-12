@@ -217,6 +217,7 @@ include_once('notes-backend.php');
                         </select>
                     </div>             
                 <?php } ?>
+                </div>
 
                 <?php if(isset($_SESSION['userID'])){?>
                 <div class="row">
@@ -242,7 +243,7 @@ include_once('notes-backend.php');
             </div>
             <br>
             <div class="row">
-                <input type="submit" class="btn btn-primary btn-lg activ pull-left" name="submitBtn" style = "margin-left: 28%;" value="<?php echo isset($_GET['user'])?'Save':'Submit' ?>">
+                <input type="submit" class="btn btn-primary btn-lg activ pull-left" name="submitBtn" style = "margin-left: 38%;" value="<?php echo isset($_GET['user'])?'Save':'Submit' ?>">
                 
                 <input type="submit" class="btn btn-danger btn-lg activ pull-left" name="submitBtn" style = "margin-left: 3%;"  value="Cancel">
             </div>
