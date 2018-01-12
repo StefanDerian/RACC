@@ -188,7 +188,6 @@ include_once('notes-backend.php');
                     <label>Consultant:</label>
 
                     <select id="consultant" name="consultant" class = "form-control">
-                        <option value = "0"> Have not chosen </option>
                         <?php foreach($agents as $agent) { ?>
                         <option value="<?php echo $agent["UserID"]; ?>" <?php echo isset($consultant)&&$consultant==$agent["UserID"]?"selected":"" ?>><?php echo $agent["DisplayName"]; ?></option>
                         <?php } ?>

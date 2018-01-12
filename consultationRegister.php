@@ -35,19 +35,19 @@ include ('consultationRegister-backend.php');
 		<div class="container"> 
 			<!-- Form Start -->
 			<form class = "form-container" method="post" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-				<img src= "image/racc.png" id = "racc">
+				<div class="row">
+					<div class="col-sm-12">
+						<img src= "image/racc.png" id = "racc">						
+						<H1 style = "color: white">Welcome to RACC Australia</H1>
+
+					</div>
+				</div>
 				<div class = "form-group">
 					<input type = "text" class = "form-control" name = "user" placeholder = "First Name...">
 				</div>
 				
 				<div class = "form-group">
 					<input type = "password" class = "form-control" name = "pass" placeholder = "Last Name...">
-				</div>
-
-				<div class = "checkbox">
-					<lable>
-						<input type = "checkbox" color:"white"> Remember Me </lable>
-					</lable>
 				</div>
 				<div>
 					<Button type = "submit" class = "btn btn-success btn-block" name = "login"> Login </Button>
