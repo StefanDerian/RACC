@@ -27,22 +27,30 @@ include ('login-backend.php');
 		<div class="container"> 
 			<!-- Form Start -->
 			<form class = "form-container" method="post" name="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-				<img src= "image/racc.png" id = "racc">
+				<div class="row">
+					<div class="col-sm-12">
+						<img src= "image/racc.png" id = "racc">						
+						<H1 style = "color: white">Welcome to RACC Australia</H1>
+
+					</div>
+				</div>
 				<div class = "form-group">
-					<input type = "text" class = "form-control" name = "user" placeholder = "Username">
+					<label style="color: white"><b>UserName</b></label>
+					<input type = "text" class = "form-control" name = "user" placeholder = "Username...">
 				</div>
 				
 				<div class = "form-group">
-					<input type = "password" class = "form-control" name = "pass" placeholder = "Password">
+					<label style="color: white"><b>Password</b></label>
+					<input type = "password" class = "form-control" name = "pass" placeholder = "Password...">
+					<br>
+					<br>
 				</div>
-
-				<div class = "checkbox">
-					<lable>
-						<input type = "checkbox" color:"white"> Remember Me
-					</lable>
+				<div>
+					<Button type = "submit" class = "btn btn-success btn-lg" name = "login"> Login </Button>
+					<Button class ="btn btn-warning btn-lg" href = "editAppt.php">Registration Form</Button>
+					<br>
+					<br>
 				</div>
-				<Button type = "submit" class = "btn btn-success btn-block" name = "login"> Login </Button>
-				<a class ="btn btn-warning btn-block" href = "editAppt.php">Registration Form</a>
 			</form>
 			<!-- Form End -->
 		</div>

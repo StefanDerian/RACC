@@ -43,15 +43,21 @@ include ('consultationRegister-backend.php');
 					</div>
 				</div>
 				<div class = "form-group">
+					<label style="color: white"><b>First Name</b></label>
 					<input type = "text" class = "form-control" name = "user" placeholder = "First Name...">
 				</div>
 				
 				<div class = "form-group">
+					<label style="color: white"><b>Last Name</b></label>
 					<input type = "password" class = "form-control" name = "pass" placeholder = "Last Name...">
+					<br>
+					<br>
 				</div>
 				<div>
-					<Button type = "submit" class = "btn btn-success btn-block" name = "login"> Login </Button>
-					<Button class ="btn btn-warning btn-block" href = "editAppt.php">Registration Form</Button>
+					<Button type = "submit" class = "btn btn-success btn-lg" name = "login"> Register </Button>
+					<Button class ="btn btn-warning btn-lg" href = "editAppt.php">Registration Form</Button>
+					<br>
+					<br>
 				</div>
 			</form>
 			<!-- Form End -->
