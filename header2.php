@@ -45,8 +45,8 @@
 						</script>
 					</div>
 					<div class="col-sm-10">
-						<a class="navbar-header" href="editAppt.php"><img src= "image/racc.png" id = "racc"></a>
-						<h1 style="margin-top: 30px">RACC Australia</h1>
+						<a style="margin-top: 8px" class="navbar-header" href="editAppt.php"><img src= "image/racc.png" id = "racc"></a>
+						<h1 style="margin-top: 16px; color: white">RACC Australia</h1>
 					</div>					
 				</div>				
 			</div>
@@ -71,6 +71,7 @@
 			<?php }else{ ?>
 			<ul class="nav navbar-nav">
 				<li><a href="editAppt.php">REGISTRATION FORM</a></li>
+				<li><a href="consultationRegister.php">CONSULTATION REGISTER</a></li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">

@@ -27,7 +27,7 @@ function destroySession(){
 
 $pageName = basename($_SERVER['PHP_SELF']);
 
-if(!isset($_SESSION['userID']) && $pageName != "editAppt.php" && $pageName != "login.php"  ) {
+if(!isset($_SESSION['userID']) && $pageName != "editAppt.php" && $pageName != "login.php" && $pageName != "consultationRegister.php" ) {
 	
 	
 	header("Location: login.php");
