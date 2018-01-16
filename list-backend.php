@@ -64,6 +64,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $parameter .= empty($parameter)?"":"AND";
         $parameter .= " DateofBirth = '$dob' ";
     }
+    if(!empty($_POST['status'])){
+        $status = $_POST['status'];
+        $parameter .= empty($parameter)?"":"AND";
+        $parameter .= " CurrentStatus = '$status' ";
+    }
     if(!empty($_POST['lastContacted'])){
         $lastContactDate = $_POST['lastContacted'];
         $lastContactParam .= " HAVING MAX(time) >= DATE_ADD(NOW(), INTERVAL $lastContactDate MONTH) ";
@@ -98,7 +103,7 @@ $statement;
 if($_SESSION["userType"] != "AGENT"){
 
 
-    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName, urgent FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
+    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName, urgent, know FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
     LEFT JOIN account ON account.UserID = user.ConsultantID
     WHERE user.UserID IN ($query) GROUP BY user.UserID $lastContactParam ORDER BY user.Created DESC";
 
@@ -106,7 +111,7 @@ if($_SESSION["userType"] != "AGENT"){
 
 }else{
 
-    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, urgent FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
+    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, urgent, know FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
 
 
 
@@ -132,22 +137,50 @@ if($statement->bind_param("i", $a)){
 
 $result = $statement->execute();
 
-if($statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted,$urgent)){
+if($statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted,$urgent, $know)){
 
 
 
 }else{
-    $statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted, $consultantName,$urgent);
+    $statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted, $consultantName,$urgent, $know);
 }
 
 $appointments = array();
+$appointments2 = array();
+
+$urgentAppointment = array();
 
 if ($result) {
     while ($statement->fetch()) {
 
 
+        $appointment2 = array();
 
 
+        
+
+
+
+
+
+
+        $appointment2 = array( 
+            $urgent,
+            $rUserID, 
+            $rFirstName,
+            $rLastName,
+            $rPreferName,
+            $rDateofBirth,
+            $rNationality,
+            $rGender,
+            $rMobile,
+            $rEmail,
+            $rCurrentStatus,
+            $vexpiry,
+            $lastContacted,
+            $course,
+            $know 
+        );
 
 
 
@@ -167,15 +200,23 @@ if ($result) {
             "vexpiry" => $vexpiry,
             "lastContacted" => $lastContacted,
             "course" => $course,
-            "urgent" => $urgent
+            "urgent" => $urgent,
+            "know" => $know
         );
+
+
         if($_SESSION["userType"] != "AGENT"){
             $appointment['consultant'] = $consultantName;
 
         }
-        
-        array_push($appointments, $appointment);
-    }
+        if($urgent == 1){
+           array_push($urgentAppointments, $appointment);
+       }
+
+
+       array_push($appointments2, $appointment2);
+       array_push($appointments, $appointment);
+   }
 }
 
 
@@ -200,6 +241,6 @@ $appointments = array_slice(
     $records_per_page
 );
 
-
+echo json_encode($appointments);
 
 ?>

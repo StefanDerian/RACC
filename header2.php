@@ -12,7 +12,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		
+
 	<script src="confirmation-modal.js"></script>
 	<script src="//cdn.quilljs.com/1.3.4/quill.js"></script>
 	<script src="//cdn.quilljs.com/1.3.4/quill.min.js"></script>
@@ -20,6 +20,10 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 	<script type="text/javascript" src = "list.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+
+	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 	
 
 </head> 
@@ -34,10 +38,10 @@
 					<div class="col-sm-2" style="margin-top: 32px">
 						<input class = "goBackBtn" type = "image" src = "image/bback-32.png" onclick="goBack()">
 						<script>
-						function goBack()
-						  {
-						  window.history.back()
-						  }
+							function goBack()
+							{
+								window.history.back()
+							}
 						</script>
 					</div>
 					<div class="col-sm-10">

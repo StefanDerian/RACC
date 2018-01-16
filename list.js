@@ -1,5 +1,85 @@
 $(document).ready(function(){
 
+	
+
+
+	$('#client-table').DataTable({
+
+		"processing": true,
+		"serverSide": true,
+		"ajax":{
+			url:"list-backend.php",
+			dataSrc: ''
+		},
+
+		"columns": [
+		{ "data": "urgent" },
+		{ "data": "FirstName" },
+		{ "data": "LastName" },
+		{ "data": "Mobile" },
+		{ "data": "DateofBirth" },
+		{ "data": "Email" },
+		{ "data": "CurrentStatus" },
+		{ "data": "lastContacted" },
+		{ "data": "course" },
+		{ "data": "lastContacted" },
+		{ "data": "consultant" }
+		],
+		"columnDefs": [ {
+			"targets": 0,
+			"data": "urgent",
+			"render": function ( data, type, row, meta ) {
+				console.log(row);
+				if(data == 1){
+
+					return "<input type='checkbox' class='urgent-switch' data-id ="+row.UserID+"  checked  >";
+				}else{
+
+					return "<input type='checkbox' class='urgent-switch' data-id ="+row.UserID+"  >";
+				}
+			}
+		} ],
+		"createdRow": function(row, data, dataIndex) {
+			$(row).attr('data-id',data.UserID)
+			if(data.urgent == 1){
+				$(row).addClass('danger');
+			}
+		},
+		"drawCallback": function( settings ) {
+			$('.urgent-switch').bootstrapSwitch();
+
+			$('.urgent-switch').on('switchChange.bootstrapSwitch', function(event, state) {
+
+
+				var id = $(this).data('id');
+
+				var value = 0;
+				if(state){
+					$(this).closest('tr').addClass('danger');
+					value = 1;
+
+				}else{
+					$(this).closest('tr').removeClass('danger');
+					value = 0;
+				}
+				$.post("list-urgent.php", 
+				{
+					id:id,
+					value: value,
+
+				}, 
+				function(data, status){
+
+				});
+
+
+
+
+			});
+		}
+
+	});
+
 
 	$("#gen-report").click(function(){
 		console.log('ok');
@@ -18,36 +98,7 @@ $(document).ready(function(){
 		// setTimeout(function(){newWin.close();},10);
 	});
 
-	$('.urgent-switch').bootstrapSwitch();
-
-	$('.urgent-switch').on('switchChange.bootstrapSwitch', function(event, state) {
-
-		
-		var id = $(this).data('id');
-
-		var value = 0;
-		if(state){
-			$(this).closest('.listrow').addClass('danger');
-			value = 1;
-
-		}else{
-			$(this).closest('.listrow').removeClass('danger');
-			value = 0;
-		}
-		$.post("list-urgent.php", 
-		{
-			id:id,
-			value: value,
-
-		}, 
-		function(data, status){
-			
-		});
-
-
-
-
-	});
+	
 
 });
 

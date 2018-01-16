@@ -1,6 +1,6 @@
 <?php
 include('session.php');
-include('list-backend.php');
+// include('list-backend.php');
 
 // include ('header.php');
 include ('header2.php');
@@ -9,10 +9,10 @@ include ('editDate-backend.php');
 
 ?>
 <script type="text/javascript" src = "./printMe/jquery-printme.js"></script>
-<script type="text/javascript" src = "list.js"></script>
+<!-- <script type="text/javascript" src = "list.js"></script> -->
 
 <br>
-<div class = "container-fluid">
+<div class = "container">
     <div class="row">
 
        <?php if(isset($_GET['msg'])){ ?>
@@ -25,7 +25,7 @@ include ('editDate-backend.php');
         <div class="col-md-2" >
 
             <div class = "form-group">
-                <label> Enter Name:</label>
+                <label> Name:</label>
 
                 <input type="text" class="form-control" name="search" placeholder="Search by Name..."/>
 
@@ -47,20 +47,33 @@ include ('editDate-backend.php');
         <div class="col-md-2" >
 
             <div class = "form-group">
-                <label> Enter Visa Expiry Date:</label>
+                <label> Visa Expiry Date:</label>
                 <input type="date" class="form-control" name="vexpiry" placeholder="dd/mm/yyyy"/>
             </div>
         </div>  
 
         <div class="col-md-2" >
             <div class = "form-group">
-                <label> Enter Last Contact Date In:</label>
+                <label> Last Contact Date In:</label>
                 <select id="status" name="lastContacted" class = "form-control">
 
                     <option value= "">Any Month</option>
                     <option value= "-1" >Last 1 Months</option>
                     <option value= "-2" >Last 2 Months</option>
                     <option value= "-3" >Last 3 Months</option>
+                    <!--  <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option> -->
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2" >
+            <div class = "form-group">
+                <label>Status:</label>
+                <select id="status" name="status" class = "form-control">
+
+                    <option value= "">Any Progress</option>
+                    <option value= "new client" >new client</option>
+                    <option value= "on progress" > app on progress</option>
+                    <option value= "successfull" > Successfull</option>
                     <!--  <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option> -->
                 </select>
             </div>
@@ -97,41 +110,45 @@ include ('editDate-backend.php');
 <!-- <a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a> -->
 <!-- <button  class = "btn btn-lg btn-primary pull-right" id ="gen-report"> Generate Report</button> -->
 
-<table width="100%" style="border-collapse:collapse" cellpadding="5" id = "clients-list" class="table table-hover">
-    <tr class = "info">
-        <th>Emergency</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Mobile</th>
-        <th>DOB</th>
-        <th>Email</th>
-        <th>Status</th>
-        <th>Visa Expiry Date</th>
-        <th>Course</th>
-        <th>Last Contact</th>
-        <?php if($_SESSION["userType"] != "AGENT"){?>
-        <th>Consultant</th>
-        <?php }?>
+<table width="100%" style="border-collapse:collapse" cellpadding="5"  class="table table-striped table-hover" id = "client-table">
+    <thead>
+        <tr class = "info">
+            <th>Emergency</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Mobile</th>
+            <th>DOB</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Visa Expiry Date</th>
+            <th>Course</th>
+           <!--  <th>Reference</th> -->
+            <th>Last Contact</th>
+            <?php if($_SESSION["userType"] != "AGENT"){?>
+            <th>Consultant</th>
+            <?php }?>
 
-    </tr>
-    <?php if (empty($appointment)){ ?>
+        </tr>
+    </thead>
+    <!-- <?php if (empty($appointment)){ ?>
 
     <span class = "alert alert-warning"> There is no match with your Search criteria</span>
-    <?php } else {?>
+    <?php } else {?> -->
+  <!--   <tbody>
+        <?php foreach($appointments as $appointment) { ?>
+        <tr class="listrow <?php echo $appointment["urgent"] == 1?'danger':''; ?>" id = "list-Client">
 
-    <?php foreach($appointments as $appointment) { ?>
-    <tr class="listrow <?php echo $appointment["urgent"] == 1?'danger':''; ?>" id = "list-Client">
-     
-        <td ><input type="checkbox" class="urgent-switch" <?php echo $appointment["urgent"] == 1?'checked':''; ?> data-id='<?php echo $appointment["UserID"]; ?>' ></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["FirstName"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["LastName"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Mobile"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["DateofBirth"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Email"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["CurrentStatus"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["vexpiry"]=="0000-00-00"?"<i><font color='grey'>There is no information yet</font></i>": $appointment["vexpiry"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["course"] ?></td>
-        <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo empty($appointment["lastContacted"])?"<i><font color='grey'>There is still no contact </font</i>": $appointment["lastContacted"] ?></td>
+            <td ><input type="checkbox" class="urgent-switch" <?php echo $appointment["urgent"] == 1?'checked':''; ?> data-id='<?php echo $appointment["UserID"]; ?>' ></td>
+            <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["FirstName"] ?></td>
+            <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["LastName"] ?></td>
+            <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Mobile"] ?></td>
+            <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["DateofBirth"] ?></td>
+            <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["Email"] ?></td>
+            <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["CurrentStatus"] ?></td>
+            <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["vexpiry"]=="0000-00-00"?"<i><font color='grey'>There is no information yet</font></i>": $appointment["vexpiry"] ?></td>
+            <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["course"] ?></td>
+            <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo !empty($appointment["know"])?$appointment['know']:"<i><font color='grey'>not filled </font></i>"; ?></td>
+            <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo empty($appointment["lastContacted"])?"<i><font color='grey'>There is still no contact </font></i>": $appointment["lastContacted"] ?></td>
             <?php if($_SESSION["userType"] != "AGENT"){?>
 
 
@@ -140,12 +157,14 @@ include ('editDate-backend.php');
 
         </tr>
 
+
         <?php } ?>
-        <?php } ?>
-    </table>
-    <div align="center">
-        <?php $pagination->render(); ?>
-    </div> 
+    </tbody> -->
+    <?php } ?>
+</table>
+<!-- <div align="center">
+    <?php $pagination->render(); ?>
+</div>  -->
 </div>
 
 
