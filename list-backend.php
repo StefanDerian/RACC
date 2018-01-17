@@ -1,6 +1,8 @@
 <?php
 include('dbConnection.php'); //db connection
+include('session.php');
 require 'vendor/stefangabos/zebra_pagination/Zebra_Pagination.php';
+
 //function to connect and execute the query
 function table($query){
     include('dbConnection.php'); //db connection
@@ -103,7 +105,7 @@ $statement;
 if($_SESSION["userType"] != "AGENT"){
 
 
-    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName, urgent, know FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
+    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName, urgent, know, account.UserID FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
     LEFT JOIN account ON account.UserID = user.ConsultantID
     WHERE user.UserID IN ($query) GROUP BY user.UserID $lastContactParam ORDER BY user.Created DESC";
 
@@ -142,7 +144,7 @@ if($statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDa
 
 
 }else{
-    $statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted, $consultantName,$urgent, $know);
+    $statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted, $consultantName,$urgent, $know, $consultantID);
 }
 
 $appointments = array();
@@ -164,23 +166,23 @@ if ($result) {
 
 
 
-        $appointment2 = array( 
-            $urgent,
-            $rUserID, 
-            $rFirstName,
-            $rLastName,
-            $rPreferName,
-            $rDateofBirth,
-            $rNationality,
-            $rGender,
-            $rMobile,
-            $rEmail,
-            $rCurrentStatus,
-            $vexpiry,
-            $lastContacted,
-            $course,
-            $know 
-        );
+        // $appointment2 = array( 
+        //     $urgent,
+        //     $rUserID, 
+        //     $rFirstName,
+        //     $rLastName,
+        //     $rPreferName,
+        //     $rDateofBirth,
+        //     $rNationality,
+        //     $rGender,
+        //     $rMobile,
+        //     $rEmail,
+        //     $rCurrentStatus,
+        //     $vexpiry,
+        //     $lastContacted,
+        //     $course,
+        //     $know 
+        // );
 
 
 
@@ -201,12 +203,14 @@ if ($result) {
             "lastContacted" => $lastContacted,
             "course" => $course,
             "urgent" => $urgent,
-            "know" => $know
+            "know" => $know,
+            
         );
 
 
         if($_SESSION["userType"] != "AGENT"){
             $appointment['consultant'] = $consultantName;
+            $appointment['consultantID'] = $consultantID;
 
         }
         if($urgent == 1){
@@ -214,7 +218,7 @@ if ($result) {
        }
 
 
-       array_push($appointments2, $appointment2);
+       // array_push($appointments2, $appointment2);
        array_push($appointments, $appointment);
    }
 }

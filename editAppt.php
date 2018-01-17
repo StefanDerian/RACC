@@ -15,6 +15,11 @@ include_once('notes-backend.php');
 </div>
 
 <?php } ?> 
+
+
+
+
+
 <div class="container">
     <div class="col-lg-12 well">
         <div class="row">
@@ -25,14 +30,14 @@ include_once('notes-backend.php');
                     <div class="row">
                         <div class="col-sm-4 form-group">
                             <label>First Name</label>
-                            <input type="text" id = "fname" name = "fname" maxlength = "255" value = "<?php echo isset($fname)?$fname:"";  ?>" class="form-control">
+                            <input placeholder = "As it is written in your passport" type="text" id = "fname" name = "fname" maxlength = "255" value = "<?php echo isset($fname)?$fname:"";  ?>" class="form-control">
                             <span class="error"><?php echo isset($fnameError)?$fnameError:"";?></span>
                         </div>
 
 
                         <div class="col-sm-4 form-group">
                             <label>Last Name</label>
-                            <input type="text" id="lname" name="lname" maxlength="255" value = "<?php echo isset($lname)?$lname:"";  ?>" class="form-control">
+                            <input placeholder = "As it is written in your passport" type="text" id="lname" name="lname" maxlength="255" value = "<?php echo isset($lname)?$lname:"";  ?>" class="form-control">
                             <span class="error"><?php echo isset($lnameError)?$lnameError:"";?>
                             </span>
                         </div>
@@ -91,184 +96,201 @@ include_once('notes-backend.php');
                     <h2 class="title2">Education Background</h2>
                     <h4><b>Current Study</b></h4>
                     <div class = "row">
-                       <div class="col-sm-4 form-group">
-                            <label>University</label>
-                            <input type="text" class="form-control" id="uni" name="uni" maxlength="255" value = "<?php echo isset($uni)?$uni:"";  ?>">
-                            <span class="error"><?php echo isset($uniError)?$uniError:"";?>
-                            </span>
-                        </div>      
-                        <div class="col-sm-4 form-group">
-                            <label>Course and Major</label>
-                            <input type="text" class="form-control" id="cam" name="cam" maxlength="255" value = "<?php echo isset($cam)?$cam:"";  ?>">
-                            <span class="error"><?php echo isset($camError)?$camError:"";?>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class = "row">
-                        <div class="col-sm-4 form-group">
-                            <label>Estimated Completion Date</label>
-                            <input type="date" id="comp" name="comp" value = "<?php echo isset($comp)?$comp:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
-                            <span class="error"><?php echo isset($compError)?$compError:"";?>
-                            </span>
-                        </div> 
-                    </div>
-
-                    <!-- Need modification part start -->
-                    <h4><b>Previous Study</b></h4>
-                    <div class = "row">
-                       <div class="col-sm-4 form-group">
-                            <label>University</label>
-                            <input type="text" class="form-control" id="uni" name="uni" maxlength="255" value = "<?php echo isset($uni)?$uni:"";  ?>">
-                            <span class="error"><?php echo isset($uniError)?$uniError:"";?>
-                            </span>
-                        </div>      
-                        <div class="col-sm-4 form-group">
-                            <label>Course and Major</label>
-                            <input type="text" class="form-control" id="cam" name="cam" maxlength="255" value = "<?php echo isset($cam)?$cam:"";  ?>">
-                            <span class="error"><?php echo isset($camError)?$camError:"";?>
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class = "row">
-                        <div class="col-sm-4 form-group">
-                            <label>Completion Date</label>
-                            <input type="date" id="comp" name="comp" value = "<?php echo isset($comp)?$comp:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
-                            <span class="error"><?php echo isset($compError)?$compError:"";?>
-                            </span>
-                        </div> 
-                    </div>
-                    <!-- Need modification part end -->
-
-                    <div class="row">
-                        <?php if(!isset($_SESSION['userID'])){?>
-
-                        <div class="col-sm-4 form-group">
-                            <label>Where did you hear about us:</label>
-                            <input type="text" class="form-control" id="know" name="know" maxlength="255" value = "<?php echo isset($know)?$know:"";  ?>">
-                            </span>
-                        </div>
-
-                        <!-- Need modification part start -->
-                        <div class="col-sm-4 form-group">
-                            <label>Which service are you interested in:</label>
-                            <select id="service" name="service" class = "form-control">
-                            <option value= "migration" <?php echo isset($status)&&$status=="**"?"**":"" ?>>Migration</option>
-                            <option value= "education" <?php echo isset($status)&&$status=="**"?"**":"" ?>>Education</option>
-                            </select>
-                            
-                        </div>
-                        <!-- Need modification part end -->
-
-
-                        <?php } ?>
-                    </div>
-
-
-                    <!-- this form only available when users are logged in -->
-                    <?php if(isset($_SESSION['userID'])){?>
-
-                    <div class = "row">
-                       <div class="col-sm-4 form-group">
-                            <label>Current Visa:</label>
-                            <input class="form-control" type="text" id="visa" name="visa" maxlength="255" value = "<?php echo isset($visa)?$visa:"";  ?>"/>
-                            <span class="error"><?php echo isset($visaError)?$visaError:"";?></span>
-                        </div>
-                        <div class="col-sm-4 form-group">
-                            <label>Visa Expiry Date:</label>
-                            <input class="form-control" type="date" id="vexpiry" name="vexpiry" value = "<?php echo isset($vexpiry)?$vexpiry:"";  ?>"/>
-                            <span class="error"><?php echo isset($vexpiryError)?$vexpiryError:"";?></span>
-                        </div>
-                    </div>
-
-                    <div class = "row">
-                        <div class="col-sm-4 form-group">
-                         <label>Passport No.:</label>
-                         <input class="form-control" type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" />
-                         <span class="error"><?php echo isset($passportError)?$passportError:"";?></span>
-                     </div>
                      <div class="col-sm-4 form-group">
-                        <label>Passport Expiry Date:</label>
-                        <input class="form-control" type="date" id="pexpiry" name="pexpiry" value = "<?php echo isset($pexpiry)?$pexpiry:"";  ?>" />
-                        <span class="error"><?php echo isset($pexpiryError)?$pexpiryError:"";?></span>
+                        <label>University</label>
+                        <input type="text" class="form-control" id="uni" name="uni" maxlength="255" value = "<?php echo isset($uni)?$uni:"";  ?>">
+                        <span class="error"><?php echo isset($uniError)?$uniError:"";?>
+                        </span>
+                    </div>      
+                    <div class="col-sm-4 form-group">
+                        <label>Course and Major</label>
+                        <input type="text" class="form-control" id="cam" name="cam" maxlength="255" value = "<?php echo isset($cam)?$cam:"";  ?>">
+                        <span class="error"><?php echo isset($camError)?$camError:"";?>
+                        </span>
                     </div>
                 </div>
 
-
-
-
-                <?php } ?>
-                <!-- Need modification part start -->
                 <div class = "row">
                     <div class="col-sm-4 form-group">
-                        <label>Wechat:</label>
-                        <input class="form-control" type="text" id="wechatID" name="wechatID" value = "<?php echo isset($pexpiry)?$pexpiry:"";  ?>" />
-                    </div>
-                <!-- Need modification part end -->
-                   <?php if(!isset($_SESSION['userID']) || $_SESSION['userType'] != "AGENT" ){?>
-                   <div class="col-sm-4 form-group">
-                        <label>Consultant:</label>
-
-                        <select id="consultant" name="consultant" class = "form-control">
-                            <?php foreach($agents as $agent) { ?>
-                            <option value="<?php echo $agent["UserID"]; ?>" <?php echo isset($consultant)&&$consultant==$agent["UserID"]?"selected":"" ?>><?php echo $agent["DisplayName"]; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>             
-                <?php } ?>
+                        <label>Estimated Completion Date</label>
+                        <input type="date" id="comp" name="comp" value = "<?php echo isset($comp)?$comp:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
+                        <span class="error"><?php echo isset($compError)?$compError:"";?>
+                        </span>
+                    </div> 
                 </div>
 
-                <?php if(isset($_SESSION['userID'])){?>
-                <div class="row">
-                    <div class="col-sm-4 form-group">
-                        <label>Status:</label>
-
-                        <select id="status" name="status" class = "form-control">
-
-                            <option value= "new client" <?php echo isset($status)&&$status=="new client"?"selected":"" ?>>new client</option>
-                            <option value= "on progress" <?php echo isset($status)&&$status=="on progress"?"selected":"" ?>> app on progress</option>
-                            <option value= "successfull" <?php echo isset($status)&&$status=="successfull"?"selected":"" ?>> Successfull</option>
-                            <!--  <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option> -->
-
-                        </select>
-                    </div>
-                    
-
-                    
+                <!-- Need modification part start -->
+                <h4><b>Previous Study</b></h4>
+                <div class = "row">
+                 <div class="col-sm-4 form-group">
+                    <label>University</label>
+                    <input type="text" class="form-control" id="prevUni" name="prevUni" maxlength="255" value = "<?php echo isset($prevUni)?$prevUni:"";  ?>">
+                    <span class="error"><?php echo isset($prevUniError)?$prevUniError:"";?>
+                    </span>
+                </div>      
+                <div class="col-sm-4 form-group">
+                    <label>Course and Major</label>
+                    <input type="text" class="form-control" id="prevStudy" name="prevStudy" maxlength="255" value = "<?php echo isset($prevStudy)?$prevStudy:"";  ?>">
+                    <span class="error"><?php echo isset($prevStudyError)?$prevStudyError:"";?>
+                    </span>
                 </div>
-                
-
-                <?php } ?>
-            </div>
-            <br>
-            <div class="row">
-                <input type="submit" class="btn btn-primary btn-lg activ pull-left" name="submitBtn" style = "margin-left: 38%;" value="<?php echo isset($_GET['user'])?'Save':'Submit' ?>">
-                
-                <input type="submit" class="btn btn-danger btn-lg activ pull-left" name="submitBtn" style = "margin-left: 3%;"  value="Cancel">
             </div>
 
-            </form>
+            <div class = "row">
+                <div class="col-sm-4 form-group">
+                    <label>Completion Date</label>
+                    <input type="date" id="comp" name="prevComp" value = "<?php echo isset($prevComp)?$prevComp:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
+                    <span class="error"><?php echo isset($prevCompError)?$prevCompError:"";?>
+                    </span>
+                </div> 
+            </div>
+            <!-- Need modification part end -->
+            <div class="col-sm-4 form-group">
+                <label>Service needed:</label>
+                <select id="service" name="service" class = "form-control">
+                    <option value= "migration" <?php echo isset($service)&&$service=="migration"?"selected":"" ?>>Migration</option>
+                    <option value= "education" <?php echo isset($service)&&$service=="education"?"selected":"" ?>>Education</option>
+                </select>
+
+            </div>
+            <?php if(!isset($_SESSION['userID'])){?>
+           <!--  <div class="row">
+
+
+                <div class="col-sm-4 form-group">
+                    <label>Where did you hear about us:</label>
+                    <input type="text" class="form-control" id="know" name="know" maxlength="255" value = "<?php echo isset($know)?$know:"";  ?>">
+                </span>
+            </div> -->
+
+            <!-- Need modification part start -->
+            
+            <!-- Need modification part end -->
+
+
+
+        <!-- </div> -->
+        <?php } ?>
+        <div class="row">
+
+
+                <div class="col-sm-4 form-group">
+                    <label>Where did you hear about us:</label>
+                    <input type="text" class="form-control" id="know" name="know" maxlength="255" value = "<?php echo isset($know)?$know:"";  ?>">
+                </span>
+            </div>
+
+            <!-- Need modification part start -->
+            
+            <!-- Need modification part end -->
+
+
+            
         </div>
-
-
-
-
+        <div class = "row">
+         <div class="col-sm-4 form-group">
+            <label>Current Visa:</label>
+            <input class="form-control" type="text" id="visa" name="visa" maxlength="255" value = "<?php echo isset($visa)?$visa:"";  ?>"/>
+            <span class="error"><?php echo isset($visaError)?$visaError:"";?></span>
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Visa Expiry Date:</label>
+            <input class="form-control" type="date" id="vexpiry" name="vexpiry" value = "<?php echo isset($vexpiry)?$vexpiry:"";  ?>"/>
+            <span class="error"><?php echo isset($vexpiryError)?$vexpiryError:"";?></span>
+        </div>
     </div>
+    <!-- this form only available when users are logged in -->
+    <?php if(isset($_SESSION['userID'])){?>
 
 
-
-    <br>
 
     <div class = "row">
-       <div class = "col-md-12" style="width: 760px; margin-left: 180px">
-        <?php if(isset($_SESSION['userID']) && isset($_GET['user']) ){?>
-        <?php 
-
-        $noter = new Note($_GET['user']);
-        $noter->displayNotes();
-        ?>
+        <div class="col-sm-4 form-group">
+           <label>Passport No.:</label>
+           <input class="form-control" type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" />
+           <span class="error"><?php echo isset($passportError)?$passportError:"";?></span>
+       </div>
+       <div class="col-sm-4 form-group">
+        <label>Passport Expiry Date:</label>
+        <input class="form-control" type="date" id="pexpiry" name="pexpiry" value = "<?php echo isset($pexpiry)?$pexpiry:"";  ?>" />
+        <span class="error"><?php echo isset($pexpiryError)?$pexpiryError:"";?></span>
     </div>
+</div>
+
+
+
+
+<?php } ?>
+<!-- Need modification part start -->
+<div class = "row">
+    <div class="col-sm-4 form-group">
+        <label>Wechat:</label>
+        <input placeholder = "leave it if you don't have one" class="form-control" type="text" id="wechat" name="wechat" value = "<?php echo isset($wechat)?$wechat:"";  ?>" />
+    </div>
+    <!-- Need modification part end -->
+    <?php if(!isset($_SESSION['userID']) || $_SESSION['userType'] != "AGENT" ){?>
+    <div class="col-sm-4 form-group">
+        <label>Consultant:</label>
+
+        <select id="consultant" name="consultant" class = "form-control">
+            <?php foreach($agents as $agent) { ?>
+            <option value="<?php echo $agent["UserID"]; ?>" <?php echo isset($consultant)&&$consultant==$agent["UserID"]?"selected":"" ?>><?php echo $agent["DisplayName"]; ?></option>
+            <?php } ?>
+        </select>
+    </div>             
+    <?php } ?>
+</div>
+
+<?php if(isset($_SESSION['userID'])){?>
+<div class="row">
+    <div class="col-sm-4 form-group">
+        <label>Status:</label>
+
+        <select id="status" name="status" class = "form-control">
+
+            <option value= "new client" <?php echo isset($status)&&$status=="new client"?"selected":"" ?>>new client</option>
+            <option value= "on progress" <?php echo isset($status)&&$status=="on progress"?"selected":"" ?>> app on progress</option>
+            <option value= "successfull" <?php echo isset($status)&&$status=="successfull"?"selected":"" ?>> Successfull</option>
+            <!--  <option value= "cancelled/failed" <?php echo isset($status)&&$status=="cancelled/failed"?"selected":"" ?>> Cancelled/Failed</option> -->
+
+        </select>
+    </div>
+
+
+
+</div>
+
+
+<?php } ?>
+</div>
+<br>
+<div class="row">
+    <input type="submit" class="btn btn-primary btn-lg activ pull-left" name="submitBtn" style = "margin-left: 38%;" value="<?php echo isset($_GET['user'])?'Save':'Submit' ?>">
+
+    <input type="submit" class="btn btn-danger btn-lg activ pull-left" name="submitBtn" style = "margin-left: 3%;"  value="Cancel">
+</div>
+
+</form>
+</div>
+
+
+
+
+</div>
+
+
+
+<br>
+
+<div class = "row">
+ <div class = "col-md-12" style="width: 760px; margin-left: 180px">
+    <?php if(isset($_SESSION['userID']) && isset($_GET['user']) ){?>
+    <?php 
+
+    $noter = new Note($_GET['user']);
+    $noter->displayNotes();
+    ?>
+</div>
 </div>
 
 <?php } ?>

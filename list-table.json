@@ -1,0 +1,12 @@
+ [
+ 	{ "data": "urgent", "orderable": false },
+ 	{ "data": "FirstName" },
+ 	{ "data": "LastName" },
+ 	{ "data": "Mobile" },
+ 	{ "data": "DateofBirth" },
+ 	{ "data": "Email" },
+ 	{ "data": "CurrentStatus" },
+ 	{ "data": "lastContacted" },
+ 	{ "data": "course" },
+ 	{ "data": "lastContacted" }
+ ]

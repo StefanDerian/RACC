@@ -11,51 +11,89 @@ include ('editDate-backend.php');
 <script type="text/javascript" src = "./printMe/jquery-printme.js"></script>
 <!-- <script type="text/javascript" src = "list.js"></script> -->
 
+<?php
+if($_SESSION['userType'] == "MANAGER"){
+    include('dbConnection.php'); 
+//db connection
+    $consultants = array();
+    $consultantQuery = "SELECT * FROM account";
+    if ($result = $mysqli->query($consultantQuery)) {
+        while ($row = $result->fetch_assoc()) {
+            $consultant = array();
+            foreach ($row as $key => $value) {
+            # code...
+                $consultant[$key] = $value;
+            }
+            array_push($consultants, $consultant);
+
+        }
+    }
+}
+?>
+<?php if($_SESSION['userType'] == "MANAGER"){ ?>
+
+<script>
+    jQuery(function($){
+        $.getDataTable('list-admin-table.json');
+    });
+</script>
+
+<?php }else{ ?>
+<script>
+    jQuery(function($){
+        console.log('ok')
+        $.getDataTable('list-table.json',false);
+    });
+</script>
+
+<?php } ?> 
+
+
 <br>
 <div class = "container">
     <div class="row">
 
-       <?php if(isset($_GET['msg'])){ ?>
-       <div class = "alert <?php echo $_GET['flag']==1?'alert-success':'alert-danger';?>">
+     <?php if(isset($_GET['msg'])){ ?>
+     <div class = "alert <?php echo $_GET['flag']==1?'alert-success':'alert-danger';?>">
         <?php echo $_GET['msg']; ?>
     </div>
     <?php } ?>
 
-    <form method="post" name="info" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <form method="post" name="info" id="search-form" >
         <div class="col-md-2" >
 
             <div class = "form-group">
                 <label> Name:</label>
 
-                <input type="text" class="form-control" name="search" placeholder="Search by Name..."/>
+                <input type="text" id="name" class="form-control search-form" name="search" placeholder="Search by Name..."/>
 
             </div>
         </div> 
         <div class="col-md-2" >
             <div class = "form-group">
                 <label> Date Of Birth:</label>
-                <input type="date" class="form-control" name="dob" placeholder="dd/mm/yyyy"/>
+                <input type="date" id="birthday" class="form-control search-form" name="dob" placeholder="dd/mm/yyyy"/>
             </div>
         </div>  
         <div class="col-md-2" >
 
             <div class = "form-group">
                 <label> phone number:</label>
-                <input type="tel" class="form-control" name="phone" placeholder="Search by Phone Number..."/>
+                <input type="tel" id="phone" class="form-control search-form" name="phone" placeholder="Search by Phone Number..."/>
             </div>
         </div>  
         <div class="col-md-2" >
 
             <div class = "form-group">
                 <label> Visa Expiry Date:</label>
-                <input type="date" class="form-control" name="vexpiry" placeholder="dd/mm/yyyy"/>
+                <input type="date" id="vexpiry" class="form-control search-form" name="vexpiry" placeholder="dd/mm/yyyy"/>
             </div>
         </div>  
 
         <div class="col-md-2" >
             <div class = "form-group">
                 <label> Last Contact Date In:</label>
-                <select id="status" name="lastContacted" class = "form-control">
+                <select id="lastContacted" name="lastContacted" class = "form-control search-form">
 
                     <option value= "">Any Month</option>
                     <option value= "-1" >Last 1 Months</option>
@@ -68,7 +106,7 @@ include ('editDate-backend.php');
         <div class="col-md-2" >
             <div class = "form-group">
                 <label>Status:</label>
-                <select id="status" name="status" class = "form-control">
+                <select id="status" name="status" class = "form-control search-form">
 
                     <option value= "">Any Progress</option>
                     <option value= "new client" >new client</option>
@@ -84,7 +122,7 @@ include ('editDate-backend.php');
 
             <div class = "form-group">
                 <label> Enter Consultant Name:</label>
-                <select id="consultant" name="consultant" class = "form-control">
+                <select id="consultant" name="consultant" class = "form-control search-form">
                     <option value= ""> Any </option>
                     <?php foreach ($consultants as $key => $value) {?>
 
@@ -101,7 +139,7 @@ include ('editDate-backend.php');
 
         <div class="form-group" >
             <div align="center">
-                <input type="submit" class ="btn btn-warning" name="Btsearch" value="Search"/>
+                <input type="submit" class ="btn btn-warning" id = "search-button" name="Btsearch" value="Reset Search"/>
             </div>
         </div>
     </form>
@@ -122,10 +160,11 @@ include ('editDate-backend.php');
             <th>Status</th>
             <th>Visa Expiry Date</th>
             <th>Course</th>
-           <!--  <th>Reference</th> -->
+            <!--  <th>Reference</th> -->
             <th>Last Contact</th>
             <?php if($_SESSION["userType"] != "AGENT"){?>
             <th>Consultant</th>
+            <th style = "display:none">ConsultantID</th>
             <?php }?>
 
         </tr>
@@ -162,9 +201,7 @@ include ('editDate-backend.php');
     </tbody> -->
     <?php } ?>
 </table>
-<!-- <div align="center">
-    <?php $pagination->render(); ?>
-</div>  -->
+
 </div>
 
 

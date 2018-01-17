@@ -7,7 +7,7 @@ include('dbConnection.php'); // connect with database
 $action = htmlspecialchars($_SERVER["PHP_SELF"]);
 
 
-
+// initialize the variable as empty if we dont have
 $fname = "";
 $lname = "";
 $pname = "";
@@ -28,9 +28,18 @@ $haddress = "";
 $consultant = "";
 $status = "";
 $know = "";
+$wechat = "";
+$prevStudy = "";
+$prevComp = "";
+$PrevUni = "";
+$service = "";
 
+
+//for populating the agent list
 $agents = populateChouncelor($mysqli);
 
+
+//for error message initialization
 $fnameError = "";
 $lnameError = "";
 $pnameError = "";
@@ -56,7 +65,7 @@ $statusFlag = "";
 
 $id = isset($_GET['user'])?$_GET['user']:"";
 
-
+//for fetching the conultant
 function populateChouncelor($mysqli){
 
 
@@ -74,6 +83,8 @@ function populateChouncelor($mysqli){
 	return $agents;
 
 }
+
+//getting the user information in edit page
 function getSingleUser( $id, $mysqli){
 
 	$user = array();
@@ -85,6 +96,8 @@ function getSingleUser( $id, $mysqli){
 	}
 	return $user;
 }
+
+//for inserting notes in edit page
 function insertNotes($mysqli,$value){
 
 
@@ -114,7 +127,7 @@ function insertNotes($mysqli,$value){
 
 
 
-
+//for assigning variables in case there is an error or update
 function assignVars ($value, $admin = false){
 	$GLOBALS['fname'] =$value['fname'];
 	$GLOBALS['lname'] = $value['lname'];
@@ -127,17 +140,24 @@ function assignVars ($value, $admin = false){
 	$GLOBALS['cam'] = $value['cam'];
 	$GLOBALS['uni'] = $value['uni'];
 	$GLOBALS['comp'] = $value['comp'];
+	$GLOBALS['visa'] = $value['visa'];
+	$GLOBALS['vexpiry'] = $value['vexpiry'];
+	$GLOBALS['wechat'] = $value ['wechat'];
+	$GLOBALS['prevStudy'] = $value ['prevStudy'];
+	$GLOBALS['prevComp'] = $value ['prevComp'];
+	$GLOBALS['prevUni'] = $value ['prevUni'];
+	$GLOBALS['service'] = $value ['service'];
 	if($admin){
-		$GLOBALS['visa'] = $value['visa'];
-		$GLOBALS['vexpiry'] = $value['vexpiry'];
+		
 		$GLOBALS['passport']= $value['passport'];
 		$GLOBALS['pexpiry'] = $value['pexpiry'];
 		$GLOBALS['status'] = $value['status'];
 	}
 	$GLOBALS['caddress'] = $value['caddress'];
 	$GLOBALS['haddress'] = $value['haddress'];
+	$GLOBALS['know'] = $value['know'];
 	if(!$admin){
-		$GLOBALS['know'] = $value['know'];
+		// $GLOBALS['know'] = $value['know'];
 	}
 	
 
@@ -148,6 +168,8 @@ function assignVars ($value, $admin = false){
 	
 }
 
+
+// assigning var from database in edit page
 function assignFromDatabase($value){
 
 	$GLOBALS['fname'] =$value['FirstName'];
@@ -170,23 +192,29 @@ function assignFromDatabase($value){
 	$GLOBALS['consultant'] = $value['ConsultantID'];
 	$GLOBALS['status'] = $value['CurrentStatus'];
 	$GLOBALS['know'] = $value['know'];
+	$GLOBALS['wechat'] = $value['wechat'];
+	$GLOBALS['prevStudy'] = $value ['prevStudy'];
+	$GLOBALS['prevComp'] = $value ['prevComp'];
+	$GLOBALS['prevUni'] = $value ['prevUni'];
+	$GLOBALS['service'] = $value ['service'];
 }
 
+//insering clients' data and each clients' data may be different when user logged in and not logged in
 function insertClient($mysqli,$value,$admin = false){
 
 
-	$collumns = "FirstName, LastName, DateofBirth, Nationality, Gender, Mobile, Email, Course, Uni, Uni_compl, CurrentAddress,HomeAddress, ConsultantID, CurrentStatus";
-	$collumns .= $admin?",Visa,Vexpiry,Passport,Pexpiry":"";
-	$collumns .= $admin?"":",know";
+	$collumns = "FirstName, LastName, DateofBirth, Nationality, Gender, Mobile, Email, Course, Uni, Uni_compl, CurrentAddress,HomeAddress, ConsultantID, CurrentStatus,Visa,Vexpiry,wechat,service,prevUni,prevStudy,prevComp,know";
+	$collumns .= $admin?",Passport,Pexpiry":"";
+	// $collumns .= $admin?"":",know";
 
 	$statusInsert = "";
 
 	if(!$admin){
 		$statusInsert = "new client";
-		$know = $value['know'];
+		
 		
 	}
-
+	$know = $value['know'];
 	$fname = $value['fname'];
 	$lname = $value['lname'];
 	// $pname = $value['pname'];
@@ -198,9 +226,16 @@ function insertClient($mysqli,$value,$admin = false){
 	$cam = $value['cam'];
 	$uni = $value['uni'];
 	$comp = $value['comp'];
+	$visa = $value['visa'];
+	$vexpiry = $value['vexpiry'];
+	$wechat = $value['wechat'];
+	$prevStudy = $value['prevStudy'];
+	$prevComp = $value['prevComp'];
+	$prevUni = $value['prevStudy'];
+	$service = $value['service'];
 	if($admin){
-		$visa = $value['visa'];
-		$vexpiry = $value['vexpiry'];
+
+
 		$passport = $value['passport'];
 		$pexpiry = $value['pexpiry'];
 		$statusInsert = $value['status'];
@@ -216,9 +251,9 @@ function insertClient($mysqli,$value,$admin = false){
 
 
 //getting all values and collumn
-	$values = "'$fname', '$lname', '$dob', '$nationality', '$gender', '$mobile', '$email', '$cam', '$uni', '$comp','$caddress','$haddress','$consultant','$statusInsert'";
-	$values .= $admin?",'$visa','$vexpiry','$passport','$pexpiry'":"";
-	$values .= $admin?"":",'$know'";
+	$values = "'$fname', '$lname', '$dob', '$nationality', '$gender', '$mobile', '$email', '$cam', '$uni', '$comp','$caddress','$haddress','$consultant','$statusInsert','$visa','$vexpiry','$wechat','$service','$prevUni','$prevStudy','$prevComp','$know'";
+	$values .= $admin?",'$passport','$pexpiry'":"";
+	// $values .= $admin?"":",'$know'";
 
 
 	$query = "INSERT INTO USER ($collumns) 
@@ -446,7 +481,13 @@ if(isset($_SESSION['userID'])){
 					Pexpiry = '$pexpiry',
 					CurrentAddress = '$caddress',
 					HomeAddress = '$haddress',
-					CurrentStatus = '$status'
+					CurrentStatus = '$status',
+					service = '$service',
+					prevUni = '$prevUni',
+					prevStudy = '$prevStudy',
+					prevComp = '$prevComp',
+					wechat = '$wechat',
+					know = '$know'
 					$consultantParam
 					WHERE UserID = $id ";
 
