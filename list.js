@@ -14,7 +14,8 @@ $(document).ready(function(){
 			e.preventDefault();
 		});
 		$('#search-button').on('click',function(){
-			$('#name').val('');
+			$('#firstname').val('');
+			$('#lastname').val('');
 			
 			$('#birthday').val('');
 			
@@ -108,7 +109,17 @@ $(document).ready(function(){
 					url:"list-backend.php",
 					dataSrc: ''
 				},
-
+				buttons: [
+				{
+					extend: 'print',
+					text: 'Print current page',
+					exportOptions: {
+						modifier: {
+							page: 'current'
+						}
+					}
+				}
+				],
 				columns:data,
 				columnDefs: colDefsArray,
 				createdRow: function(row, data, dataIndex) {
@@ -167,8 +178,10 @@ $(document).ready(function(){
 
 				
 
-				var name = $('#name').val();
-				var nameCol =  data[1];
+				var firstname = $('#firstname').val();
+				var firstnameCol =  data[1];
+				var lastname = $('#lastname').val();
+				var lastnameCol =  data[2];
 				var birthday= $('#birthday').val();
 				var birthdayCol =  data[4];
 				var phone= $('#phone').val();
@@ -191,7 +204,11 @@ $(document).ready(function(){
 				var now = new Date();
 				var severalMonthsFromNow = new Date(now.setMonth(now.getMonth() + parseInt(lastContact)));
 				
-				if ( nameCol != name && name !== "")
+				if ( firstnameCol != firstname && firstname !== "")
+				{
+					return false;
+				}
+				if ( lastnameCol != lastname && lastname !== "")
 				{
 					return false;
 				}

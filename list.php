@@ -63,12 +63,22 @@ if($_SESSION['userType'] == "MANAGER"){
         <div class="col-md-2" >
 
             <div class = "form-group">
-                <label> Name:</label>
+                <label> First Name:</label>
 
-                <input type="text" id="name" class="form-control search-form" name="search" placeholder="Search by Name..."/>
+                <input type="text" id="firstname" class="form-control search-form" name="search" placeholder="Search by Name..."/>
 
             </div>
-        </div> 
+        </div>
+        <div class="col-md-2" >
+
+            <div class = "form-group">
+                <label> Last Name:</label>
+
+                <input type="text" id="lastname" class="form-control search-form" name="search" placeholder="Search by Name..."/>
+
+            </div>
+        </div>  
+
         <div class="col-md-2" >
             <div class = "form-group">
                 <label> Date Of Birth:</label>
@@ -148,7 +158,7 @@ if($_SESSION['userType'] == "MANAGER"){
 <!-- <a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a> -->
 <!-- <button  class = "btn btn-lg btn-primary pull-right" id ="gen-report"> Generate Report</button> -->
 
-<table width="100%" style="border-collapse:collapse" cellpadding="5"  class="table table-striped table-hover" id = "client-table">
+<table width="100%" style="border-collapse:collapse" cellpadding="5"  class="table table-striped table-bordered table-hover dt-responsive " id = "client-table">
     <thead>
         <tr class = "info">
             <th>Emergency</th>
