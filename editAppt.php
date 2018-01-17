@@ -6,7 +6,16 @@ include ('editDate-backend.php');
 include_once('notes-backend.php');
 ?>
 
-<?php include('secondary.php'); ?>
+<?php 
+
+if(isset($_GET)){
+    include('secondary.php');
+}else{
+
+}
+
+
+?>
 
 
 <?php if(!empty($statusmsg)){ ?>
@@ -96,7 +105,7 @@ include_once('notes-backend.php');
                     <h2 class="title2">Education Background</h2>
                     <h4><b>Current Study</b></h4>
                     <div class = "row">
-                     <div class="col-sm-4 form-group">
+                       <div class="col-sm-4 form-group">
                         <label>University</label>
                         <input type="text" class="form-control" id="uni" name="uni" maxlength="255" value = "<?php echo isset($uni)?$uni:"";  ?>">
                         <span class="error"><?php echo isset($uniError)?$uniError:"";?>
@@ -122,7 +131,7 @@ include_once('notes-backend.php');
                 <!-- Need modification part start -->
                 <h4><b>Previous Study</b></h4>
                 <div class = "row">
-                 <div class="col-sm-4 form-group">
+                   <div class="col-sm-4 form-group">
                     <label>University</label>
                     <input type="text" class="form-control" id="prevUni" name="prevUni" maxlength="255" value = "<?php echo isset($prevUni)?$prevUni:"";  ?>">
                     <span class="error"><?php echo isset($prevUniError)?$prevUniError:"";?>
@@ -169,9 +178,9 @@ include_once('notes-backend.php');
 
 
 
-        <!-- </div> -->
-        <?php } ?>
-        <div class="row">
+            <!-- </div> -->
+            <?php } ?>
+            <div class="row">
 
 
                 <div class="col-sm-4 form-group">
@@ -188,7 +197,7 @@ include_once('notes-backend.php');
             
         </div>
         <div class = "row">
-         <div class="col-sm-4 form-group">
+           <div class="col-sm-4 form-group">
             <label>Current Visa:</label>
             <input class="form-control" type="text" id="visa" name="visa" maxlength="255" value = "<?php echo isset($visa)?$visa:"";  ?>"/>
             <span class="error"><?php echo isset($visaError)?$visaError:"";?></span>
@@ -206,11 +215,11 @@ include_once('notes-backend.php');
 
     <div class = "row">
         <div class="col-sm-4 form-group">
-           <label>Passport No.:</label>
-           <input class="form-control" type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" />
-           <span class="error"><?php echo isset($passportError)?$passportError:"";?></span>
-       </div>
-       <div class="col-sm-4 form-group">
+         <label>Passport No.:</label>
+         <input class="form-control" type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" />
+         <span class="error"><?php echo isset($passportError)?$passportError:"";?></span>
+     </div>
+     <div class="col-sm-4 form-group">
         <label>Passport Expiry Date:</label>
         <input class="form-control" type="date" id="pexpiry" name="pexpiry" value = "<?php echo isset($pexpiry)?$pexpiry:"";  ?>" />
         <span class="error"><?php echo isset($pexpiryError)?$pexpiryError:"";?></span>
@@ -283,7 +292,7 @@ include_once('notes-backend.php');
 <br>
 
 <div class = "row">
- <div class = "col-md-12" style="width: 760px; margin-left: 180px">
+   <div class = "col-md-12" style="width: 760px; margin-left: 180px">
     <?php if(isset($_SESSION['userID']) && isset($_GET['user']) ){?>
     <?php 
 

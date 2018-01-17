@@ -348,8 +348,18 @@ function checkError($values, $admin = false){
 		$error++;
 		$GLOBALS['uniError'] = "CUniversity Completion is required";
 	}  
-
-	if($admin){
+	if (empty($values["visa"])) {
+		$error++;
+		$GLOBALS['visaError'] = "Visa is required";
+	} else {
+		$first = $values["visa"];
+		// check if name contains a letter
+		if (!preg_match("/[a-zA-Z ]/",$first)) {
+			$error++;
+			$GLOBALS['visaError'] = "visa must contain a letter";
+		}
+	}
+		if($admin){
 
 		// if (empty($values["passport"])) {
 		// 	$error++;
@@ -378,16 +388,16 @@ function checkError($values, $admin = false){
 		// 	$error++;
 		// 	$GLOBALS['pexpiryError'] = "Passport Expiry date is required";
 		// } 
-		
+			
 
-	}
+		}
 
 
 // deleted as not required
-	if (empty($values["caddress"])) {
-		$error++;
-		$GLOBALS['caddressError'] = "Current Address is required";
-	} 
+		if (empty($values["caddress"])) {
+			$error++;
+			$GLOBALS['caddressError'] = "Current Address is required";
+		} 
 
 	// deleted as not required
 	// if (empty($values["haddress"])) {
@@ -395,17 +405,17 @@ function checkError($values, $admin = false){
 	// 	$GLOBALS['haddressError'] = "Home Address is required";
 	// }
 
-	if (empty($values["nationality"])) {
-		$error++;
-		$GLOBALS['nationalityError'] = "Nationality is required.";
-	} else {
-		$nationality = $values["nationality"];
-		// check if nationality contains a letter
-		if (!preg_match("/[a-zA-Z ]/",$nationality)) {
+		if (empty($values["nationality"])) {
 			$error++;
-			$GLOBALS['nationalityError'] = "Nationality must contain a letter";
+			$GLOBALS['nationalityError'] = "Nationality is required.";
+		} else {
+			$nationality = $values["nationality"];
+		// check if nationality contains a letter
+			if (!preg_match("/[a-zA-Z ]/",$nationality)) {
+				$error++;
+				$GLOBALS['nationalityError'] = "Nationality must contain a letter";
+			}
 		}
-	}
 
 	// if (!isset($values["gender"])) {
 	// 	$error++;
@@ -413,166 +423,166 @@ function checkError($values, $admin = false){
 	// }
 
 
-	if (empty($values["mobile"])) {
-		$error++;
-		$GLOBALS['mobileError'] = "Mobile is required.";
-	} else {
-		$mobile = $values["mobile"];
+		if (empty($values["mobile"])) {
+			$error++;
+			$GLOBALS['mobileError'] = "Mobile is required.";
+		} else {
+			$mobile = $values["mobile"];
 		// check if mobile contains a letter
-		if (strpos($mobile, " ") != false) {
-			$error++;
-			$GLOBALS['mobileError'] = "Mobile must not contain spaces";
-		}
-	}
-
-	if (empty($values["email"])) {
-		$error++;
-		$GLOBALS['emailError'] = "Email is required.";
-	} else {
-		$email = $values["email"];
-		// check if email contains a letter
-		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			$error++;
-			$GLOBALS['emailError'] = "Invalid email format"; 
-		}
-	}
-
-	if ($error > 0 ){
-		return false;
-	}else{
-		return true;
-	}
-
-
-}
-
-
-if(isset($_SESSION['userID'])){
-	if(isset($_GET['user'])){
-		$id = $_GET['user'];
-		$single_user = getSingleUser( $id, $mysqli);
-		assignFromDatabase($single_user);
-		$action .= "?user=$id";
-		if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['client']) ){
-
-			assignVars($_POST,true);
-
-			if($_POST['submitBtn'] != "Cancel"){
-				if(checkError($_POST,true)){
-
-					$consultantParam = $_SESSION['userType'] != "AGENT"?", ConsultantID = '$consultant' ":"";
-
-
-
-					$query = "UPDATE USER SET 
-					FirstName = '$fname', 
-					LastName = '$lname',  
-					DateofBirth = '$dob', 
-					Nationality = '$nationality', 
-					Gender = '$gender', 
-					Mobile = '$mobile', 
-					Email = '$email', 
-					Course = '$cam', 
-					Uni = '$uni', 
-					Uni_compl = '$comp',
-					Visa = '$visa',
-					Vexpiry = '$vexpiry',
-					Passport = '$passport',
-					Pexpiry = '$pexpiry',
-					CurrentAddress = '$caddress',
-					HomeAddress = '$haddress',
-					CurrentStatus = '$status',
-					service = '$service',
-					prevUni = '$prevUni',
-					prevStudy = '$prevStudy',
-					prevComp = '$prevComp',
-					wechat = '$wechat',
-					know = '$know'
-					$consultantParam
-					WHERE UserID = $id ";
-
-
-
-
-					if($mysqli->query($query)){
-						$GLOBALS['statusmsg'] = "Successfully Update the Client Data";
-						$GLOBALS['statusFlag'] = 1;
-					}else{
-						$GLOBALS['statusmsg'] = 'Failed Update Client Data';
-						$GLOBALS['statusFlag'] = 0;
-					}
-
-				}
-			}else{
-				header("Location: list.php");
+			if (strpos($mobile, " ") != false) {
+				$error++;
+				$GLOBALS['mobileError'] = "Mobile must not contain spaces";
 			}
 		}
 
+		if (empty($values["email"])) {
+			$error++;
+			$GLOBALS['emailError'] = "Email is required.";
+		} else {
+			$email = $values["email"];
+		// check if email contains a letter
+			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+				$error++;
+				$GLOBALS['emailError'] = "Invalid email format"; 
+			}
+		}
 
-		if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['note'])){
-
-			
-			$clientId = $_GET['user'];
-			$values = array(
-				'content' => $_POST['content'],
-				'client' => $clientId,
-				'writer' => $_SESSION['userID']
-			);
-
-			insertNotes($mysqli, $values);
-
-
+		if ($error > 0 ){
+			return false;
+		}else{
+			return true;
 		}
 
 
+	}
+
+
+	if(isset($_SESSION['userID'])){
+		if(isset($_GET['user'])){
+			$id = $_GET['user'];
+			$single_user = getSingleUser( $id, $mysqli);
+			assignFromDatabase($single_user);
+			$action .= "?user=$id";
+			if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['client']) ){
+
+				assignVars($_POST,true);
+
+				if($_POST['submitBtn'] != "Cancel"){
+					if(checkError($_POST,true)){
+
+						$consultantParam = $_SESSION['userType'] != "AGENT"?", ConsultantID = '$consultant' ":"";
+
+
+
+						$query = "UPDATE USER SET 
+						FirstName = '$fname', 
+						LastName = '$lname',  
+						DateofBirth = '$dob', 
+						Nationality = '$nationality', 
+						Gender = '$gender', 
+						Mobile = '$mobile', 
+						Email = '$email', 
+						Course = '$cam', 
+						Uni = '$uni', 
+						Uni_compl = '$comp',
+						Visa = '$visa',
+						Vexpiry = '$vexpiry',
+						Passport = '$passport',
+						Pexpiry = '$pexpiry',
+						CurrentAddress = '$caddress',
+						HomeAddress = '$haddress',
+						CurrentStatus = '$status',
+						service = '$service',
+						prevUni = '$prevUni',
+						prevStudy = '$prevStudy',
+						prevComp = '$prevComp',
+						wechat = '$wechat',
+						know = '$know'
+						$consultantParam
+						WHERE UserID = $id ";
 
 
 
 
-	}else{
+						if($mysqli->query($query)){
+							$GLOBALS['statusmsg'] = "Successfully Update the Client Data";
+							$GLOBALS['statusFlag'] = 1;
+						}else{
+							$GLOBALS['statusmsg'] = 'Failed Update Client Data';
+							$GLOBALS['statusFlag'] = 0;
+						}
+
+					}
+				}else{
+					header("Location: list.php");
+				}
+			}
+
+
+			if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['note'])){
+
+				
+				$clientId = $_GET['user'];
+				$values = array(
+					'content' => $_POST['content'],
+					'client' => $clientId,
+					'writer' => $_SESSION['userID']
+				);
+
+				insertNotes($mysqli, $values);
+
+
+			}
+
+
+
+
+
+
+		}else{
+
+			if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
+
+				assignVars($_POST,true);
+
+				if($_POST['submitBtn'] != "Cancel"){
+					if(checkError($_POST,true)){
+
+
+						insertClient($mysqli, $_POST, true);
+					}
+				}else{
+
+					header("Location: list.php");
+
+
+
+
+				}
+
+				
+			}
+		}
+	}else {
 
 		if ($_SERVER["REQUEST_METHOD"] == "POST"){
-
-
-			assignVars($_POST,true);
-
+			assignVars($_POST);
 			if($_POST['submitBtn'] != "Cancel"){
-				if(checkError($_POST,true)){
+				if(checkError($_POST)){
 
 
-					insertClient($mysqli, $_POST, true);
+					insertClient($mysqli, $_POST);
+
 				}
 			}else{
-
-				header("Location: list.php");
-
-
-
-
+				header("Location: editAppt.php");
 			}
-
-			
 		}
 	}
-}else {
-
-	if ($_SERVER["REQUEST_METHOD"] == "POST"){
-		assignVars($_POST);
-		if($_POST['submitBtn'] != "Cancel"){
-			if(checkError($_POST)){
 
 
-				insertClient($mysqli, $_POST);
-
-			}
-		}else{
-			header("Location: editAppt.php");
-		}
-	}
-}
-
-
-$statusmsg = "";
+	$statusmsg = "";
 // if(isset($_GET["success"]) && $_GET["sucess"] == 1) {
 // 	$statusmsg = "modified successfully";
 // }
@@ -587,4 +597,4 @@ $statusmsg = "";
 
 
 
-?>
+	?>
