@@ -34,6 +34,7 @@ $prevStudy = "";
 $prevComp = "";
 $PrevUni = "";
 $service = "";
+$duedate = "";
 
 
 //for populating the agent list
@@ -63,8 +64,8 @@ $caddressError = "";
 $haddressError = "";
 $consultantError = "";
 $statusError = "";
-$duedate = "";
 
+$knowError = "";
 $statusFlag = "";
 
 
@@ -423,6 +424,10 @@ function checkError($values, $admin = false){
 	if (empty($values["vexpiry"])) {
 		$error++;
 		$GLOBALS['vexpiryError'] = "Visa Expiry Date is required";
+	}
+	if (empty($values["know"])) {
+		$error++;
+		$GLOBALS['knowError'] = "This field is also reequired";
 	} 
 	if($admin){
 
