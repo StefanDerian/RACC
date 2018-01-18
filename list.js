@@ -197,11 +197,11 @@ $(document).ready(function(){
 				var now = new Date();
 				var severalMonthsFromNow = new Date(now.setMonth(now.getMonth() + parseInt(lastContact)));
 				
-				if ( firstnameCol != firstname && firstname !== "")
+				if ( firstnameCol.toLowerCase() != firstname.toLowerCase() && firstname !== "")
 				{
 					return false;
 				}
-				if ( lastnameCol != lastname && lastname !== "")
+				if ( lastnameCol.toLowerCase() != lastname.toLowerCase() && lastname !== "")
 				{
 					return false;
 				}
