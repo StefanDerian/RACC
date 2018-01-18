@@ -109,16 +109,9 @@ $(document).ready(function(){
 					url:"list-backend.php",
 					dataSrc: ''
 				},
+				dom: 'Bfrtip',
 				buttons: [
-				{
-					extend: 'print',
-					text: 'Print current page',
-					exportOptions: {
-						modifier: {
-							page: 'current'
-						}
-					}
-				}
+				'print'
 				],
 				columns:data,
 				columnDefs: colDefsArray,

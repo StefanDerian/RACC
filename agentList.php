@@ -4,6 +4,16 @@ include('agentList-backend.php');
 include('header2.php');
 ?>
 
+<?php 
+if($_SESSION['userType'] != "MANAGER"){
+	
+	header('location:list.php');
+	exit;
+}
+?>
+
+
+
 <?php $pagination->render(); ?> 
 <table class = "table table-hover">
 	<tr class = "info">

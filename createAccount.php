@@ -6,6 +6,10 @@ include('createAccount-backend.php');
 
 
 ?>
+<?php 
+
+
+?>
 
 <link rel="stylesheet" type="text/css" href="css/create-account.css">
 
@@ -24,7 +28,7 @@ include('createAccount-backend.php');
 
 
 <div class = "container jumbotron create-account-container">
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <form method="post" action="<?php echo $action;?>">
         <H2><?php echo isset($_GET['id'])?'Update Agent':'Create a new user account'; ?></H2>
         <div class = "form-group">
             <label>Display name:</label>

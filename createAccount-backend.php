@@ -1,16 +1,30 @@
 <?php
 include('dbConnection.php');
 $authpage = TRUE;
-$queryStatus = "";
-$queryFlag = 1;
+$action = htmlspecialchars($_SERVER["PHP_SELF"]);
 $agent = array();
 $display = $user = $pass = $repass = $lang = "";
 $displayErr = $userErr = $passErr = $repassErr = $langErr = "";
+$userID = isset($_GET['id'])? $_GET['id']:0;
+
+if($_SESSION['userType'] != "MANAGER"){
+    header('list.php');
+    exit;
+}
+
+
+if(isset($_GET)){
+    $action .= "?id=$userID";
+}
+
+
+
 function assignVars($value){
     $GLOBALS['display'] = $value["display"];
     $GLOBALS['pass'] = $value["pass"];
     $GLOBALS['user'] = $value["user"];
-    $GLOBALS['role'] = $value["role"];
+    if(!isset($_GET))
+        $GLOBALS['role'] = $value["role"];
     $GLOBALS['repass'] = $value["repass"];
     $GLOBALS['lang'] = $value["lang"];
 }
@@ -36,7 +50,7 @@ function checkError($value){
         $error++;
     } else {
 
-        if (!preg_match("/[a-zA-Z ]/",$GLOBALS['user'])) { //check if username contains a letter
+        if (!preg_match("/[a-zA-Z ]/",$value["user"])) { //check if username contains a letter
             $GLOBALS['userErr'] = "<br />Username must contain a letter";
             $error++;
         }
@@ -47,7 +61,7 @@ function checkError($value){
         $error++;
     } else {
 
-        if (!preg_match("/[a-zA-Z ]/",$GLOBALS['lang'])) { //check if username contains a letter
+        if (!preg_match("/[a-zA-Z ]/",$value['lang'])) { //check if username contains a letter
             $GLOBALS['langErr'] = "<br />language must contain a letter";
             $error++;
         }
@@ -72,11 +86,13 @@ function checkError($value){
         $error++;
     } else {
 
-        if($GLOBALS['repass'] != $GLOBALS['pass']){
+        if($value['repass'] != $value['pass']){
             $repassErr = "<br />Passwords must match";
             $error++;
         }
     }
+    assignVars($value);
+    
 
 
     if($error > 0){
@@ -150,10 +166,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
         }else{
    //updating agent or consultant data
+            
 
+            $encrypt_pass=MD5($pass);
 
-
-
+            $query = "UPDATE Account SET 
+            DisplayName = '$display', 
+            UserName = '$user', 
+            Password =  '$encrypt_pass', 
+            language = '$lang', 
+            UserType = '$role'
+            WHERE UserID = '$userID'";
+            if($mysqli->query($query)){
+                $queryFlag = 1;
+                $queryStatus = "updated successfully";
+                header("Location: createAccount.php?id=$userID");
+            }else{
+                $queryFlag = 0;
+                $queryStatus = "failed to create acccount";
+            }
 
 
 
