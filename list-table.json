@@ -8,5 +8,6 @@
  	{ "data": "CurrentStatus" },
  	{ "data": "lastContacted" },
  	{ "data": "course" },
- 	{ "data": "lastContacted" }
+ 	{ "data": "lastContacted" },
+ 	{"data":"duedate"}
  ]

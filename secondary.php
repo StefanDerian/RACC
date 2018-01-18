@@ -6,10 +6,10 @@
 
           <ul class="nav navbar-nav">
              <li class = "active">
-                <a href=<?php echo "editAppt.php?user=$id"; ?>   >Cient Information</a>
+                <a href=<?php echo "editAppt.php?user=$id"; ?>>Cient Information</a>
             </li>
             <li >
-             <a href=<?php echo "PointTest.php?user=$id"; ?>  >Point Test</a>
+             <a href=<?php echo "PointTest.php?user=$id"; ?>>Point Test</a>
          </li>
      </ul>
  </div>
@@ -25,9 +25,4 @@
 <?php } ?>
 
 
-<?php if(isset($_GET['msg'])){ ?>
-<div class = "alert <?php echo $_GET['flag']==1?'alert-success':'alert-danger';?>">
-    <?php echo $_GET['msg']; ?>
-</div>
 
-<?php } ?> 

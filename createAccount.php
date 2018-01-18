@@ -1,7 +1,7 @@
 
 <?php
 include('session.php');
-include ('header.php');
+include ('header2.php');
 include('createAccount-backend.php');
 
 
@@ -16,13 +16,9 @@ include('createAccount-backend.php');
 
 
 
-<?php if(!empty($queryStatus)){ ?>
-<div class = "alert <?php echo $queryFlag==1?'alert-success':'alert-danger';?>">
-    <p><?php echo $queryStatus; ?></p>
-</div>
-<?php } ?>
 
 
+<script type="text/javascript" src ="createAccount.js"></script>
 
 
 
@@ -79,21 +75,27 @@ include('createAccount-backend.php');
 
 
 
-
-        <div class = "form-group">
-            <label>Password:</label>
-            <div style="text-align:left">
-                <input type="password" class = "form-control" name="pass" maxlength="255" value="" width="50%" />
-                <span class="error">* <?php echo $passErr;?></span>
-            </div>
+        <?php if(isset($_GET['id'])){ ?>
+        <div class="checkbox">
+          <label>
+            <input id ="change" type="checkbox" name="change" value=1 >Change Password
+        </label>
+    </div>
+    <?php } ?>
+    <div class = "form-group">
+        <label>Password:</label>
+        <div style="text-align:left">
+            <input id="pass" type="password" class = "form-control" name="pass" maxlength="255" value="" width="50%" <?php echo isset($_GET['id'])?'disabled':'' ?> />
+            <span class="error">* <?php echo $passErr;?></span>
         </div>
-        <div class = "form-group">
-            <label>Re-Type Password:</label>
-            <div style="text-align:left">
-                <input type="password" class = "form-control" name="repass" maxlength="255" value="" width="50%" />
-                <span class="error">* <?php echo $repassErr;?></span>
-            </div>
+    </div>
+    <div class = "form-group">
+        <label>Re-Type Password:</label>
+        <div style="text-align:left">
+            <input id="repass" type="password" class = "form-control" name="repass" maxlength="255" value="" width="50%" <?php echo isset($_GET['id'])?'disabled':'' ?> />
+            <span class="error">* <?php echo $repassErr;?></span>
         </div>
+    </div>
       <!--   <tr>
             <td width="50%" style="text-align:right">Username:</td>
             <td style="text-align:left"><input type="text" name="user" maxlength="45" value=""/><span class="error">* <?php echo $userErr;?></span></td>
@@ -109,7 +111,7 @@ include('createAccount-backend.php');
         <tr><td /></tr> -->
         <tr>
             <td style="text-align:center" colspan="2">
-                <input type="submit" class = "btn btn-lg btn-primary" name="submit" value="<?php echo isset($_GET)?'Update Account':'Create Account'?>"/>
+                <input type="submit" class = "btn btn-lg btn-primary" name="submit" value="<?php echo isset($_GET['id'])?'Update Account':'Create Account'?>"/>
                 <br/><span class="error"><?php echo "<br/>*fields are mandatory";?></span>
             </td>
         </tr>

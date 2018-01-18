@@ -41,11 +41,15 @@ $pagination->records(count($agents));
 // records per page
 $pagination->records_per_page($records_per_page);
 
-$agents = array_slice(
-	$agents,
-	(($pagination->get_page() - 1) * $records_per_page),
-	$records_per_page
-);
+echo json_encode($agents);
+
+
+
+// $agents = array_slice(
+// 	$agents,
+// 	(($pagination->get_page() - 1) * $records_per_page),
+// 	$records_per_page
+// );
 
 
 

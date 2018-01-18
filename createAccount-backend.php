@@ -13,7 +13,7 @@ if($_SESSION['userType'] != "MANAGER"){
 }
 
 
-if(isset($_GET)){
+if(isset($_GET['id'])){
     $action .= "?id=$userID";
 }
 
@@ -66,29 +66,32 @@ function checkError($value){
             $error++;
         }
     }
-    
-    if(empty($value["pass"])) {
-        $GLOBALS['passErr'] = "<br />Password is required";
-        $error++;
-    } else {
+    if(isset($value['change']) || !isset($_GET['id'])){
+        if(empty($value["pass"])) {
+            $GLOBALS['passErr'] = "<br />Password is required";
+            $error++;
+        } else {
 
-        if(strpos($value["pass"], " ") != false) { //check if password contains a space
-            $GLOBALS['passErr'] = "<br />Password must not contain spaces";
-            $error++;
-        } else if(strlen($value["pass"])<5) {
-            $GLOBALS['passErr'] = "<br />Password must contain at least 5 charaters";
-            $error++;
+            if(strpos($value["pass"], " ") != false) { 
+        //check if password contains a space
+                $GLOBALS['passErr'] = "<br />Password must not contain spaces";
+                $error++;
+            } else if(strlen($value["pass"])<5) {
+                $GLOBALS['passErr'] = "<br />Password must contain at least 5 charaters";
+                $error++;
+            }
         }
-    }
-    
-    if(empty($value["repass"])) {
-        $GLOBALS['repassErr'] = "<br />Re-typed Password is required";
-        $error++;
-    } else {
 
-        if($value['repass'] != $value['pass']){
-            $repassErr = "<br />Passwords must match";
+
+        if(empty($value["repass"])) {
+            $GLOBALS['repassErr'] = "<br />Re-typed Password is required";
             $error++;
+        } else {
+
+            if($value['repass'] != $value['pass']){
+                $repassErr = "<br />Passwords must match";
+                $error++;
+            }
         }
     }
     assignVars($value);
@@ -159,6 +162,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($mysqli->query($query)){
                 $queryFlag = 1;
                 $queryStatus = "created successfully";
+                header("Location: agentList.php?msg=$queryStatus&flag=$queryFlag");
             }else{
                 $queryFlag = 0;
                 $queryStatus = "failed to create acccount";
@@ -166,7 +170,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
         }else{
    //updating agent or consultant data
-            
+
 
             $encrypt_pass=MD5($pass);
 

@@ -1,6 +1,6 @@
 <?php 
 include('session.php');
-include('agentList-backend.php');
+// include('agentList-backend.php');
 include('header2.php');
 ?>
 
@@ -12,32 +12,39 @@ if($_SESSION['userType'] != "MANAGER"){
 }
 ?>
 
-
-
-<?php $pagination->render(); ?> 
-<table class = "table table-hover">
-	<tr class = "info">
-		<th>Display Name</th>
-		<th>User Name</th>
-		
-	</tr>
-	<?php foreach ($agents as $key => $value) { ?>
-	
-	<tr onclick="window.document.location='createAccount.php?id=<?php echo $value["id"]; ?>'">
-
-		<td><?php echo $value['DisplayName']; ?></td>
-		<td><?php echo $value['UserName']; ?></td>
-		
-	</tr>
+<?php include('message.php'); ?>
 
 
 
+<script type="text/javascript" src="agentList.js" ></script>
+<div class = "container">
+	<table id ="agent-list" class="table table-striped table-bordered table-hover dt-responsive ">
+		<thead>
+			<tr class = "info">
+				<th>Display Name</th>
+				<th>User Name</th>
+
+			</tr>
+		</thead>
+		<tbody>
+		<!-- <?php foreach ($agents as $key => $value) { ?>
+
+		<tr onclick="window.document.location='createAccount.php?id=<?php echo $value["id"]; ?>'">
+
+			<td><?php echo $value['DisplayName']; ?></td>
+			<td><?php echo $value['UserName']; ?></td>
+
+		</tr>
 
 
 
 
 
 
-	<?php }  ?>
+
+
+
+		<?php }  ?> -->
+	</tbody>
 </table>
-<?php $pagination->render(); ?> 
+</div>

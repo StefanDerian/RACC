@@ -12,7 +12,9 @@ require './PHPMailer/src/SMTP.php';
 
 error_reporting(0);
 
-
+if(empty($_GET['user'])){
+	header('Location:list.php');
+}
 
 
 

@@ -6,6 +6,7 @@ include('dbConnection.php'); // connect with database
 
 $action = htmlspecialchars($_SERVER["PHP_SELF"]);
 
+$key="RACC IS COOL";
 
 // initialize the variable as empty if we dont have
 $fname = "";
@@ -51,6 +52,9 @@ $emailError = "";
 $camError = "";
 $uniError = "";
 $compError = "";
+$prevCompError="";
+$prevUniError="";
+$prevStudyiError="";
 $visaError = "";
 $vexpiryError = "";
 $passportError= "";
@@ -59,6 +63,7 @@ $caddressError = "";
 $haddressError = "";
 $consultantError = "";
 $statusError = "";
+$duedate = "";
 
 $statusFlag = "";
 
@@ -81,6 +86,19 @@ function populateChouncelor($mysqli){
 		}
 	}
 	return $agents;
+
+}
+function encrypt($value){
+
+
+
+	return $value;
+	
+}
+function decrypt($value){
+
+	return $value;
+
 
 }
 
@@ -152,6 +170,7 @@ function assignVars ($value, $admin = false){
 		$GLOBALS['passport']= $value['passport'];
 		$GLOBALS['pexpiry'] = $value['pexpiry'];
 		$GLOBALS['status'] = $value['status'];
+		$GLOBALS['duedate'] = $value['duedate'];
 	}
 	$GLOBALS['caddress'] = $value['caddress'];
 	$GLOBALS['haddress'] = $value['haddress'];
@@ -197,6 +216,7 @@ function assignFromDatabase($value){
 	$GLOBALS['prevComp'] = $value ['prevComp'];
 	$GLOBALS['prevUni'] = $value ['prevUni'];
 	$GLOBALS['service'] = $value ['service'];
+	$GLOBALS['duedate'] = $value ['duedate'];
 }
 
 //insering clients' data and each clients' data may be different when user logged in and not logged in
@@ -204,7 +224,7 @@ function insertClient($mysqli,$value,$admin = false){
 
 
 	$collumns = "FirstName, LastName, DateofBirth, Nationality, Gender, Mobile, Email, Course, Uni, Uni_compl, CurrentAddress,HomeAddress, ConsultantID, CurrentStatus,Visa,Vexpiry,wechat,service,prevUni,prevStudy,prevComp,know";
-	$collumns .= $admin?",Passport,Pexpiry":"";
+	$collumns .= $admin?",Passport,Pexpiry,duedate":"";
 	// $collumns .= $admin?"":",know";
 
 	$statusInsert = "";
@@ -239,6 +259,7 @@ function insertClient($mysqli,$value,$admin = false){
 		$passport = $value['passport'];
 		$pexpiry = $value['pexpiry'];
 		$statusInsert = $value['status'];
+		$duedate = $value['duedate'];
 	}
 	$caddress = $value['caddress'];
 	$haddress = $value['haddress'];
@@ -252,7 +273,7 @@ function insertClient($mysqli,$value,$admin = false){
 
 //getting all values and collumn
 	$values = "'$fname', '$lname', '$dob', '$nationality', '$gender', '$mobile', '$email', '$cam', '$uni', '$comp','$caddress','$haddress','$consultant','$statusInsert','$visa','$vexpiry','$wechat','$service','$prevUni','$prevStudy','$prevComp','$know'";
-	$values .= $admin?",'$passport','$pexpiry'":"";
+	$values .= $admin?",'$passport','$pexpiry','$duedate'":"";
 	// $values .= $admin?"":",'$know'";
 
 
@@ -277,19 +298,41 @@ function insertClient($mysqli,$value,$admin = false){
 		
 	}else{
 		if(isset($_SESSION['UserID'])){
-			header("Location: list.php?msg=Failed Inserted the Client Data"); 
+			header("Location: list.php?msg=Failed Inserted the Client Data&flag=0"); 
 			exit;
 		}else{
-			header("Location: editAppt.php"); 
+			header("Location: editAppt.php?msg=Failed Inserted the Client Data&flag=0"); 
 			exit;
 		}
 	}
 }
 
+function checkUserAvailability($mysqli,$user){
 
+	$firstname = $user['fname'];
+	$lastname = $user['lname'];
+	$id = $GLOBALS['id'];
+	if(!empty($id)){
+		$query = "SELECT * FROM user WHERE FirstName = '$firstname' AND LastName = '$lastname' WHERE UserID <> $id";
+	}
+	else{
+		$query = "SELECT * FROM user WHERE FirstName = '$firstname' AND LastName = '$lastname'";
+	}
+	
+	//echo $query;
+	$result = $mysqli->query($query);
+	if($result){
+		if(mysqli_num_rows($result) > 0){
+			return true;
+
+		}
+	}
+
+	
+	return false;
+}
 
 function checkError($values, $admin = false){
-
 
 	$error = 0;
 
@@ -303,6 +346,12 @@ function checkError($values, $admin = false){
 			$error++;
 			$GLOBALS['fnameError'] = "First name must contain a letter";
 		}
+	}
+
+	if(checkUserAvailability($GLOBALS['mysqli'],$values)){
+		$error++;
+		$GLOBALS['fnameError'] = "Both first name and last name already  registered in the system";
+		$GLOBALS['lnameError'] = "Both first name and last name already  registered in the system";
 	}
 
 	if (empty($values["lname"])) {
@@ -330,7 +379,7 @@ function checkError($values, $admin = false){
 	// 	}
 	// }
 
-	
+
 
 	if (empty($values["dob"])) {
 		$error++;
@@ -346,7 +395,19 @@ function checkError($values, $admin = false){
 	}  
 	if (empty($values["uni"])) {
 		$error++;
-		$GLOBALS['uniError'] = "CUniversity Completion is required";
+		$GLOBALS['uniError'] = "University Completion is required";
+	}  
+	if (empty($values["prevComp"])) {
+		$error++;
+		$GLOBALS['prevCompError'] = "Previous Course Completion Date is required";
+	}  
+	if (empty($values["prevStudy"])) {
+		$error++;
+		$GLOBALS['prevStudyError'] = "Previous Course is required";
+	}  
+	if (empty($values["prevUni"])) {
+		$error++;
+		$GLOBALS['prevUniError'] = "Previous Institution is required";
 	}  
 	if (empty($values["visa"])) {
 		$error++;
@@ -359,7 +420,11 @@ function checkError($values, $admin = false){
 			$GLOBALS['visaError'] = "visa must contain a letter";
 		}
 	}
-		if($admin){
+	if (empty($values["vexpiry"])) {
+		$error++;
+		$GLOBALS['vexpiryError'] = "Visa Expiry Date is required";
+	} 
+	if($admin){
 
 		// if (empty($values["passport"])) {
 		// 	$error++;
@@ -388,16 +453,16 @@ function checkError($values, $admin = false){
 		// 	$error++;
 		// 	$GLOBALS['pexpiryError'] = "Passport Expiry date is required";
 		// } 
-			
 
-		}
+
+	}
 
 
 // deleted as not required
-		if (empty($values["caddress"])) {
-			$error++;
-			$GLOBALS['caddressError'] = "Current Address is required";
-		} 
+	if (empty($values["caddress"])) {
+		$error++;
+		$GLOBALS['caddressError'] = "Current Address is required";
+	} 
 
 	// deleted as not required
 	// if (empty($values["haddress"])) {
@@ -405,17 +470,17 @@ function checkError($values, $admin = false){
 	// 	$GLOBALS['haddressError'] = "Home Address is required";
 	// }
 
-		if (empty($values["nationality"])) {
-			$error++;
-			$GLOBALS['nationalityError'] = "Nationality is required.";
-		} else {
-			$nationality = $values["nationality"];
+	if (empty($values["nationality"])) {
+		$error++;
+		$GLOBALS['nationalityError'] = "Nationality is required.";
+	} else {
+		$nationality = $values["nationality"];
 		// check if nationality contains a letter
-			if (!preg_match("/[a-zA-Z ]/",$nationality)) {
-				$error++;
-				$GLOBALS['nationalityError'] = "Nationality must contain a letter";
-			}
+		if (!preg_match("/[a-zA-Z ]/",$nationality)) {
+			$error++;
+			$GLOBALS['nationalityError'] = "Nationality must contain a letter";
 		}
+	}
 
 	// if (!isset($values["gender"])) {
 	// 	$error++;
@@ -423,166 +488,169 @@ function checkError($values, $admin = false){
 	// }
 
 
-		if (empty($values["mobile"])) {
-			$error++;
-			$GLOBALS['mobileError'] = "Mobile is required.";
-		} else {
-			$mobile = $values["mobile"];
+	if (empty($values["mobile"])) {
+		$error++;
+		$GLOBALS['mobileError'] = "Mobile is required.";
+	} else {
+		$mobile = $values["mobile"];
 		// check if mobile contains a letter
-			if (strpos($mobile, " ") != false) {
-				$error++;
-				$GLOBALS['mobileError'] = "Mobile must not contain spaces";
-			}
-		}
-
-		if (empty($values["email"])) {
+		if (strpos($mobile, " ") != false) {
 			$error++;
-			$GLOBALS['emailError'] = "Email is required.";
-		} else {
-			$email = $values["email"];
+			$GLOBALS['mobileError'] = "Mobile must not contain spaces";
+		}
+	}
+
+	if (empty($values["email"])) {
+		$error++;
+		$GLOBALS['emailError'] = "Email is required.";
+	} else {
+		$email = $values["email"];
 		// check if email contains a letter
-			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-				$error++;
-				$GLOBALS['emailError'] = "Invalid email format"; 
-			}
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			$error++;
+			$GLOBALS['emailError'] = "Invalid email format"; 
 		}
+	}
 
-		if ($error > 0 ){
-			return false;
-		}else{
-			return true;
-		}
-
-
+	if ($error > 0 ){
+		return false;
+	}else{
+		return true;
 	}
 
 
-	if(isset($_SESSION['userID'])){
-		if(isset($_GET['user'])){
-			$id = $_GET['user'];
-			$single_user = getSingleUser( $id, $mysqli);
-			assignFromDatabase($single_user);
-			$action .= "?user=$id";
-			if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['client']) ){
-
-				assignVars($_POST,true);
-
-				if($_POST['submitBtn'] != "Cancel"){
-					if(checkError($_POST,true)){
-
-						$consultantParam = $_SESSION['userType'] != "AGENT"?", ConsultantID = '$consultant' ":"";
+}
 
 
+if(isset($_SESSION['userID'])){
+	if(isset($_GET['user'])){
+		$id = $_GET['user'];
+		$single_user = getSingleUser( $id, $mysqli);
+		assignFromDatabase($single_user);
+		$action .= "?user=$id";
+		if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['client']) ){
 
-						$query = "UPDATE USER SET 
-						FirstName = '$fname', 
-						LastName = '$lname',  
-						DateofBirth = '$dob', 
-						Nationality = '$nationality', 
-						Gender = '$gender', 
-						Mobile = '$mobile', 
-						Email = '$email', 
-						Course = '$cam', 
-						Uni = '$uni', 
-						Uni_compl = '$comp',
-						Visa = '$visa',
-						Vexpiry = '$vexpiry',
-						Passport = '$passport',
-						Pexpiry = '$pexpiry',
-						CurrentAddress = '$caddress',
-						HomeAddress = '$haddress',
-						CurrentStatus = '$status',
-						service = '$service',
-						prevUni = '$prevUni',
-						prevStudy = '$prevStudy',
-						prevComp = '$prevComp',
-						wechat = '$wechat',
-						know = '$know'
-						$consultantParam
-						WHERE UserID = $id ";
+			assignVars($_POST,true);
 
-
-
-
-						if($mysqli->query($query)){
-							$GLOBALS['statusmsg'] = "Successfully Update the Client Data";
-							$GLOBALS['statusFlag'] = 1;
-						}else{
-							$GLOBALS['statusmsg'] = 'Failed Update Client Data';
-							$GLOBALS['statusFlag'] = 0;
-						}
-
-					}
-				}else{
-					header("Location: list.php");
-				}
-			}
-
-
-			if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['note'])){
-
-				
-				$clientId = $_GET['user'];
-				$values = array(
-					'content' => $_POST['content'],
-					'client' => $clientId,
-					'writer' => $_SESSION['userID']
-				);
-
-				insertNotes($mysqli, $values);
-
-
-			}
-
-
-
-
-
-
-		}else{
-
-			if ($_SERVER["REQUEST_METHOD"] == "POST"){
-
-
-				assignVars($_POST,true);
-
-				if($_POST['submitBtn'] != "Cancel"){
-					if(checkError($_POST,true)){
-
-
-						insertClient($mysqli, $_POST, true);
-					}
-				}else{
-
-					header("Location: list.php");
-
-
-
-
-				}
-
-				
-			}
-		}
-	}else {
-
-		if ($_SERVER["REQUEST_METHOD"] == "POST"){
-			assignVars($_POST);
 			if($_POST['submitBtn'] != "Cancel"){
-				if(checkError($_POST)){
+				if(checkError($_POST,true)){
+
+					$consultantParam = $_SESSION['userType'] != "AGENT"?", ConsultantID = '$consultant' ":"";
 
 
-					insertClient($mysqli, $_POST);
+
+					$query = "UPDATE USER SET 
+					FirstName = '$fname', 
+					LastName = '$lname',  
+					DateofBirth = '$dob', 
+					Nationality = '$nationality', 
+					Gender = '$gender', 
+					Mobile = '$mobile', 
+					Email = '$email', 
+					Course = '$cam', 
+					Uni = '$uni', 
+					Uni_compl = '$comp',
+					Visa = '$visa',
+					Vexpiry = '$vexpiry',
+					Passport = '$passport',
+					Pexpiry = '$pexpiry',
+					CurrentAddress = '$caddress',
+					HomeAddress = '$haddress',
+					CurrentStatus = '$status',
+					service = '$service',
+					prevUni = '$prevUni',
+					prevStudy = '$prevStudy',
+					prevComp = '$prevComp',
+					wechat = '$wechat',
+					know = '$know',
+					duedate = '$duedate'
+					$consultantParam
+					WHERE UserID = $id ";
+
+
+
+
+					if($mysqli->query($query)){
+						$GLOBALS['statusmsg'] = "Successfully Update the Client Data";
+						$GLOBALS['statusFlag'] = 1;
+						header("location:editAppt.php?user=$id&msg=Successfully Update the Client Data&flag=1");
+					}else{
+						$GLOBALS['statusmsg'] = 'Failed Update Client Data';
+						$GLOBALS['statusFlag'] = 0;
+						header("location:editAppt.php?user=$id&msg=Failed Update Client Data&flag=0");
+					}
 
 				}
 			}else{
-				header("Location: editAppt.php");
+				header("Location: list.php");
 			}
 		}
+
+
+		if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['note'])){
+
+
+			$clientId = $_GET['user'];
+			$values = array(
+				'content' => $_POST['content'],
+				'client' => $clientId,
+				'writer' => $_SESSION['userID']
+			);
+
+			insertNotes($mysqli, $values);
+
+
+		}
+
+
+
+
+
+
+	}else{
+
+		if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
+
+			assignVars($_POST,true);
+
+			if($_POST['submitBtn'] != "Cancel"){
+				if(checkError($_POST,true)){
+
+
+					insertClient($mysqli, $_POST, true);
+				}
+			}else{
+
+				header("Location: list.php");
+
+
+
+
+			}
+
+
+		}
 	}
+}else {
+
+	if ($_SERVER["REQUEST_METHOD"] == "POST"){
+		assignVars($_POST);
+		if($_POST['submitBtn'] != "Cancel"){
+			if(checkError($_POST)){
 
 
-	$statusmsg = "";
+				insertClient($mysqli, $_POST);
+
+			}
+		}else{
+			header("Location: editAppt.php");
+		}
+	}
+}
+
+
+$statusmsg = "";
 // if(isset($_GET["success"]) && $_GET["sucess"] == 1) {
 // 	$statusmsg = "modified successfully";
 // }
@@ -597,4 +665,4 @@ function checkError($values, $admin = false){
 
 
 
-	?>
+?>

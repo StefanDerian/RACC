@@ -19,12 +19,12 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
-	<script src="https://cdn.datatables.net/responsive/2.2.1/css/jquery.dataTables.js"></script>
+	<!-- <script src="https://cdn.datatables.net/responsive/2.2.1/js/jquery.dataTables.js"></script> -->
 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap.css">
 	<link rel="stylesheet" type="text/css" href=" https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href=" https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href=" https://cdn.datatables.net/responsive/2.2.1/css/buttons.bootstrap.css">
-	<link rel="stylesheet" type="text/css" href=" https://cdn.datatables.net/responsive/2.2.1/css/pagination.bootstrap.css">
+	
+	
 
 
 	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
@@ -66,9 +66,11 @@
 				<?php if($_SESSION['userType'] == "MANAGER"){ ?>
 				<li><a href="agentList.php">AGENTS</a></li>
 				<?php } ?>
-				<li><a href="genReport.php">GENERATE REPORT</a></li>
+				<!-- <li><a href="genReport.php">GENERATE REPORT</a></li> -->
 				<li><a href="editAppt.php">ADD CLIENT</a></li>
-				
+				<?php if($_SESSION['userType'] == "MANAGER"){ ?>
+				<li><a href="createAccount.php">ADD AGENT</a></li>
+				<?php } ?>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
@@ -78,7 +80,7 @@
 			<?php }else{ ?>
 			<ul class="nav navbar-nav">
 				<li><a href="editAppt.php">REGISTRATION FORM</a></li>
-				<li><a href="consultationRegister.php">CONSULTATION REGISTER</a></li>
+				<!-- <li><a href="consultationRegister.php">CONSULTATION REGISTER</a></li> -->
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">

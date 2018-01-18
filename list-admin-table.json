@@ -10,5 +10,6 @@
  	{ "data": "course" },
  	{ "data": "lastContacted" },
  	{ "data": "consultant" },
- 	{ "data": "consultantID" }
+ 	{ "data": "consultantID" },
+ 	{"data":"duedate"}
  ]
