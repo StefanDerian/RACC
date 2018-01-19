@@ -4,14 +4,14 @@ $(document).ready(function(){
 
 
 	var dictionary = {
-	FirstName : {
-		en:"firstname",
-		cn:"firstname in CN"
-	},
-	personalInformation : {
-		en:"Personal Information",
-		cn:"Personal Information in CN"
-	},
+		firstname : {
+			en:"firstname",
+			cn:"您的名字"
+		},
+		personalInformation : {
+			en:"Personal Information",
+			cn:"个人信息"
+		},
 
 
 
@@ -21,13 +21,16 @@ $(document).ready(function(){
 	$('#chinese-button').click(function(){
 		loadLanguage('cn');
 	});
+	$('#english-button').click(function(){
+		loadLanguage('en');
+	});
 
 
 	function loadLanguage(lang = 'en'){
 		$('.translate').each(function(){
 			var translateKey = $(this).data("translate");
-			console.log(translateKey);
-			console.log(dictionary[translateKey][lang]);
+			
+			$(this).text(dictionary[translateKey][lang]);
 		})
 
 	}
