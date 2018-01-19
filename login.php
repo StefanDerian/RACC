@@ -3,6 +3,7 @@ include('session.php');
 include ('login-backend.php');
 
 //include ('header.php');
+//TEST
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -34,10 +35,10 @@ include ('login-backend.php');
 
 					</div>
 				</div>
-				<div class = "form-group">
+<!-- 				<div class = "form-group">
 					<label style="color: white"><b>UserName</b></label>
 					<input type = "text" class = "form-control" name = "user" placeholder = "Username...">
-				</div>
+				</div> -->
 				
 				<div class = "form-group">
 					<label style="color: white"><b>Password</b></label>
