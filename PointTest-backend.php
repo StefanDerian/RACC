@@ -234,7 +234,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 //only the advisor can send the email
-			if ($_SESSION['userType'] != "AGENT" && $_POST['submitBtn'] == "Send Email") {
+			if ($_POST['submitBtn'] == "Send Email") {
 				$mail = new PHPMailer(true);                              
 			// Passing `true` enables exceptions
 				try {

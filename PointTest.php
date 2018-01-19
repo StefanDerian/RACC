@@ -211,20 +211,20 @@ include ('header2.php');
                 </td>
                 <?php } ?>
             </tr>
-            <?php if($_SESSION['userType'] != "AGENT"){ ?>
+            
             <tr>
                 <td colspan="5">
                     <div class ="form-group">
                         <label>Email:</label>
-                        <input type ="email" class="form-control" name="emailUserName">
+                        <input placeholder = "your racc email address" type ="email" class="form-control" name="emailUserName">
                     </div>
                     <div class ="form-group">
                         <label>Password:</label>
-                        <input type ="password" class="form-control" name="emailPassword">
+                        <input placeholder = "your racc email password" type ="password" class="form-control" name="emailPassword">
                     </div>
                     <div class ="form-group">
                         <label>Feedback:</label>
-                        <textarea class="form-control" name="feedback"></textarea>
+                        <textarea placeholder = "your feedback for clients related to PTE test" class="form-control" name="feedback"></textarea>
                     </div>
                 </td>
             </tr>
@@ -233,7 +233,7 @@ include ('header2.php');
                     <input type = "submit" name = "submitBtn" value = "Send Email" class = "btn btn-lg btn-primary pull-right">
                 </td>
             </tr>
-            <?php } ?>
+            
             
         </form>
     </table>
