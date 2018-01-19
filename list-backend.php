@@ -37,83 +37,82 @@ if ($result = $mysqli->query($consultantQuery)) {
 
 $a = $_SESSION['userID'];
 
-$query = "SELECT user.UserID FROM user ";
-$parameter = "";
-$lastContactParam ="";
+// $query = "SELECT user.UserID FROM user ";
+// $parameter = "";
+// $lastContactParam ="";
 
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+// if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    //print_r($_POST);
+//     //print_r($_POST);
 
-    //search in all table columns
-    //$query = "SELECT UserID FROM user WHERE ConsultantID = $_SESSION['userID']";
+//     //search in all table columns
+//     //$query = "SELECT UserID FROM user WHERE ConsultantID = $_SESSION['userID']";
 
-    $query .= "WHERE ";
+//     $query .= "WHERE ";
 
-    if(!empty($_POST['search'])){
-        $search = $_POST['search'];
-        $parameter .= empty($parameter)?"":"AND";
-        $parameter .= " FirstName LIKE '%$search%' OR LastName LIKE '%$search%' OR PreferName LIKE '%$search%' OR Mobile LIKE '%$search%' OR  Email LIKE '%$search%' ";
-    }
-    if(!empty($_POST['phone'])){
-        $phone = $_POST['phone'];
-        $parameter .= empty($parameter)?"":"AND";
-        $parameter .= " mobile = '$phone' ";
-    } 
-    if(!empty($_POST['dob'])){
-        $dob = $_POST['dob'];
-        $parameter .= empty($parameter)?"":"AND";
-        $parameter .= " DateofBirth = '$dob' ";
-    }
-    if(!empty($_POST['status'])){
-        $status = $_POST['status'];
-        $parameter .= empty($parameter)?"":"AND";
-        $parameter .= " CurrentStatus = '$status' ";
-    }
-    if(!empty($_POST['lastContacted'])){
-        $lastContactDate = $_POST['lastContacted'];
-        $lastContactParam .= " HAVING MAX(time) >= DATE_ADD(NOW(), INTERVAL $lastContactDate MONTH) ";
-    }
-    if(!empty($_POST['vexpiry'])){
-        $vexpiry = $_POST['vexpiry'];
-        $parameter .= empty($parameter)?"":"AND";
-        $parameter .= " Vexpiry = '$vexpiry' ";
-    } 
-    if( isset($_POST['consultant']) && !empty($_POST['consultant'])){
-        $consultant = $_POST['consultant'];
-        $parameter .= empty($parameter)?"":"AND";
-        $parameter .= " ConsultantID = '$consultant' ";
-    }
-    if(empty($parameter)){
-        $query .= "1";
-    }
+//     if(!empty($_POST['search'])){
+//         $search = $_POST['search'];
+//         $parameter .= empty($parameter)?"":"AND";
+//         $parameter .= " FirstName LIKE '%$search%' OR LastName LIKE '%$search%' OR PreferName LIKE '%$search%' OR Mobile LIKE '%$search%' OR  Email LIKE '%$search%' ";
+//     }
+//     if(!empty($_POST['phone'])){
+//         $phone = $_POST['phone'];
+//         $parameter .= empty($parameter)?"":"AND";
+//         $parameter .= " mobile = '$phone' ";
+//     } 
+//     if(!empty($_POST['dob'])){
+//         $dob = $_POST['dob'];
+//         $parameter .= empty($parameter)?"":"AND";
+//         $parameter .= " DateofBirth = '$dob' ";
+//     }
+//     if(!empty($_POST['status'])){
+//         $status = $_POST['status'];
+//         $parameter .= empty($parameter)?"":"AND";
+//         $parameter .= " CurrentStatus = '$status' ";
+//     }
+//     if(!empty($_POST['lastContacted'])){
+//         $lastContactDate = $_POST['lastContacted'];
+//         $lastContactParam .= " HAVING MAX(time) >= DATE_ADD(NOW(), INTERVAL $lastContactDate MONTH) ";
+//     }
+//     if(!empty($_POST['vexpiry'])){
+//         $vexpiry = $_POST['vexpiry'];
+//         $parameter .= empty($parameter)?"":"AND";
+//         $parameter .= " Vexpiry = '$vexpiry' ";
+//     } 
+//     if( isset($_POST['consultant']) && !empty($_POST['consultant'])){
+//         $consultant = $_POST['consultant'];
+//         $parameter .= empty($parameter)?"":"AND";
+//         $parameter .= " ConsultantID = '$consultant' ";
+//     }
+//     if(empty($parameter)){
+//         $query .= "1";
+//     }
 
-    $query .= $parameter;
+//     $query .= $parameter;
 
 
 
-    //$search_result = table($query);
-}
+//     //$search_result = table($query);
+// }
 
 
 // echo "SELECT UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, lastContacted,Course FROM user WHERE ConsultantID = $a AND UserID IN ($query)";
 
-$list_query = "";
-$statement;
+// $list_query = "";
+// $statement;
 
 if($_SESSION["userType"] != "AGENT"){
 
 
     $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName, urgent, know, account.UserID,duedate FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
-    LEFT JOIN account ON account.UserID = user.ConsultantID
-    WHERE user.UserID IN ($query) GROUP BY user.UserID $lastContactParam ORDER BY user.Created DESC";
+    LEFT JOIN account ON account.UserID = user.ConsultantID GROUP BY user.UserID ORDER BY user.Created DESC";
 
 
 
 }else{
 
-    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, urgent, know, duedate FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
+    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, urgent, know, duedate FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ?  GROUP BY user.UserID";
 
 
 
@@ -240,12 +239,24 @@ $pagination->records(count($appointments));
 $pagination->records_per_page($records_per_page);
 $appointmentsPrint = $appointments;
 $_SESSION["clients"] = $appointmentsPrint;
-$appointments = array_slice(
-    $appointments,
-    (($pagination->get_page() - 1) * $records_per_page),
-    $records_per_page
+// $appointments = array_slice(
+//     $appointments,
+//     (($pagination->get_page() - 1) * $records_per_page),
+//     $records_per_page
+// );
+
+
+$totalData=sizeof($appointments);
+$totalFilter=$totalData;
+$finalArray = array(
+
+    "recordsTotal"      =>  intval($totalData),
+    "recordsFilter"     =>  intval($totalData),
+    "data"              =>  $appointments
+
+
 );
 
-echo json_encode($appointments);
+echo json_encode($finalArray);
 
 ?>

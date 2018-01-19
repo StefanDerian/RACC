@@ -17,24 +17,32 @@ if(isset($_GET['user'])){
 
 ?>
 
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript" src = "editAppt.js"></script>
 
-
-
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+</script>
 
 
 
 
 <div class="container">
     <?php include('message.php'); ?>
+    <div id="google_translate_element"></div>
+    <a id="english-button" href = "#"> English</a>
+    <a  id="chinese-button" href = "#"> Chinese</a>
     <div class="col-lg-12 well">
         <div class="row">
             <form method="post" name="form" action="<?php echo $action;?>">
                 <input type="hidden" name="client" value="client" />
                 <div class="<?php echo isset($_GET['user'])?'col-md-12': 'col-md-12';?>"  style="width:100%; margin-left: 180px; margin-right: auto;">
-                    <h2 class="title2">Personal Information</h2>
+                    <h2 class="title2 translate" data-translate="personalInformation">Personal Information</h2>
                     <div class="row">
                         <div class="col-sm-4 form-group">
-                            <label>First Name</label>
+                            <label class = "translate" data-translate = "firstname">First Name</label>
                             <input placeholder = "As it is written in your passport" type="text" id = "fname" name = "fname" maxlength = "255" value = "<?php echo isset($fname)?$fname:"";  ?>" class="form-control">
                             <span class="error"><?php echo isset($fnameError)?$fnameError:"";?></span>
                         </div>
@@ -192,44 +200,44 @@ if(isset($_GET['user'])){
                 <label>Where did you hear about us:</label>
                 <input type="text" class="form-control" id="know" name="know" maxlength="255" value = "<?php echo isset($know)?$know:"";  ?>">
                 <span class="error"><?php echo isset($knowError)?$knowError:"";?>
-            </span>
+                </span>
+            </div>
+
+            <!-- Need modification part start -->
+
+            <!-- Need modification part end -->
+
+
+
         </div>
-
-        <!-- Need modification part start -->
-
-        <!-- Need modification part end -->
-
-
-
+        <div class = "row">
+         <div class="col-sm-4 form-group">
+            <label>Current Visa:</label>
+            <input class="form-control" type="text" id="visa" name="visa" maxlength="255" value = "<?php echo isset($visa)?$visa:"";  ?>"/>
+            <span class="error"><?php echo isset($visaError)?$visaError:"";?></span>
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Visa Expiry Date:</label>
+            <input class="form-control" type="date" id="vexpiry" name="vexpiry" value = "<?php echo isset($vexpiry)?$vexpiry:"";  ?>"/>
+            <span class="error"><?php echo isset($vexpiryError)?$vexpiryError:"";?></span>
+        </div>
     </div>
+    <!-- this form only available when users are logged in -->
+    <?php if(isset($_SESSION['userID'])){?>
+
+
+
     <div class = "row">
-     <div class="col-sm-4 form-group">
-        <label>Current Visa:</label>
-        <input class="form-control" type="text" id="visa" name="visa" maxlength="255" value = "<?php echo isset($visa)?$visa:"";  ?>"/>
-        <span class="error"><?php echo isset($visaError)?$visaError:"";?></span>
+        <div class="col-sm-4 form-group">
+           <label>Passport No.:</label>
+           <input class="form-control" type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" />
+           <span class="error"><?php echo isset($passportError)?$passportError:"";?></span>
+       </div>
+       <div class="col-sm-4 form-group">
+        <label>Passport Expiry Date:</label>
+        <input class="form-control" type="date" id="pexpiry" name="pexpiry" value = "<?php echo isset($pexpiry)?$pexpiry:"";  ?>" />
+        <span class="error"><?php echo isset($pexpiryError)?$pexpiryError:"";?></span>
     </div>
-    <div class="col-sm-4 form-group">
-        <label>Visa Expiry Date:</label>
-        <input class="form-control" type="date" id="vexpiry" name="vexpiry" value = "<?php echo isset($vexpiry)?$vexpiry:"";  ?>"/>
-        <span class="error"><?php echo isset($vexpiryError)?$vexpiryError:"";?></span>
-    </div>
-</div>
-<!-- this form only available when users are logged in -->
-<?php if(isset($_SESSION['userID'])){?>
-
-
-
-<div class = "row">
-    <div class="col-sm-4 form-group">
-       <label>Passport No.:</label>
-       <input class="form-control" type="text" id="passport" name="passport" maxlength="255" value = "<?php echo isset($passport)?$passport:"";  ?>" />
-       <span class="error"><?php echo isset($passportError)?$passportError:"";?></span>
-   </div>
-   <div class="col-sm-4 form-group">
-    <label>Passport Expiry Date:</label>
-    <input class="form-control" type="date" id="pexpiry" name="pexpiry" value = "<?php echo isset($pexpiry)?$pexpiry:"";  ?>" />
-    <span class="error"><?php echo isset($pexpiryError)?$pexpiryError:"";?></span>
-</div>
 </div>
 
 
