@@ -107,7 +107,9 @@ $(document).ready(function(){
 				serverSide: false,
 				ajax:{
 					url:"list-backend.php",
-					dataSrc: ''
+					type: "post",
+					
+
 				},
 				dom: 'Bfrtip',
 				buttons: [
