@@ -35,10 +35,10 @@ include ('login-backend.php');
 
 					</div>
 				</div>
-<!-- 				<div class = "form-group">
+				<div class = "form-group">
 					<label style="color: white"><b>UserName</b></label>
 					<input type = "text" class = "form-control" name = "user" placeholder = "Username...">
-				</div> -->
+				</div>
 				
 				<div class = "form-group">
 					<label style="color: white"><b>Password</b></label>
