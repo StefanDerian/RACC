@@ -243,7 +243,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Enable verbose debug output
 					$mail->isSMTP();                                      
     // Set mailer to use SMTP
-					$mail->Host = 'smtp.live.com';  
+					$mail->Host = 'racc.net.au';  
     // Specify main and backup SMTP servers
 					$mail->SMTPAuth = true;                               
     // Enable SMTP authentication

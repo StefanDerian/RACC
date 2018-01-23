@@ -73,7 +73,12 @@ include('createAccount-backend.php');
         </div>
         <!-- <?php } ?> -->
 
-
+        <div class = "form-group">
+            <label>Email:</label>
+            <div style="text-align:left">
+                <input id="email" type="email" class = "form-control" name="email" maxlength="255" value="<?php echo $email; ?>" width="50%"/>
+            </div>
+        </div>
 
         <?php if(isset($_GET['id'])){ ?>
         <div class="checkbox">

@@ -3,8 +3,8 @@ include('dbConnection.php');
 $authpage = TRUE;
 $action = htmlspecialchars($_SERVER["PHP_SELF"]);
 $agent = array();
-$display = $user = $pass = $repass = $lang = "";
-$displayErr = $userErr = $passErr = $repassErr = $langErr = "";
+$display = $user = $pass = $repass = $lang = $email= "";
+$displayErr = $userErr = $passErr = $repassErr = $langErr = $emailErr = "";
 $userID = isset($_GET['id'])? $_GET['id']:0;
 
 if($_SESSION['userType'] != "MANAGER"){
@@ -27,11 +27,13 @@ function assignVars($value){
         $GLOBALS['role'] = $value["role"];
     $GLOBALS['repass'] = $value["repass"];
     $GLOBALS['lang'] = $value["lang"];
+    $GLOBALS['email'] = $value["email"];
 }
 function assignVarsFromDB($value){
     $GLOBALS['display'] = $value["DisplayName"];
     $GLOBALS['user'] = $value["UserName"];
     $GLOBALS['lang'] = $value["language"];
+    $GLOBALS['email'] = $value["email"];
 }
 function checkError($value){
     $error = 0;
@@ -158,7 +160,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             //inserting new consultant or manager data
             $encrypt_pass=MD5($pass); 
     //encrypt password
-            $query = "INSERT INTO Account (DisplayName, UserName, Password, language , UserType) VALUES ('$display', '$user', '$encrypt_pass','$lang' , '$role')";
+            $query = "INSERT INTO Account (DisplayName, UserName, Password, language , UserType,email) VALUES ('$display', '$user', '$encrypt_pass','$lang' , '$role',$email)";
             if($mysqli->query($query)){
                 $queryFlag = 1;
                 $queryStatus = "created successfully";
@@ -179,7 +181,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             UserName = '$user', 
             Password =  '$encrypt_pass', 
             language = '$lang', 
-            UserType = '$role'
+            UserType = '$role',
+            email = '$email'
             WHERE UserID = '$userID'";
             if($mysqli->query($query)){
                 $queryFlag = 1;

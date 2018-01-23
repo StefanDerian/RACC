@@ -18,6 +18,7 @@ if($result = $mysqli->query($agentsQuery)) {
 			"id" => $row['UserID'],
 			"DisplayName" => $row['DisplayName'],
 			"UserName" => $row['UserName'],
+			"email" => $row['email']
 		);
 
 

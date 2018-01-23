@@ -105,14 +105,15 @@ $a = $_SESSION['userID'];
 if($_SESSION["userType"] != "AGENT"){
 
 
-    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName, urgent, know, account.UserID,duedate FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
+    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, user.Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName, urgent, know, account.UserID,duedate FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
     LEFT JOIN account ON account.UserID = user.ConsultantID GROUP BY user.UserID ORDER BY user.Created DESC";
 
 
 
 }else{
+    $a = $_SESSION['userID'];
 
-    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, urgent, know, duedate FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ?  GROUP BY user.UserID";
+    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, user.Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, urgent, know, duedate FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = $a  GROUP BY user.UserID";
 
 
 
@@ -121,12 +122,13 @@ if($_SESSION["userType"] != "AGENT"){
 
 
 $statement = $mysqli->prepare($list_query);
+// print_r($list_query);
 // echo "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
 
 // echo "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim FROM user JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = ? AND user.UserID IN ($query) GROUP BY user.UserID $lastContactParam";
 //$statement->bind_param("i", $_SESSION['userID']);
 // print_r($_SESSION);
-//$a = $_SESSION['userID'];
+$a = $_SESSION['userID'];
 
 
 if($statement->bind_param("i", $a)){
@@ -225,21 +227,21 @@ if ($result) {
 
 
 // how many records should be displayed on a page?
-$records_per_page = 14;
+// $records_per_page = 14;
 
 
 
-// instantiate the pagination object
-$pagination = new Zebra_Pagination();
+// // instantiate the pagination object
+// $pagination = new Zebra_Pagination();
 
-// the number of total records is the number of records in the array
-$pagination->records(count($appointments));
+// // the number of total records is the number of records in the array
+// $pagination->records(count($appointments));
 
-// records per page
-$pagination->records_per_page($records_per_page);
-$appointmentsPrint = $appointments;
-$_SESSION["clients"] = $appointmentsPrint;
-// $appointments = array_slice(
+// // records per page
+// $pagination->records_per_page($records_per_page);
+// $appointmentsPrint = $appointments;
+// $_SESSION["clients"] = $appointmentsPrint;
+// // $appointments = array_slice(
 //     $appointments,
 //     (($pagination->get_page() - 1) * $records_per_page),
 //     $records_per_page

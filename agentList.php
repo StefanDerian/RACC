@@ -23,6 +23,7 @@ if($_SESSION['userType'] != "MANAGER"){
 			<tr class = "info">
 				<th>Display Name</th>
 				<th>User Name</th>
+				<th>Email</th>
 
 			</tr>
 		</thead>

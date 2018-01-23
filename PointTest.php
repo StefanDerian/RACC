@@ -223,7 +223,7 @@ include ('header2.php');
                         <input placeholder = "your racc email password" type ="password" class="form-control" name="emailPassword">
                     </div>
                     <div class ="form-group">
-                        <label>Feedback:</label>
+                        <label>Advice:</label>
                         <textarea placeholder = "your feedback for clients related to PTE test" class="form-control" name="feedback"></textarea>
                     </div>
                 </td>

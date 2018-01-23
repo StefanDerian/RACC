@@ -9,6 +9,7 @@ $(document).ready(function(){
 		columns:[
 		{ "data": "DisplayName", "orderable": true },
 		{ "data": "UserName", "orderable": true },
+		{ "data": "email", "orderable": true },
 		],
 		createdRow: function(row, data, dataIndex) {
 			$(row).attr('data-id',data.id)
