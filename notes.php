@@ -61,24 +61,25 @@
 
 			</a></td> -->
 
-			<td><a class = "btn btn-sm btn-warning edit-note" data-toggle="modal" data-target="#noteModal" data-content = "<?php echo $note['content'] ; ?>"
+			<!-- <td><a class = "btn btn-sm btn-warning edit-note" data-toggle="modal" data-target="#noteModal" data-content = "<?php echo $note['content'] ; ?>"
 				data-id = "<?php echo $note['ID'] ; ?>" data-user = "<?php echo $_GET['user'] ; ?>" data-writer = "<?php echo $_SESSION['userID'] ; ?>"
 
 				>
 
 				EDIT
 
-			</a></td>
+			</a>
+		</td> -->
 
 
-		</tr>
+	</tr>
 
-		
-		
-	</div>
+	
+	
+</div>
 
 
-	<?php }   ?>
+<?php }   ?>
 </table>
 </div>
 

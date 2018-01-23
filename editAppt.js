@@ -72,6 +72,10 @@ $(document).ready(function(){
 			en: "Completion date",
 			cn: "毕业时间"
 		},
+		prevCountry:{
+			en: "Country",
+			cn: "国"
+		},
 		service:{
 			en: "Service needed:",
 			cn: "您需要哪方面的服务？"
