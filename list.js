@@ -112,8 +112,7 @@ $(document).ready(function(){
 					
 
 				},
-			
-				dom: 'Bfrtip',
+				dom: 'Brtip',
 				buttons: [
 				'print' ,'excel', 'pdf'
 				],
