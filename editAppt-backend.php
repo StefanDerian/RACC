@@ -403,22 +403,22 @@ function checkError($values, $admin = false){
 		$error++;
 		$GLOBALS['uniError'] = "University Completion is required";
 	}  
-	if (empty($values["prevComp"])) {
-		$error++;
-		$GLOBALS['prevCompError'] = "Previous Course Completion Date is required";
-	}  
-	if (empty($values["prevStudy"])) {
-		$error++;
-		$GLOBALS['prevStudyError'] = "Previous Course is required";
-	}  
-	if (empty($values["prevUni"])) {
-		$error++;
-		$GLOBALS['prevUniError'] = "Previous Institution is required";
-	}  
-	if (empty($values["prevCountry"])) {
-		$error++;
-		$GLOBALS['prevCountryError'] = "This field is required";
-	}
+	// if (empty($values["prevComp"])) {
+	// 	$error++;
+	// 	$GLOBALS['prevCompError'] = "Previous Course Completion Date is required";
+	// }  
+	// if (empty($values["prevStudy"])) {
+	// 	$error++;
+	// 	$GLOBALS['prevStudyError'] = "Previous Course is required";
+	// }  
+	// if (empty($values["prevUni"])) {
+	// 	$error++;
+	// 	$GLOBALS['prevUniError'] = "Previous Institution is required";
+	// }  
+	// if (empty($values["prevCountry"])) {
+	// 	$error++;
+	// 	$GLOBALS['prevCountryError'] = "This field is required";
+	// }
 	if (empty($values["visa"])) {
 		$error++;
 		$GLOBALS['visaError'] = "Visa is required";
