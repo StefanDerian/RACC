@@ -129,7 +129,7 @@ if($_SESSION['userType'] == "MANAGER"){
             <div class="col-md-2" >
 
                 <div class = "form-group">
-                    <label> Enter Consultant Name:</label>
+                    <label> Consultant Name:</label>
                     <select id="consultant" name="consultant" class = "form-control search-form">
                         <option value= ""> Any </option>
                         <?php foreach ($consultants as $key => $value) {?>
