@@ -214,10 +214,10 @@ include ('header2.php');
             
             <tr>
                 <td colspan="5">
-                    <div class ="form-group">
+                    <!-- <div class ="form-group">
                         <label>Email:</label>
                         <input placeholder = "your racc email address" type ="email" class="form-control" name="emailUserName">
-                    </div>
+                    </div> -->
                     <div class ="form-group">
                         <label>Password:</label>
                         <input placeholder = "your racc email password" type ="password" class="form-control" name="emailPassword">

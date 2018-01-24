@@ -10,7 +10,8 @@ function setSession($row){
 	$_SESSION["user"] = $row[ACCOUNT['collumns']['username']];
 	$_SESSION["userID"] = $row[ACCOUNT['collumns']['user_id']];
 	$_SESSION["userType"] = $row[ACCOUNT['collumns']['user_type']];
-
+	$_SESSION["DisplayName"] = $row['DisplayName'];
+	$_SESSION["email"] = $row['email'];
 	// print_r($_SESSION);
 
 }

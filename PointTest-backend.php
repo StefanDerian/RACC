@@ -204,12 +204,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 		if($number > 0){
+			// if ($_POST['submitBtn'] == "Update Point") {
 			foreach ($_POST as $key => $value) {
 		# code...
 			//if the client has been assessed, only update required 
 			// print_r($value);
 
-				if(!isset($value['feedback']) && !isset($value['emailUserName']) && !isset($value['feedback']) ){
+				if(isset($value['id']) && isset($value['goal']) && isset($value['current']) ){
 					$query = "UPDATE clientpoint SET ";
 					$pointid = $value['id'];
 					$goal = $value['goal'];
@@ -220,17 +221,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 				}
 
+				// }
+
+
+				$msg = "The Point is successfully Inserted new record created";
+				updateValue($mysqli);
+				$totals = calculateTotals($id);
+				updateValue($mysqli);
+				$msg = "The Point is successfully Updated";
+
+
 			}
-
-
-			$msg = "The Point is successfully Inserted new record created";
-			updateValue($mysqli);
-			$totals = calculateTotals($id);
-			updateValue($mysqli);
-			$msg = "The Point is successfully Updated";
-
-
-
 
 
 //only the advisor can send the email
@@ -239,19 +240,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			// Passing `true` enables exceptions
 				try {
     //Server settings
-				// $mail->SMTPDebug = 4;                                 
+					//$mail->SMTPDebug = 4;                                 
     // Enable verbose debug output
 					$mail->isSMTP();                                      
     // Set mailer to use SMTP
-					$mail->Host = 'racc.net.au';  
+					$mail->Host = 'mail.racc.net.au';  
     // Specify main and backup SMTP servers
 					$mail->SMTPAuth = true;                               
     // Enable SMTP authentication
-					$mail->Username = $_POST['emailUserName'];                 
+					$mail->Username = $_SESSION['email'];                 
     // SMTP username
 					$mail->Password = $_POST['emailPassword'];                           
     // SMTP password
-					$mail->SMTPSecure = 'tls';                            
+					//$mail->SMTPSecure = 'tls';                            
     // Enable TLS encryption, `ssl` also accepted
 					$mail->Port = 587;                                    
     // TCP port to connect to
@@ -259,14 +260,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Recipients
 
 
-				// $mail->SMTPOptions = array(
-				// 	'ssl' => array(
-				// 		'verify_peer' => false,
-				// 		'verify_peer_name' => false,
-				// 		'allow_self_signed' => true
-				// 	)
-				// );
-					$mail->setFrom($_POST['emailUserName'], 'RACC');
+					$mail->SMTPOptions = array(
+						'ssl' => array(
+							'verify_peer' => false,
+							'verify_peer_name' => false,
+							'allow_self_signed' => true
+						)
+					);
+					$mail->setFrom($_SESSION['email'], 'RACC');
 					$mail->addAddress($userDetail['Email'], $userDetail['FirstName']." ".$userDetail['LastName'] );     
     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
@@ -338,8 +339,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 					$mail->Body .= '</br>';
 					$mail->Body .= '</br>';
 					$mail->Body .= '</br>';
-
-					$mail->Body .= '<p> Michael Moedjianto</p>';
+					$name = $_SESSION['DisplayName'];
+					$mail->Body .= "<p>$name</p>";
 					$mail->Body .= '</br>';
 					$mail->addAttachment('image/racc.png');
 
@@ -351,10 +352,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 					$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
 					if($mail->send()){
-						$mail .= " and email sent successfully";
+						$msg .= " and email sent successfully";
+						// header('Location:PointTest.php?user='.$id);
 
 					}else{
-						$mail .= " but the email is not sent";
+						// $mail .= " but the email is not sent";
 					}
 
 
