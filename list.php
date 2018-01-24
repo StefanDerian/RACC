@@ -1,12 +1,9 @@
 <?php
 include('session.php');
 // include('list-backend.php');
-
 // include ('header.php');
 include ('header2.php');
-
 include ('editDate-backend.php');
-
 ?>
 <script type="text/javascript" src = "./printMe/jquery-printme.js"></script>
 <!-- <script type="text/javascript" src = "list.js"></script> -->
@@ -25,7 +22,6 @@ if($_SESSION['userType'] == "MANAGER"){
                 $consultant[$key] = $value;
             }
             array_push($consultants, $consultant);
-
         }
     }
 }
@@ -185,13 +181,11 @@ if($_SESSION['userType'] == "MANAGER"){
             </tr>
         </thead>
     <!-- <?php if (empty($appointment)){ ?>
-
     <span class = "alert alert-warning"> There is no match with your Search criteria</span>
     <?php } else {?> -->
   <!--   <tbody>
         <?php foreach($appointments as $appointment) { ?>
         <tr class="listrow <?php echo $appointment["urgent"] == 1?'danger':''; ?>" id = "list-Client">
-
             <td ><input type="checkbox" class="urgent-switch" <?php echo $appointment["urgent"] == 1?'checked':''; ?> data-id='<?php echo $appointment["UserID"]; ?>' ></td>
             <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["FirstName"] ?></td>
             <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo $appointment["LastName"] ?></td>
@@ -204,14 +198,9 @@ if($_SESSION['userType'] == "MANAGER"){
             <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo !empty($appointment["know"])?$appointment['know']:"<i><font color='grey'>not filled </font></i>"; ?></td>
             <td onclick="window.document.location='editAppt.php?user=<?php echo $appointment["UserID"]; ?>'"><?php echo empty($appointment["lastContacted"])?"<i><font color='grey'>There is still no contact </font></i>": $appointment["lastContacted"] ?></td>
             <?php if($_SESSION["userType"] != "AGENT"){?>
-
-
             <td><?php echo empty($appointment["consultant"])?"<i><font color='grey'>Not assigned</font></i>":$appointment["consultant"] ?></td>
             <?php }?>
-
         </tr>
-
-
         <?php } ?>
     </tbody> -->
     <?php } ?>

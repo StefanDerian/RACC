@@ -7,6 +7,7 @@ $(document).ready(function(){
 
 		var table;
 
+
 		$('.search-form').on('input',function(){
 			table.draw();
 		});
@@ -111,6 +112,7 @@ $(document).ready(function(){
 					
 
 				},
+			
 				dom: 'Bfrtip',
 				buttons: [
 				'print' ,'excel', 'pdf'
