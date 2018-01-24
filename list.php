@@ -129,7 +129,7 @@ if($_SESSION['userType'] == "MANAGER"){
             <div class="col-md-2" >
 
                 <div class = "form-group">
-                    <label> Enter Consultant Name:</label>
+                    <label> Consultant Name:</label>
                     <select id="consultant" name="consultant" class = "form-control search-form">
                         <option value= ""> Any </option>
                         <?php foreach ($consultants as $key => $value) {?>
@@ -152,9 +152,15 @@ if($_SESSION['userType'] == "MANAGER"){
             </div>
         </form>
     </div>
-
+   
     <!-- <a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a> -->
     <!-- <button  class = "btn btn-lg btn-primary pull-right" id ="gen-report"> Generate Report</button> -->
+
+
+
+
+
+
 
     <table width="100%" style="border-collapse:collapse" cellpadding="5"  class="table table-striped table-bordered table-hover dt-responsive " id = "client-table">
         <thead>
