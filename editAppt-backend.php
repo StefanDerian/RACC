@@ -35,6 +35,7 @@ $prevComp = "";
 $PrevUni = "";
 $service = "";
 $duedate = "";
+$prevCountry = "";
 
 
 //for populating the agent list
@@ -64,6 +65,7 @@ $caddressError = "";
 $haddressError = "";
 $consultantError = "";
 $statusError = "";
+$prevCountryError = "";
 
 $knowError = "";
 $statusFlag = "";
@@ -173,6 +175,7 @@ function assignVars ($value, $admin = false){
 		$GLOBALS['status'] = $value['status'];
 		$GLOBALS['duedate'] = $value['duedate'];
 	}
+	$GLOBALS['prevCountry'] = $value['prevCountry'];
 	$GLOBALS['caddress'] = $value['caddress'];
 	$GLOBALS['haddress'] = $value['haddress'];
 	$GLOBALS['know'] = $value['know'];
@@ -218,13 +221,14 @@ function assignFromDatabase($value){
 	$GLOBALS['prevUni'] = $value ['prevUni'];
 	$GLOBALS['service'] = $value ['service'];
 	$GLOBALS['duedate'] = $value ['duedate'];
+	$GLOBALS['prevCountry'] = $value['prevCountry'];
 }
 
 //insering clients' data and each clients' data may be different when user logged in and not logged in
 function insertClient($mysqli,$value,$admin = false){
 
 
-	$collumns = "FirstName, LastName, DateofBirth, Nationality, Gender, Mobile, Email, Course, Uni, Uni_compl, CurrentAddress,HomeAddress, ConsultantID, CurrentStatus,Visa,Vexpiry,wechat,service,prevUni,prevStudy,prevComp,know";
+	$collumns = "FirstName, LastName, DateofBirth, Nationality, Gender, Mobile, Email, Course, Uni, Uni_compl, CurrentAddress,HomeAddress, ConsultantID, CurrentStatus,Visa,Vexpiry,wechat,service,prevUni,prevStudy,prevComp,know,prevCountry";
 	$collumns .= $admin?",Passport,Pexpiry,duedate":"";
 	// $collumns .= $admin?"":",know";
 
@@ -254,6 +258,7 @@ function insertClient($mysqli,$value,$admin = false){
 	$prevComp = $value['prevComp'];
 	$prevUni = $value['prevStudy'];
 	$service = $value['service'];
+	$prevCountry = $value['prevCountry'];
 	if($admin){
 
 
@@ -273,7 +278,7 @@ function insertClient($mysqli,$value,$admin = false){
 
 
 //getting all values and collumn
-	$values = "'$fname', '$lname', '$dob', '$nationality', '$gender', '$mobile', '$email', '$cam', '$uni', '$comp','$caddress','$haddress','$consultant','$statusInsert','$visa','$vexpiry','$wechat','$service','$prevUni','$prevStudy','$prevComp','$know'";
+	$values = "'$fname', '$lname', '$dob', '$nationality', '$gender', '$mobile', '$email', '$cam', '$uni', '$comp','$caddress','$haddress','$consultant','$statusInsert','$visa','$vexpiry','$wechat','$service','$prevUni','$prevStudy','$prevComp','$know','$prevCountry'";
 	$values .= $admin?",'$passport','$pexpiry','$duedate'":"";
 	// $values .= $admin?"":",'$know'";
 
@@ -410,6 +415,10 @@ function checkError($values, $admin = false){
 		$error++;
 		$GLOBALS['prevUniError'] = "Previous Institution is required";
 	}  
+	if (empty($values["prevCountry"])) {
+		$error++;
+		$GLOBALS['prevCountryError'] = "This field is required";
+	}
 	if (empty($values["visa"])) {
 		$error++;
 		$GLOBALS['visaError'] = "Visa is required";
@@ -566,6 +575,7 @@ if(isset($_SESSION['userID'])){
 					prevUni = '$prevUni',
 					prevStudy = '$prevStudy',
 					prevComp = '$prevComp',
+					prevCountry = '$prevCountry',
 					wechat = '$wechat',
 					know = '$know',
 					duedate = '$duedate'

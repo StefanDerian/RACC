@@ -113,7 +113,7 @@ $(document).ready(function(){
 				},
 				dom: 'Bfrtip',
 				buttons: [
-				'print'
+				'print' ,'excel', 'pdf'
 				],
 				columns:data,
 				columnDefs: colDefsArray,

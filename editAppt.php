@@ -31,10 +31,20 @@ if(isset($_GET['user'])){
 
 <div class="container">
     <?php include('message.php'); ?>
+
+
+    <?php if(!isset($_GET['user'])){ ?>
     <div id="google_translate_element"></div>
-    <a id="english-button" href = "#"> English</a>
-    <a  id="chinese-button" href = "#"> Chinese</a>
+    
+
+
+
+    <a class = "btn btn-sm btn-primary" id="english-button" href = "#"> English</a>
+    <a  class = "btn btn-sm btn-primary" id="chinese-button" href = "#">Chinese</a>
+
+    <?php } ?>
     <div class="col-lg-12 well">
+
         <div class="row">
             <form method="post" name="form" action="<?php echo $action;?>">
                 <input type="hidden" name="client" value="client" />
@@ -107,7 +117,7 @@ if(isset($_GET['user'])){
                     </div> 
 
                     <h2 class="title2" >Education Background</h2>
-                    <h4 id = "cstudy-heading"><b>Current Study</b></h4>
+                    <h4><b class = "translate" data-translate = "CurrentHeading">Current Study</b></h4>
                     <div class = "row">
                      <div class="col-sm-4 form-group">
                         <label class = "translate" data-translate = "university">University</label>
@@ -130,6 +140,7 @@ if(isset($_GET['user'])){
                         <span class="error"><?php echo isset($compError)?$compError:"";?>
                         </span>
                     </div> 
+                    
                 </div>
 
                 <!-- Need modification part start -->
@@ -154,6 +165,12 @@ if(isset($_GET['user'])){
                     <label class = "translate" data-translate = "pcomp">Completion Date</label>
                     <input type="date" id="comp" name="prevComp" value = "<?php echo isset($prevComp)?$prevComp:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
                     <span class="error"><?php echo isset($prevCompError)?$prevCompError:"";?>
+                    </span>
+                </div> 
+                <div class="col-sm-4 form-group">
+                    <label class = "translate" data-translate = "prevCountry">Country :</label>
+                    <input type="text" id="prevCountry" name="prevCountry" value = "<?php echo isset($prevCountry)?$prevCountry:"";  ?>" placeholder="your previous institution country" class="form-control">
+                    <span class="error"><?php echo isset($prevCountryError)?$prevCountryError:"";?>
                     </span>
                 </div> 
             </div>
@@ -267,7 +284,7 @@ if(isset($_GET['user'])){
 <?php if(isset($_SESSION['userID'])){?>
 <div class="row">
     <div class="col-sm-4 form-group">
-        <label class = "translate" data-translate = "status">Status:</label>
+        <label>Status:</label>
 
         <select id="status" name="status" class = "form-control">
 
@@ -288,9 +305,9 @@ if(isset($_GET['user'])){
 </div>
 <br>
 <div class="row">
-    <input type="submit" class="btn btn-primary btn-lg activ pull-left" name="submitBtn" style = "margin-left: 38%;" value="<?php echo isset($_GET['user'])?'Save':'Submit' ?>">
+    <input type="submit" class="btn btn-primary btn-lg activ pull-left" id = "submit-button" name="submitBtn" style = "margin-left: 38%;" value="<?php echo isset($_GET['user'])?'Save':'Submit' ?>">
 
-    <input type="submit" class="btn btn-danger btn-lg activ pull-left" name="submitBtn" style = "margin-left: 3%;"  value="Cancel">
+    <input type="submit" class="btn btn-danger btn-lg activ pull-left"  id = "cancel-button" name="submitBtn" style = "margin-left: 3%;"  value="Cancel">
 </div>
 
 </form>

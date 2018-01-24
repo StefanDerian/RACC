@@ -152,9 +152,15 @@ if($_SESSION['userType'] == "MANAGER"){
             </div>
         </form>
     </div>
-
+   
     <!-- <a href = "editAppt.php" class = "btn btn-lg btn-primary pull-right"> Add Client</a> -->
     <!-- <button  class = "btn btn-lg btn-primary pull-right" id ="gen-report"> Generate Report</button> -->
+
+
+
+
+
+
 
     <table width="100%" style="border-collapse:collapse" cellpadding="5"  class="table table-striped table-bordered table-hover dt-responsive " id = "client-table">
         <thead>

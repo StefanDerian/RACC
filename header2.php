@@ -17,6 +17,8 @@
 	<script src="//cdn.quilljs.com/1.3.4/quill.js"></script>
 	<script src="//cdn.quilljs.com/1.3.4/quill.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 	<!-- <script src="https://cdn.datatables.net/responsive/2.2.1/js/jquery.dataTables.js"></script> -->
