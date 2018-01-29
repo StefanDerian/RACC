@@ -341,7 +341,7 @@ function checkUserAvailability($mysqli,$user){
 function checkError($values, $admin = false){
 
 	$error = 0;
-	if(!$admin){
+	if(!$admin && $admin){
 		if (empty($values["fname"])) {
 			$error++;
 			$GLOBALS['fnameError'] = "First name is required";
