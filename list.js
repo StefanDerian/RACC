@@ -113,6 +113,7 @@ $(document).ready(function(){
 
 				},
 				dom: 'Brtip',
+				
 				buttons: [
 				'print' ,'excel', 'pdf'
 				],

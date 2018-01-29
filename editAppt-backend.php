@@ -341,36 +341,36 @@ function checkUserAvailability($mysqli,$user){
 function checkError($values, $admin = false){
 
 	$error = 0;
-
-	if (empty($values["fname"])) {
-		$error++;
-		$GLOBALS['fnameError'] = "First name is required";
-	} else {
-		$first = $values["fname"];
-		// check if name contains a letter
-		if (!preg_match("/[a-zA-Z ]/",$first)) {
+	if(!$admin){
+		if (empty($values["fname"])) {
 			$error++;
-			$GLOBALS['fnameError'] = "First name must contain a letter";
-		}
-	}
-
-	if(checkUserAvailability($GLOBALS['mysqli'],$values)){
-		$error++;
-		$GLOBALS['fnameError'] = "Both first name and last name already  registered in the system";
-		$GLOBALS['lnameError'] = "Both first name and last name already  registered in the system";
-	}
-
-	if (empty($values["lname"])) {
-		$error++;
-		$GLOBALS['lnameError'] = "Last name is required";
-	} else {
-		$last = $values["lname"];
+			$GLOBALS['fnameError'] = "First name is required";
+		} else {
+			$first = $values["fname"];
 		// check if name contains a letter
-		if (!preg_match("/[a-zA-Z ]/",$last)) {
-			$error++;
-			$GLOBALS['lnameError'] = "Last name must contain a letter";
+			if (!preg_match("/[a-zA-Z ]/",$first)) {
+				$error++;
+				$GLOBALS['fnameError'] = "First name must contain a letter";
+			}
 		}
-	}
+
+		if(checkUserAvailability($GLOBALS['mysqli'],$values)){
+			$error++;
+			$GLOBALS['fnameError'] = "Both first name and last name already  registered in the system";
+			$GLOBALS['lnameError'] = "Both first name and last name already  registered in the system";
+		}
+
+		if (empty($values["lname"])) {
+			$error++;
+			$GLOBALS['lnameError'] = "Last name is required";
+		} else {
+			$last = $values["lname"];
+		// check if name contains a letter
+			if (!preg_match("/[a-zA-Z ]/",$last)) {
+				$error++;
+				$GLOBALS['lnameError'] = "Last name must contain a letter";
+			}
+		}
 
 
 	// if (empty($values["pname"])) {
@@ -387,22 +387,22 @@ function checkError($values, $admin = false){
 
 
 
-	if (empty($values["dob"])) {
-		$error++;
-		$GLOBALS['dobError'] = "Date of Birth is required";
-	}
-	if (empty($values["comp"])) {
-		$error++;
-		$GLOBALS['compError'] = "Course Completion is required";
-	}  
-	if (empty($values["cam"])) {
-		$error++;
-		$GLOBALS['camError'] = "Course is required";
-	}  
-	if (empty($values["uni"])) {
-		$error++;
-		$GLOBALS['uniError'] = "University Completion is required";
-	}  
+		if (empty($values["dob"])) {
+			$error++;
+			$GLOBALS['dobError'] = "Date of Birth is required";
+		}
+		if (empty($values["comp"])) {
+			$error++;
+			$GLOBALS['compError'] = "Course Completion is required";
+		}  
+		if (empty($values["cam"])) {
+			$error++;
+			$GLOBALS['camError'] = "Course is required";
+		}  
+		if (empty($values["uni"])) {
+			$error++;
+			$GLOBALS['uniError'] = "University Completion is required";
+		}  
 	// if (empty($values["prevComp"])) {
 	// 	$error++;
 	// 	$GLOBALS['prevCompError'] = "Previous Course Completion Date is required";
@@ -419,26 +419,26 @@ function checkError($values, $admin = false){
 	// 	$error++;
 	// 	$GLOBALS['prevCountryError'] = "This field is required";
 	// }
-	if (empty($values["visa"])) {
-		$error++;
-		$GLOBALS['visaError'] = "Visa is required";
-	} else {
-		$first = $values["visa"];
-		// check if name contains a letter
-		if (!preg_match("/[a-zA-Z ]/",$first)) {
+		if (empty($values["visa"])) {
 			$error++;
-			$GLOBALS['visaError'] = "visa must contain a letter";
+			$GLOBALS['visaError'] = "Visa is required";
+		} else {
+			$first = $values["visa"];
+		// check if name contains a letter
+			if (!preg_match("/[a-zA-Z ]/",$first)) {
+				$error++;
+				$GLOBALS['visaError'] = "visa must contain a letter";
+			}
 		}
-	}
-	if (empty($values["vexpiry"])) {
-		$error++;
-		$GLOBALS['vexpiryError'] = "Visa Expiry Date is required";
-	}
-	if (empty($values["know"])) {
-		$error++;
-		$GLOBALS['knowError'] = "This field is also reequired";
-	} 
-	if($admin){
+		if (empty($values["vexpiry"])) {
+			$error++;
+			$GLOBALS['vexpiryError'] = "Visa Expiry Date is required";
+		}
+		if (empty($values["know"])) {
+			$error++;
+			$GLOBALS['knowError'] = "This field is also reequired";
+		} 
+
 
 		// if (empty($values["passport"])) {
 		// 	$error++;
@@ -469,14 +469,14 @@ function checkError($values, $admin = false){
 		// } 
 
 
-	}
+
 
 
 // deleted as not required
-	if (empty($values["caddress"])) {
-		$error++;
-		$GLOBALS['caddressError'] = "Current Address is required";
-	} 
+		if (empty($values["caddress"])) {
+			$error++;
+			$GLOBALS['caddressError'] = "Current Address is required";
+		} 
 
 	// deleted as not required
 	// if (empty($values["haddress"])) {
@@ -484,17 +484,17 @@ function checkError($values, $admin = false){
 	// 	$GLOBALS['haddressError'] = "Home Address is required";
 	// }
 
-	if (empty($values["nationality"])) {
-		$error++;
-		$GLOBALS['nationalityError'] = "Nationality is required.";
-	} else {
-		$nationality = $values["nationality"];
-		// check if nationality contains a letter
-		if (!preg_match("/[a-zA-Z ]/",$nationality)) {
+		if (empty($values["nationality"])) {
 			$error++;
-			$GLOBALS['nationalityError'] = "Nationality must contain a letter";
+			$GLOBALS['nationalityError'] = "Nationality is required.";
+		} else {
+			$nationality = $values["nationality"];
+		// check if nationality contains a letter
+			if (!preg_match("/[a-zA-Z ]/",$nationality)) {
+				$error++;
+				$GLOBALS['nationalityError'] = "Nationality must contain a letter";
+			}
 		}
-	}
 
 	// if (!isset($values["gender"])) {
 	// 	$error++;
@@ -502,36 +502,36 @@ function checkError($values, $admin = false){
 	// }
 
 
-	if (empty($values["mobile"])) {
-		$error++;
-		$GLOBALS['mobileError'] = "Mobile is required.";
-	} else {
-		$mobile = $values["mobile"];
+		if (empty($values["mobile"])) {
+			$error++;
+			$GLOBALS['mobileError'] = "Mobile is required.";
+		} else {
+			$mobile = $values["mobile"];
 		// check if mobile contains a letter
-		if (strpos($mobile, " ") != false) {
-			$error++;
-			$GLOBALS['mobileError'] = "Mobile must not contain spaces";
+			if (strpos($mobile, " ") != false) {
+				$error++;
+				$GLOBALS['mobileError'] = "Mobile must not contain spaces";
+			}
 		}
-	}
 
-	if (empty($values["email"])) {
-		$error++;
-		$GLOBALS['emailError'] = "Email is required.";
-	} else {
-		$email = $values["email"];
+		if (empty($values["email"])) {
+			$error++;
+			$GLOBALS['emailError'] = "Email is required.";
+		} else {
+			$email = $values["email"];
 		// check if email contains a letter
-		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			$error++;
-			$GLOBALS['emailError'] = "Invalid email format"; 
+			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+				$error++;
+				$GLOBALS['emailError'] = "Invalid email format"; 
+			}
+		}
+
+		if ($error > 0 ){
+			return false;
+		}else{
+			return true;
 		}
 	}
-
-	if ($error > 0 ){
-		return false;
-	}else{
-		return true;
-	}
-
 
 }
 
@@ -539,8 +539,8 @@ function checkError($values, $admin = false){
 if(isset($_SESSION['userID'])){
 	if(isset($_GET['user'])){
 		$id = $_GET['user'];
-		$single_user = getSingleUser( $id, $mysqli);
-		assignFromDatabase($single_user);
+		$user = getSingleUser( $id, $mysqli);
+		assignFromDatabase($user);
 		$action .= "?user=$id";
 		if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['client']) ){
 

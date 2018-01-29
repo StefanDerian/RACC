@@ -115,7 +115,7 @@
         </div> -->
         <div class="form-group">
         	<label for="message-text" class="col-form-label">Note:</label>
-        	<textarea class="form-control content" width=100%  name ="content" id="message-text"></textarea>
+        	<textarea class="form-control content" width=100% height="500px"  name ="content" id="message-text"></textarea>
         </div>
         <div class="form-group">
         	<!-- <label for="message-text" class="col-form-label">Username:</label> -->
