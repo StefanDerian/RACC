@@ -320,7 +320,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 					} 
 					$mail->Body .= '<tr>';
 					$mail->Body .= '<td colspan ="5">';
-					$mail->Body .= '<h4>Feedback</h4>';
+					$mail->Body .= '<h4>Feedback:</h4>';
 					$mail->Body .= '<p>'.$_POST['feedback'].'</p>';
 					$mail->Body .= '</td>';
 

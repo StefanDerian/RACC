@@ -68,4 +68,4 @@ EOT;
     <input type="submit" value="Send">
 </form>
 </body>
-</html>
+</html
