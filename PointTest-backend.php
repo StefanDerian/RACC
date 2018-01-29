@@ -284,16 +284,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Content
 					$mail->isHTML(true);                                  
     // Set email format to HTML
-					$mail->Subject = 'Your PTE Update and feedback';
-					$mail->Body    = 'Your Result Update And Some Feedback';
-
-
+					$mail->Subject = 'Your Point Test Update and Feedback';
+					
 					$mail->Body .= '<html>';
 					$mail->Body .= '<head>';
 					$mail->Body .= '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />';
 					$mail->Body .= '</head>';
 					$mail->Body .= '<body>';
 					$mail->Body .= '<p> Hello '. $userDetail['FirstName']. ' '.$userDetail['LastName'].', </p>';
+					$mail->Body .= 'Your result of point test has been updated and here are some feedback';
 					$mail->Body .= '<table class ="table" width="100%" style="border-collapse:collapse" cellpadding="13">';
 
 					$mail->Body .= '<tr class = "info">
@@ -321,7 +320,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 					} 
 					$mail->Body .= '<tr>';
 					$mail->Body .= '<td colspan ="5">';
-					$mail->Body .= '<h5>Your Feedback</h5>';
+					$mail->Body .= '<h4>Feedback</h4>';
 					$mail->Body .= '<p>'.$_POST['feedback'].'</p>';
 					$mail->Body .= '</td>';
 
