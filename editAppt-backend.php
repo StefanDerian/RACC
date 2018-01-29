@@ -525,13 +525,14 @@ function checkError($values, $admin = false){
 				$GLOBALS['emailError'] = "Invalid email format"; 
 			}
 		}
-
-		if ($error > 0 ){
-			return false;
-		}else{
-			return true;
-		}
 	}
+
+	if ($error > 0 ){
+		return false;
+	}else{
+		return true;
+	}
+	
 
 }
 
