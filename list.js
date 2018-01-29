@@ -114,7 +114,7 @@ $(document).ready(function(){
 				},
 				dom: 'Brtip',
 				buttons: [
-				'print' ,'excel', 'pdf'
+				'copy', 'csv', 'excel', 'pdf', 'print'
 				],
 				columns:data,
 				columnDefs: colDefsArray,
