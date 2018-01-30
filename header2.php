@@ -83,6 +83,7 @@
 				<?php if($_SESSION['userType'] == "MANAGER"){ ?>
 				<li><a href="createAccount.php">ADD AGENT</a></li>
 				<?php } ?>
+				<li><a href="help.php">HELP</a></li></li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
