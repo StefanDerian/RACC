@@ -73,6 +73,9 @@ $statusFlag = "";
 
 $id = isset($_GET['user'])?$_GET['user']:"";
 
+
+$errorFlag = false;
+
 //for fetching the conultant
 function populateChouncelor($mysqli){
 
@@ -260,8 +263,6 @@ function insertClient($mysqli,$value,$admin = false){
 	$service = $value['service'];
 	$prevCountry = $value['prevCountry'];
 	if($admin){
-
-
 		$passport = $value['passport'];
 		$pexpiry = $value['pexpiry'];
 		$statusInsert = $value['status'];
@@ -341,7 +342,7 @@ function checkUserAvailability($mysqli,$user){
 function checkError($values, $admin = false){
 
 	$error = 0;
-	if(!$admin && $admin){
+	if(!$admin){
 		if (empty($values["fname"])) {
 			$error++;
 			$GLOBALS['fnameError'] = "First name is required";
@@ -528,8 +529,11 @@ function checkError($values, $admin = false){
 	}
 
 	if ($error > 0 ){
+		$GLOBALS['errorFlag'] = true;
+
 		return false;
 	}else{
+		$GLOBALS['errorFlag'] = false;
 		return true;
 	}
 	

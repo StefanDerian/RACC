@@ -15,7 +15,7 @@
 
 	<script src="confirmation-modal.js"></script>
 	<script src="//cdn.quilljs.com/1.3.4/quill.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
