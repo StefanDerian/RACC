@@ -6,15 +6,15 @@
 
       <ul class="nav navbar-nav">
        <li class = "active">
-        <a href=<?php echo "editAppt.php?user=$id"; ?>>Cient Information</a>
+        <a href=<?php echo "editAppt.php?user=$id"; ?>>Personal Information</a>
       </li>
       <?php //if($user['service'] == "migration"){ ?>
       <li>
-       <a href=<?php echo "PointTest.php?user=$id"; ?>>Point Test</a>
+       <a href=<?php echo "PointTest.php?user=$id"; ?>>Migration</a>
      </li>
      <?php //}else{ ?>
      <li>
-      <a href=<?php echo "education.php?user=$id"; ?>>Education Application</a>
+      <a href=<?php echo "education.php?user=$id"; ?>>Education</a>
      </li>
      <?php //} ?>
    </ul>

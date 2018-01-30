@@ -73,6 +73,9 @@ $statusFlag = "";
 
 $id = isset($_GET['user'])?$_GET['user']:"";
 
+
+$errorFlag = false;
+
 //for fetching the conultant
 function populateChouncelor($mysqli){
 
@@ -260,8 +263,6 @@ function insertClient($mysqli,$value,$admin = false){
 	$service = $value['service'];
 	$prevCountry = $value['prevCountry'];
 	if($admin){
-
-
 		$passport = $value['passport'];
 		$pexpiry = $value['pexpiry'];
 		$statusInsert = $value['status'];
@@ -528,8 +529,11 @@ function checkError($values, $admin = false){
 	}
 
 	if ($error > 0 ){
+		$GLOBALS['errorFlag'] = true;
+
 		return false;
 	}else{
+		$GLOBALS['errorFlag'] = false;
 		return true;
 	}
 	
