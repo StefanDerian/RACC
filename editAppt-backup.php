@@ -6,7 +6,7 @@ include ('editDate-backend.php');
 include_once('notes-backend.php');
 ?>
 
-<?php
+<?php 
 
 if(isset($_GET['user'])){
     include('secondary.php');
@@ -28,7 +28,7 @@ if(isset($_GET['user'])){
 <?php if($errorFlag){ ?>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#errorMessage').modal();
+        $('#errorMessage').modal(); 
     });
 </script>
 <?php } ?>
@@ -59,12 +59,12 @@ if(isset($_GET['user'])){
 
     <?php if(!isset($_GET['user'])){ ?>
     <div id="google_translate_element"></div>
+    
 
 
 
-
-    <a class = "btn btn-sm btn-primary" id="english-button" href = "#">English</a>
-    <a class = "btn btn-sm btn-primary" id="chinese-button" href = "#">Chinese</a>
+    <a class = "btn btn-sm btn-primary" id="english-button" href = "#"> English</a>
+    <a  class = "btn btn-sm btn-primary" id="chinese-button" href = "#">Chinese</a>
 
     <?php } ?>
     <div class="col-lg-12 well">
@@ -72,93 +72,75 @@ if(isset($_GET['user'])){
         <div class="row">
             <form method="post" name="form" action="<?php echo $action;?>">
                 <input type="hidden" name="client" value="client" />
-
-                <div class="<?php echo isset($_GET['user'])?'col-md-12': 'col-md-12';?>"  style="width:100%; margin-left: 90px; margin-right: auto;">
-
-
-
-
-                    <div style="float: left; width: 50%">
-
-
-
-
-                    <h2 class="title2 translate" data-translate="personalInformation">Personal Information</h2>
-                    <div class="row">
-                        <div class="col-sm-4 form-group">
-                            <label class = "translate" data-translate = "firstname">First Name</label>
-                            <input placeholder = "As your passport" type="text" id = "fname" name = "fname" maxlength = "255" value = "<?php echo isset($fname)?$fname:"";  ?>" class="form-control">
-                            <span class="error"><?php echo isset($fnameError)?$fnameError:"";?></span>
-                        </div>
-
-
-                        <div class="col-sm-4 form-group">
-                            <label class = "translate" data-translate = "surname" >Surname</label>
-                            <input placeholder = "As your passport" type="text" id="lname" name="lname" maxlength="255" value = "<?php echo isset($lname)?$lname:"";  ?>" class="form-control">
-                            <span class="error"><?php echo isset($lnameError)?$lnameError:"";?>
-                            </span>
-                        </div>
+                <div class="<?php echo isset($_GET['user'])?'col-md-12': 'col-md-12';?>"  style="width:100%; margin-left: 180px; margin-right: auto;">
+                  <span class="error">  *required </span>
+                  <h2 class="title2 translate" data-translate="personalInformation">Personal Information</h2>
+                  <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label class = "translate" data-translate = "firstname">First Name*</label>
+                        <input placeholder = "As it is written in your passport" type="text" id = "fname" name = "fname" maxlength = "255" value = "<?php echo isset($fname)?$fname:"";  ?>" class="form-control">
+                        <span class="error"><?php echo isset($fnameError)?$fnameError:"";?></span>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-4 form-group">
-                            <label class = "translate" data-translate = "nationality">Nationality</label>
-                            <input type="text" id="nationality" name="nationality" maxlength="255"  value = "<?php echo isset($nationality)?$nationality:"";  ?>" class="form-control">
-                            <span class="error"><?php echo isset($nationalityError)?$nationalityError:"";?>
-                            </span>
-                        </div>
 
-                        <div class="col-sm-4 form-group">
-                            <label class = "translate" data-translate = "dob">Date of Birth</label>
-                            <input type="date" id = "dob" name="dob" value = "<?php echo isset($dob)?$dob:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
-                            <span class="error"><?php echo isset($dobError)?$dobError:"";?>
-                            </span>
-                        </div>
+                    <div class="col-sm-4 form-group">
+                        <label class = "translate" data-translate = "surname" >Surname*</label>
+                        <input placeholder = "As it is written in your passport" type="text" id="lname" name="lname" maxlength="255" value = "<?php echo isset($lname)?$lname:"";  ?>" class="form-control">
+                        <span class="error"><?php echo isset($lnameError)?$lnameError:"";?>
+                        </span>
                     </div>
-
-                    <div class="row">
-                        <div class="col-sm-4 form-group">
-                            <label class = "translate" data-translate = "mobile">Mobile Number</label>
-                            <input type="text"  id="mobile" name="mobile" maxlength="45" value = "<?php echo isset($mobile)?$mobile:"";  ?>" class="form-control">
-                            <span class="error"><?php echo isset($mobileError)?$mobileError:"";?></span>
-                        </div>
-
-                        <div class="col-sm-4 form-group">
-                            <label class = "translate" data-translate = "email">Email Address</label>
-                            <input type="text"id="email" name="email" maxlength="255" value = "<?php echo isset($email)?$email:"";  ?>" class="form-control">
-                            <span class="error"><?php echo isset($emailError)?$emailError:"";?>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class = "row">
-                        <div class="col-sm-8 form-group">
-                            <label class = "translate" data-translate = "caddress">Current Address</label>
-                            <input type="text" class="form-control" id="caddress" name="caddress" maxlength="255" value = "<?php echo isset($caddress)?$caddress:"";  ?>">
-                            <span class="error">
-                                <?php echo isset($caddressError)?$caddressError:"";?>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class = "row">
-                        <div class="col-sm-8 form-group">
-                            <label class = "translate" data-translate = "haddress">Home Country Address</label>
-                            <input type="text" class="form-control" id="haddress" name="haddress" maxlength="255" value = "<?php echo isset($haddress)?$haddress:"";  ?>">
-                            <span class="error"><?php echo isset($haddressError)?$haddressError:"";?>
-                            </span>
-                        </div>
-                    </div>
-
                 </div>
 
+                <div class="row"> 
+                    <div class="col-sm-4 form-group">
+                        <label class = "translate" data-translate = "nationality">Nationality <?php echo isset($_SESSION['UserID'])?'':'*' ?></label>
+                        <input type="text" id="nationality" name="nationality" maxlength="255"  value = "<?php echo isset($nationality)?$nationality:"";  ?>" class="form-control">
+                        <span class="error"><?php echo isset($nationalityError)?$nationalityError:"";?>
+                        </span>
+                    </div>
 
+                    <div class="col-sm-4 form-group">
+                        <label class = "translate" data-translate = "dob">Date of Birth <?php echo isset($_SESSION['UserID'])?'':'*' ?></label>
+                        <input type="date" id = "dob" name="dob" value = "<?php echo isset($dob)?$dob:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
+                        <span class="error"><?php echo isset($dobError)?$dobError:"";?>
+                        </span>
+                    </div> 
+                </div>
 
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label class = "translate" data-translate = "mobile">Mobile Number<?php echo isset($_SESSION['UserID'])?'':'*' ?></label>
+                        <input type="text"  id="mobile" name="mobile" maxlength="45" value = "<?php echo isset($mobile)?$mobile:"";  ?>" class="form-control">
+                        <span class="error"><?php echo isset($mobileError)?$mobileError:"";?></span>
+                    </div>
 
+                    <div class="col-sm-4 form-group">
+                        <label class = "translate" data-translate = "email">Email Address<?php echo isset($_SESSION['UserID'])?'':'*' ?></label>
+                        <input type="text"id="email" name="email" maxlength="255" value = "<?php echo isset($email)?$email:"";  ?>" class="form-control">
+                        <span class="error"><?php echo isset($emailError)?$emailError:"";?>
+                        </span>
+                    </div>  
+                </div> 
 
+                <div class = "row">
+                    <div class="col-sm-8 form-group">
+                        <label class = "translate" data-translate = "caddress">Current Address<?php echo isset($_SESSION['UserID'])?'':'*' ?></label>
+                        <input type="text" class="form-control" id="caddress" name="caddress" maxlength="255" value = "<?php echo isset($caddress)?$caddress:"";  ?>">
+                        <span class="error">
+                            <?php echo isset($caddressError)?$caddressError:"";?>
+                        </span>
+                    </div>
+                </div>
 
+                <div class = "row">
+                    <div class="col-sm-8 form-group">
+                        <label class = "translate" data-translate = "haddress">Home Country Address<?php echo isset($_SESSION['UserID'])?'':'*' ?></label>
+                        <input type="text" class="form-control" id="haddress" name="haddress" maxlength="255" value = "<?php echo isset($haddress)?$haddress:"";  ?>">
+                        <span class="error"><?php echo isset($haddressError)?$haddressError:"";?>
+                        </span>
+                    </div>
+                </div> 
 
-                <div style="float: right; width: 50%">
                 <h2 class="title2" >Education Background</h2>
                 <h4><b class = "translate" data-translate = "CurrentHeading">Current Study</b></h4>
                 <div class = "row">
@@ -167,7 +149,7 @@ if(isset($_GET['user'])){
                     <input type="text" class="form-control" id="uni" name="uni" maxlength="255" value = "<?php echo isset($uni)?$uni:"";  ?>">
                     <span class="error"><?php echo isset($uniError)?$uniError:"";?>
                     </span>
-                </div>
+                </div>      
                 <div class="col-sm-4 form-group">
                     <label class = "translate" data-translate = "ccam">Course and Major<?php echo isset($_SESSION['UserID'])?'':'*' ?></label>
                     <input type="text" class="form-control" id="cam" name="cam" maxlength="255" value = "<?php echo isset($cam)?$cam:"";  ?>">
@@ -176,34 +158,15 @@ if(isset($_GET['user'])){
                 </div>
             </div>
 
-
             <div class = "row">
                 <div class="col-sm-4 form-group">
-                    <label class = "translate" data-translate = "pcomp">Completion Date</label>
-                    <input type="date" id="comp" name="prevComp" value = "<?php echo isset($prevComp)?$prevComp:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
-                    <span class="error"><?php echo isset($prevCompError)?$prevCompError:"";?>
-                    </span>
-                </div>
-                <div class="col-sm-4 form-group">
-                    <label class = "translate" data-translate = "prevCountry">Country:</label>
-                    <input type="text" id="prevCountry" name="prevCountry" value = "<?php echo isset($prevCountry)?$prevCountry:"";  ?>" placeholder="your previous institution country" class="form-control">
-                    <span class="error"><?php echo isset($prevCountryError)?$prevCountryError:"";?>
-                    </span>
-                </div>
-            </div>
-
-            <div class = "row">
-                <div class = "col-sm-8 form-group">
                     <label class = "translate" data-translate = "ccomp">Estimated Completion Date<?php echo isset($_SESSION['UserID'])?'':'*' ?></label>
                     <input type="date" id="comp" name="comp" value = "<?php echo isset($comp)?$comp:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
                     <span class="error"><?php echo isset($compError)?$compError:"";?>
                     </span>
-                </div>
+                </div> 
+                
             </div>
-
-
-
-
 
             <!-- Need modification part start -->
             <h4><b class = "translate" data-translate = "PrevHeading">Previous Study</b></h4>
@@ -213,7 +176,7 @@ if(isset($_GET['user'])){
                 <input type="text" class="form-control" id="prevUni" name="prevUni" maxlength="255" value = "<?php echo isset($prevUni)?$prevUni:"";  ?>">
                 <span class="error"><?php echo isset($prevUniError)?$prevUniError:"";?>
                 </span>
-            </div>
+            </div>      
             <div class="col-sm-4 form-group">
                 <label class = "translate" data-translate = "pcam">Course and Major</label>
                 <input type="text" class="form-control" id="prevStudy" name="prevStudy" maxlength="255" value = "<?php echo isset($prevStudy)?$prevStudy:"";  ?>">
@@ -222,25 +185,20 @@ if(isset($_GET['user'])){
             </div>
         </div>
 
-
         <div class = "row">
             <div class="col-sm-4 form-group">
                 <label class = "translate" data-translate = "pcomp">Completion Date</label>
                 <input type="date" id="comp" name="prevComp" value = "<?php echo isset($prevComp)?$prevComp:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
                 <span class="error"><?php echo isset($prevCompError)?$prevCompError:"";?>
                 </span>
-            </div>
+            </div> 
             <div class="col-sm-4 form-group">
                 <label class = "translate" data-translate = "prevCountry">Country :</label>
                 <input type="text" id="prevCountry" name="prevCountry" value = "<?php echo isset($prevCountry)?$prevCountry:"";  ?>" placeholder="your previous institution country" class="form-control">
                 <span class="error"><?php echo isset($prevCountryError)?$prevCountryError:"";?>
                 </span>
-            </div>
+            </div> 
         </div>
-
-
-
-
         <!-- Need modification part end -->
         <?php if(isset($_SESSION["userID"])){ ?>
         <div class="row">
@@ -250,12 +208,6 @@ if(isset($_GET['user'])){
             </div>
         </div>
         <?php } ?>
-
-            </div>
-
-
-        <div style="float: left; width: 50%">
-        <h2 class="title2" >Services</h2>
         <div class="row">
             <div class="col-sm-4 form-group">
                 <label class = "translate" data-translate = "service">Service needed:</label>
@@ -276,28 +228,29 @@ if(isset($_GET['user'])){
             </div> -->
 
             <!-- Need modification part start -->
-
+            
             <!-- Need modification part end -->
 
 
 
             <!-- </div> -->
             <?php } ?>
-
+            
 
 
             <div class="col-sm-4 form-group">
-                <label class = "translate" data-translate = "know">Where did you hear about us:
-                    <select id="know" name="know" class = "form-control">
-
-                        <option style = "font-family:  " value= "facebook" <?php echo isset($know)&&$know=="facebook"?"selected":"" ?>>Facebook</option>
-                        <option value= "weChat" <?php echo isset($know)&&$know=="wechat"?"selected":"" ?>> WeChat</option>
-                        <option value= "website" <?php echo isset($know)&&$know=="website"?"selected":"" ?>> Website</option>
-                        <option value= "instagram" <?php echo isset($know)&&$know=="instagram"?"selected":"" ?>> Instagram</option>
-                    </select>
-                </label>
+                <label class = "translate" data-translate = "know">Where did you hear about us:</label>
+                <input type="text" class="form-control" id="know" name="know" maxlength="255" value = "<?php echo isset($know)?$know:"";  ?>">
+                <span class="error"><?php echo isset($knowError)?$knowError:"";?>
+                </span>
             </div>
-            
+
+            <!-- Need modification part start -->
+
+            <!-- Need modification part end -->
+
+
+
         </div>
         <div class = "row">
          <div class="col-sm-4 form-group">
@@ -349,17 +302,11 @@ if(isset($_GET['user'])){
             <option value="<?php echo $agent["UserID"]; ?>" <?php echo isset($consultant)&&$consultant==$agent["UserID"]?"selected":"" ?>><?php echo $agent["DisplayName"]; ?></option>
             <?php } ?>
         </select>
-    </div>
+    </div>             
     <?php } ?>
 </div>
-</div>
 
-
-<div style="float: right; width: 50%">
 <?php if(isset($_SESSION['userID'])){?>
-
-
-<h2 class="title2" >About</h2>
 <div class="row">
     <div class="col-sm-4 form-group">
         <label>Status:</label>
@@ -381,8 +328,6 @@ if(isset($_GET['user'])){
 
 <?php } ?>
 </div>
-</div>
-
 <br>
 <div class="row">
     <input type="submit" class="btn btn-primary btn-lg activ pull-left" id = "submit-button" name="submitBtn" style = "margin-left: 38%;" value="<?php echo isset($_GET['user'])?'Save':'Submit' ?>">
@@ -405,7 +350,7 @@ if(isset($_GET['user'])){
 <div class = "row">
  <div class = "col-md-12" style="width: 760px; margin-left: 180px">
     <?php if(isset($_SESSION['userID']) && isset($_GET['user']) ){?>
-    <?php
+    <?php 
 
     $noter = new Note($_GET['user']);
     $noter->displayNotes();
@@ -417,8 +362,6 @@ if(isset($_GET['user'])){
 
 
 
-</div>
-</div>
 </div>
 </div>
 </body>
