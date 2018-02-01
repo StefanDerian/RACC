@@ -215,7 +215,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			// Passing `true` enables exceptions
 				try {
     //Server settings
-					//$mail->SMTPDebug = 4;                                 
+					// $mail->SMTPDebug = 4;                                 
     // Enable verbose debug output
 					$mail->isSMTP();                                      
     // Set mailer to use SMTP
@@ -334,22 +334,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 					$mail->Body .= '<p><b>address:</b> 343 Little Collins Street, Melbourne</p>';
 					$mail->Body .= '<font color = "blue">Like our <font color = "red">Facebook <font color = "blue"> or <font color = "red">Wechat<font color = "blue"> and get updates about:</font>';
 					$mail->Body .= '<ul>
-										<li>Job vacancy</li>
-										<li>Intership Opportunity</li>
-										<li>Migration update</li>
-										<li>Scholarship offer</li>
-									    <li>Upcoming events such as:</li>
-										<ul>
-											<li>IELTS Free Trial Test</li>
-											<li>Free PTE Preparation Class</li>
-											<li>Migration Seminar</li>
-											<li>Career Fair</li>
-									    </ul>
-									</ul>';
+					<li>Job vacancy</li>
+					<li>Intership Opportunity</li>
+					<li>Migration update</li>
+					<li>Scholarship offer</li>
+					<li>Upcoming events such as:</li>
+					<ul>
+					<li>IELTS Free Trial Test</li>
+					<li>Free PTE Preparation Class</li>
+					<li>Migration Seminar</li>
+					<li>Career Fair</li>
+					</ul>
+					</ul>';
 
-					$mail->addAttachment('image/racclogo.jpeg');
-					$mail->addAttachment('image/wechat1.jpeg');
-					$mail->addAttachment('image/qrcode.jpeg');
+					$mail->addAttachment('image/racclogo.jpg');
+					$mail->addAttachment('image/wechat1.jpg');
+					$mail->addAttachment('image/qrcode.jpEg');
 
 
 
@@ -418,4 +418,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	}else{
 		header('Location:list.php');
 	}
+}
 ?>
