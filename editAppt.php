@@ -178,12 +178,7 @@ if(isset($_GET['user'])){
 
 
                     <div class = "row">
-                        <div class="col-sm-4 form-group">
-                            <label class = "translate" data-translate = "pcomp">Completion Date</label> <span class="error"><?php echo isset($_SESSION['UserID'])?'':'*' ?></span>
-                            <input type="date" id="comp" name="prevComp" value = "<?php echo isset($prevComp)?$prevComp:"";  ?>" placeholder="dd/mm/yyyy" class="form-control">
-                            <span class="error"><?php echo isset($prevCompError)?$prevCompError:"";?>
-                            </span>
-                        </div>
+                       
                         <div class="col-sm-4 form-group">
                             <label class = "translate" data-translate = "prevCountry">Country:</label> <span class="error"><?php echo isset($_SESSION['UserID'])?'':'*' ?></span>
                             <input type="text" id="prevCountry" name="prevCountry" value = "<?php echo isset($prevCountry)?$prevCountry:"";  ?>" placeholder="your previous institution country" class="form-control">
@@ -288,7 +283,7 @@ if(isset($_GET['user'])){
 
             <div class="col-sm-4 form-group">
                 <label class = "translate" data-translate = "know">Where did you hear about us: </label>
-                <select id="know" name="know" class = "form-control">
+                <!-- <select id="know" name="know" class = "form-control">
 
                     <option style = "font-family:  " value= "facebook" <?php echo isset($know)&&$know=="facebook"?"selected":"" ?>>Facebook</option>
                     <option value= "weChat" <?php echo isset($know)&&$know=="wechat"?"selected":"" ?>> WeChat</option>
@@ -296,7 +291,8 @@ if(isset($_GET['user'])){
                     <option value= "instagram" <?php echo isset($know)&&$know=="instagram"?"selected":"" ?>> Instagram</option>
                     
                     <option value= "friend" <?php echo isset($know)&&$know=="friend"?"selected":"" ?>> Friend</option>
-                </select>
+                </select> -->
+                <input type="text" class="form-control" id="know" name="know" maxlength="255" value = "<?php echo isset($know)?$know:"";  ?>">                
                 
             </div>
             
