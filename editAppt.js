@@ -40,9 +40,13 @@ $(document).ready(function(){
 			en:"Home Country Address",
 			cn:"出生地地址"
 		},
+		eduBackground:{
+			en:"Education Background",
+			cn:"教育背景"
+		}
 		CurrentHeading:{
 			en:"Current Study",
-			cn:""
+			cn:"当前教育背景"
 		},
 		university:{
 			en:"University",
@@ -61,7 +65,7 @@ $(document).ready(function(){
 			cn:""
 		},
 		puni:{
-			en: "University",
+			en: "University/College",
 			cn: "曾就读的大学/高中"
 		},
 		pcam:{
@@ -128,7 +132,7 @@ $(document).ready(function(){
 	function loadLanguage(lang = 'en'){
 		$('.translate').each(function(){
 			var translateKey = $(this).data("translate");
-			
+
 			if(lang == 'en'){
 				$('#submit-button').val('Submit');
 				$('#cancel-button').val('Cancel');
