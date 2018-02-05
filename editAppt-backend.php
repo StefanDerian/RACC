@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include('dbConnection.php'); // connect with database
 
@@ -99,7 +99,7 @@ function encrypt($value){
 
 
 	return $value;
-	
+
 }
 function decrypt($value){
 
@@ -134,7 +134,7 @@ function insertNotes($mysqli,$value){
 
 	$values = "'$content', '$writer','$userId'";
 
-	$query = "INSERT INTO contact ($collumns) 
+	$query = "INSERT INTO contact ($collumns)
 	VALUES ($values)";
 
 
@@ -172,7 +172,7 @@ function assignVars ($value, $admin = false){
 	$GLOBALS['prevUni'] = $value ['prevUni'];
 	$GLOBALS['service'] = $value ['service'];
 	if($admin){
-		
+
 		$GLOBALS['passport']= $value['passport'];
 		$GLOBALS['pexpiry'] = $value['pexpiry'];
 		$GLOBALS['status'] = $value['status'];
@@ -185,13 +185,13 @@ function assignVars ($value, $admin = false){
 	if(!$admin){
 		// $GLOBALS['know'] = $value['know'];
 	}
-	
+
 
 	if(!isset($_SESSION['userType']) || $_SESSION['userType'] != "AGENT"){
 		$GLOBALS['consultant'] = $value['consultant'];
 	}
-	
-	
+
+
 }
 
 
@@ -239,8 +239,8 @@ function insertClient($mysqli,$value,$admin = false){
 
 	if(!$admin){
 		$statusInsert = "new client";
-		
-		
+
+
 	}
 	$know = $value['know'];
 	$fname = $value['fname'];
@@ -270,10 +270,10 @@ function insertClient($mysqli,$value,$admin = false){
 	}
 	$caddress = $value['caddress'];
 	$haddress = $value['haddress'];
-	
 
 
-//if the user not logged in the consultant or the logged in user is a manager will be selected based on the dropdown otherwise it is taken from session 
+
+//if the user not logged in the consultant or the logged in user is a manager will be selected based on the dropdown otherwise it is taken from session
 	$consultant = isset($_SESSION['userID']) && $_SESSION['userType'] == "AGENT"?$_SESSION['userID']:$value['consultant'];
 
 
@@ -284,9 +284,9 @@ function insertClient($mysqli,$value,$admin = false){
 	// $values .= $admin?"":",'$know'";
 
 
-	$query = "INSERT INTO USER ($collumns) 
+	$query = "INSERT INTO USER ($collumns)
 	VALUES ($values)";
-	
+
 	if($mysqli->query($query)){
 		//redirect to the list page
 
@@ -294,21 +294,21 @@ function insertClient($mysqli,$value,$admin = false){
 		if(isset($_SESSION['userID'])){
 
 			//header("Location: list.php?msg=Successfully Inserted the Client Data");
-			$last_id = $mysqli->insert_id; 
-			header("Location: PointTest.php?user=$last_id"); 
+			$last_id = $mysqli->insert_id;
+			header("Location: PointTest.php?user=$last_id");
 			exit;
 		}else{
-			header("Location: welcomeMessage.php"); 
+			header("Location: welcomeMessage.php");
 			exit;
 		}
 
-		
+
 	}else{
 		if(isset($_SESSION['UserID'])){
-			header("Location: list.php?msg=Failed Inserted the Client Data&flag=0"); 
+			header("Location: list.php?msg=Failed Inserted the Client Data&flag=0");
 			exit;
 		}else{
-			header("Location: editAppt.php?msg=Failed Inserted the Client Data&flag=0"); 
+			header("Location: editAppt.php?msg=Failed Inserted the Client Data&flag=0");
 			exit;
 		}
 	}
@@ -325,7 +325,7 @@ function checkUserAvailability($mysqli,$user){
 	else{
 		$query = "SELECT * FROM user WHERE FirstName = '$firstname' AND LastName = '$lastname'";
 	}
-	
+
 	//echo $query;
 	$result = $mysqli->query($query);
 	if($result){
@@ -335,7 +335,7 @@ function checkUserAvailability($mysqli,$user){
 		}
 	}
 
-	
+
 	return false;
 }
 
@@ -395,27 +395,31 @@ function checkError($values, $admin = false){
 		if (empty($values["comp"])) {
 			$error++;
 			$GLOBALS['compError'] = "Course Completion is required";
-		}  
+		}
 		if (empty($values["cam"])) {
 			$error++;
 			$GLOBALS['camError'] = "Course is required";
-		}  
+		}
+		if (empty($values["Ccountry"])) {
+			$error++;
+			$GLOBALS['CcountryError'] = "The country is required";
+		}
 		if (empty($values["uni"])) {
 			$error++;
 			$GLOBALS['uniError'] = "University Completion is required";
-		}  
+		}
 	// if (empty($values["prevComp"])) {
 	// 	$error++;
 	// 	$GLOBALS['prevCompError'] = "Previous Course Completion Date is required";
-	// }  
+	// }
 	// if (empty($values["prevStudy"])) {
 	// 	$error++;
 	// 	$GLOBALS['prevStudyError'] = "Previous Course is required";
-	// }  
+	// }
 	// if (empty($values["prevUni"])) {
 	// 	$error++;
 	// 	$GLOBALS['prevUniError'] = "Previous Institution is required";
-	// }  
+	// }
 	// if (empty($values["prevCountry"])) {
 	// 	$error++;
 	// 	$GLOBALS['prevCountryError'] = "This field is required";
@@ -438,13 +442,13 @@ function checkError($values, $admin = false){
 		if (empty($values["know"])) {
 			$error++;
 			$GLOBALS['knowError'] = "This field is also reequired";
-		} 
+		}
 
 
 		// if (empty($values["passport"])) {
 		// 	$error++;
 		// 	$GLOBALS['passportError'] = "Passport Number is required";
-		// } 
+		// }
 
 		// if (empty($values["visa"])) {
 		// 	$error++;
@@ -463,11 +467,11 @@ function checkError($values, $admin = false){
 		// if (empty($values["vexpiry"])) {
 		// 	$error++;
 		// 	$GLOBALS['vexpiryError'] = "Visa Expiry Date is required";
-		// } 
+		// }
 		// if (empty($values["pexpiry"])) {
 		// 	$error++;
 		// 	$GLOBALS['pexpiryError'] = "Passport Expiry date is required";
-		// } 
+		// }
 
 
 
@@ -477,7 +481,7 @@ function checkError($values, $admin = false){
 		if (empty($values["caddress"])) {
 			$error++;
 			$GLOBALS['caddressError'] = "Current Address is required";
-		} 
+		}
 
 	// deleted as not required
 	// if (empty($values["haddress"])) {
@@ -523,7 +527,7 @@ function checkError($values, $admin = false){
 		// check if email contains a letter
 			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 				$error++;
-				$GLOBALS['emailError'] = "Invalid email format"; 
+				$GLOBALS['emailError'] = "Invalid email format";
 			}
 		}
 	}
@@ -536,7 +540,7 @@ function checkError($values, $admin = false){
 		$GLOBALS['errorFlag'] = false;
 		return true;
 	}
-	
+
 
 }
 
@@ -558,16 +562,16 @@ if(isset($_SESSION['userID'])){
 
 
 
-					$query = "UPDATE USER SET 
-					FirstName = '$fname', 
-					LastName = '$lname',  
-					DateofBirth = '$dob', 
-					Nationality = '$nationality', 
-					Gender = '$gender', 
-					Mobile = '$mobile', 
-					Email = '$email', 
-					Course = '$cam', 
-					Uni = '$uni', 
+					$query = "UPDATE USER SET
+					FirstName = '$fname',
+					LastName = '$lname',
+					DateofBirth = '$dob',
+					Nationality = '$nationality',
+					Gender = '$gender',
+					Mobile = '$mobile',
+					Email = '$email',
+					Course = '$cam',
+					Uni = '$uni',
 					Uni_compl = '$comp',
 					Visa = '$visa',
 					Vexpiry = '$vexpiry',

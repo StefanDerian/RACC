@@ -98,6 +98,7 @@ include('message.php');
 			<th> Intake </th>
 			<th> Status </th>
 			<th> Comment </th>
+			<th> Last Contact </th>
 		</tr>
 		<?php foreach ($educations as $key => $value) { ?>
 		<tr>
@@ -106,6 +107,7 @@ include('message.php');
 			<td> <?php echo $value['Intake']; ?> </td>
 			<td> <?php echo $value['status']; ?> </td>
 			<td> <?php echo $value['comment']; ?> </td>
+			<td> <?php echo $value['created']; ?> </td>
 			<td> <button class = "btn btn-sm btn-warning education-edit"
 				data-toggle="modal" data-target="#educationModal"
 				data-id = "<?php echo $value['id']; ?>"

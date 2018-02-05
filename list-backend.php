@@ -105,7 +105,7 @@ $a = $_SESSION['userID'];
 if($_SESSION["userType"] != "AGENT"){
 
 
-    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, user.Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName, urgent, know, account.UserID,duedate FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
+    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, user.Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, account.DisplayName as DisplayName, urgent, know, account.UserID,duedate,user.Created FROM user LEFT JOIN contact ON user.UserID = contact.UserID 
     LEFT JOIN account ON account.UserID = user.ConsultantID GROUP BY user.UserID ORDER BY user.Created DESC";
 
 
@@ -113,7 +113,7 @@ if($_SESSION["userType"] != "AGENT"){
 }else{
     $a = $_SESSION['userID'];
 
-    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, user.Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, urgent, know, duedate FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = $a  GROUP BY user.UserID";
+    $list_query = "SELECT user.UserID, FirstName, LastName, PreferName, DateofBirth, Nationality, Gender, Mobile, user.Email, CurrentStatus, Vexpiry, Course, MAX(time) as tim, urgent, know, duedate,user.Created FROM user LEFT JOIN contact ON user.UserID = contact.UserID WHERE ConsultantID = $a  GROUP BY user.UserID";
 
 
 
@@ -140,12 +140,12 @@ if($statement->bind_param("i", $a)){
 
 $result = $statement->execute();
 
-if($statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted,$urgent, $know,$duedate)){
+if($statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted,$urgent, $know,$duedate,$created)){
 
 
 
 }else{
-    $statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted, $consultantName,$urgent, $know, $consultantID,$duedate);
+    $statement->bind_result($rUserID, $rFirstName, $rLastName, $rPreferName, $rDateofBirth, $rNationality, $rGender, $rMobile, $rEmail, $rCurrentStatus ,$vexpiry, $course, $lastContacted, $consultantName,$urgent, $know, $consultantID,$duedate,$created);
 }
 
 $appointments = array();
@@ -208,6 +208,15 @@ if ($result) {
             "duedate"=>$duedate
             
         );
+
+        if(!empty($lastContacted)){
+            $appointment['lastContacted'] = $lastContacted;
+        }else{
+            $appointment['lastContacted'] = $created;
+
+        }
+
+
 
 
         if($_SESSION["userType"] != "AGENT"){

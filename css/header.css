@@ -1,0 +1,30 @@
+.navbar-new{
+	height: 100px;
+	background-color: rgb(51, 122, 183);
+}
+
+.navbar-new li{
+	display: inline-block;
+	text-align: center;
+	padding-bottom: auto;
+	line-height: 100px;
+}
+
+.navbar-new li a{
+	color: #ffffff;
+	height: 100px;
+	line-height: 100px;
+}
+
+.navbar-new li a:active{
+	background-color: rgb(88, 122, 183);
+}
+
+.navbar-new li a:hover{
+	background-color: rgb(88, 122, 183);
+}
+
+.navbar-new li a:visted{
+	background-color: rgb(88, 122, 183);
+}
+

@@ -46,7 +46,7 @@ $(document).ready(function(){
 		}
 		CurrentHeading:{
 			en:"Current Study",
-			cn:"当前教育背景"
+			cn:"当前院校"
 		},
 		university:{
 			en:"University",
@@ -62,7 +62,7 @@ $(document).ready(function(){
 		},
 		PrevHeading:{
 			en:"Previous Study",
-			cn:""
+			cn:"曾就读院校"
 		},
 		puni:{
 			en: "University/College",

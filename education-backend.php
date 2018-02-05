@@ -111,12 +111,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		}
 		if($_POST['submitBtn'] == "Update"){
 			$eduId = $_POST['id'];
+
 			$query = "UPDATE education SET 
 				uni = '$uni',
 				status = '$status',
 				course = '$course',
 				intake = '$intake',
-				comment = '$comment'
+				comment = '$comment',
+				created =  NOW()
 				WHERE id = '$eduId'
 			";
 

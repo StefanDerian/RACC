@@ -1,22 +1,22 @@
-
+<!-- <link rel = "stylesheet" type="text/css" href = "./css/secondary.css"/> -->
 <?php if(isset($_SESSION['userID'])){
   ?>
   <nav class="navbar navbar-default">
     <div class="container">
 
       <ul class="nav navbar-nav">
-       <li class = "active">
+       <li>
         <a href=<?php echo "editAppt.php?user=$id"; ?>>Personal Information</a>
       </li>
-      <?php //if($user['service'] == "migration"){ ?>
+
       <li>
        <a href=<?php echo "PointTest.php?user=$id"; ?>>Migration</a>
      </li>
-     <?php //}else{ ?>
+
      <li>
       <a href=<?php echo "education.php?user=$id"; ?>>Education</a>
      </li>
-     <?php //} ?>
+
    </ul>
  </div>
 </nav>
