@@ -143,11 +143,13 @@ if(isset($_GET['user'])){
 
                         <div class = "row">
                             <div class="col-sm-8 form-group">
-                                <label class = "translate" data-translate = "caddress">Current Address </label> <span class="error"><?php echo isset($_SESSION['UserID'])?'':'*' ?></span>
+                                <label class = "translate" data-translate = "caddress">Current Address </label>
                                 <input type="text" class="form-control" id="caddress" name="caddress" maxlength="255" value = "<?php echo isset($caddress)?$caddress:"";  ?>">
+                                <!--
                                 <span class="error">
                                     <?php echo isset($caddressError)?$caddressError:"";?>
                                 </span>
+                            -->
                             </div>
                         </div>
 

@@ -478,10 +478,10 @@ function checkError($values, $admin = false){
 
 
 // deleted as not required
-		if (empty($values["caddress"])) {
-			$error++;
-			$GLOBALS['caddressError'] = "Current Address is required";
-		}
+		//if (empty($values["caddress"])) {
+		//	$error++;
+		//	$GLOBALS['caddressError'] = "Current Address is required";
+		//}
 
 	// deleted as not required
 	// if (empty($values["haddress"])) {
