@@ -20,6 +20,7 @@ $email = "";
 $cam = "";
 $uni = "";
 $comp = "";
+$Ccountry = "";
 $visa = "";
 $vexpiry = "";
 $passport= "";
@@ -164,6 +165,8 @@ function assignVars ($value, $admin = false){
 	$GLOBALS['cam'] = $value['cam'];
 	$GLOBALS['uni'] = $value['uni'];
 	$GLOBALS['comp'] = $value['comp'];
+	$GLOBALS['Ccountry'] = $value['Ccountry'];
+
 	$GLOBALS['visa'] = $value['visa'];
 	$GLOBALS['vexpiry'] = $value['vexpiry'];
 	$GLOBALS['wechat'] = $value ['wechat'];
@@ -209,6 +212,7 @@ function assignFromDatabase($value){
 	$GLOBALS['cam'] = $value['Course'];
 	$GLOBALS['uni'] = $value['Uni'];
 	$GLOBALS['comp'] = $value['Uni_compl'];
+	$GLOBALS['Ccountry'] = $value['Ccountry'];
 	$GLOBALS['visa'] = $value['Visa'];
 	$GLOBALS['vexpiry'] = $value['Vexpiry'];
 	$GLOBALS['passport']= $value['Passport'];
@@ -231,7 +235,7 @@ function assignFromDatabase($value){
 function insertClient($mysqli,$value,$admin = false){
 
 
-	$collumns = "FirstName, LastName, DateofBirth, Nationality, Gender, Mobile, Email, Course, Uni, Uni_compl, CurrentAddress,HomeAddress, ConsultantID, CurrentStatus,Visa,Vexpiry,wechat,service,prevUni,prevStudy,prevComp,know,prevCountry";
+	$collumns = "FirstName, LastName, DateofBirth, Nationality, Gender, Mobile, Email, Course, Uni, Uni_compl, CurrentAddress,HomeAddress, ConsultantID, CurrentStatus,Visa,Vexpiry,wechat,service,prevUni,prevStudy,prevComp,know,prevCountry,Ccountry";
 	$collumns .= $admin?",Passport,Pexpiry,duedate":"";
 	// $collumns .= $admin?"":",know";
 
@@ -253,6 +257,7 @@ function insertClient($mysqli,$value,$admin = false){
 	$email = $value['email'];
 	$cam = $value['cam'];
 	$uni = $value['uni'];
+	$Ccountry = $value['Ccountry'];
 	$comp = $value['comp'];
 	$visa = $value['visa'];
 	$vexpiry = $value['vexpiry'];
@@ -279,7 +284,7 @@ function insertClient($mysqli,$value,$admin = false){
 
 
 //getting all values and collumn
-	$values = "'$fname', '$lname', '$dob', '$nationality', '$gender', '$mobile', '$email', '$cam', '$uni', '$comp','$caddress','$haddress','$consultant','$statusInsert','$visa','$vexpiry','$wechat','$service','$prevUni','$prevStudy','$prevComp','$know','$prevCountry'";
+	$values = "'$fname', '$lname', '$dob', '$nationality', '$gender', '$mobile', '$email', '$cam', '$uni', '$comp','$caddress','$haddress','$consultant','$statusInsert','$visa','$vexpiry','$wechat','$service','$prevUni','$prevStudy','$prevComp','$know','$prevCountry','$Ccountry'";
 	$values .= $admin?",'$passport','$pexpiry','$duedate'":"";
 	// $values .= $admin?"":",'$know'";
 
@@ -573,6 +578,7 @@ if(isset($_SESSION['userID'])){
 					Course = '$cam',
 					Uni = '$uni',
 					Uni_compl = '$comp',
+					Ccountry = '$Ccountry',
 					Visa = '$visa',
 					Vexpiry = '$vexpiry',
 					Passport = '$passport',
