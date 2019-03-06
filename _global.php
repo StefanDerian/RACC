@@ -13,7 +13,7 @@ const SERVER_IP = "localhost";
 const PORT = "80";
 
 
-const DATABASE_NAME = "racc";
+const DATABASE_NAME = "racc_backup_2";
 
 const DATABASE_USERNAME = "root";
 

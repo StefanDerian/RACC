@@ -2,7 +2,35 @@ $(document).ready(function(){
 
 	
 
+	
+
+
+
 	$.getDataTable = function (collumnData, admin = true){
+
+		const urgentIndex = 0;
+		const firstNameIndex = 1;
+		const lastNameIndex = 2;
+		const mobileIndex = 3;
+		const dobIndex = 4;
+		const emailIndex = 5;
+		const currentStatusIndex = 6;
+		const vexpiryIndex = 7;
+		const courseIndex = 8;
+		const lastContactIndex = 9;
+		const nationalityIndex = 10;
+		const graduationIndex = 11;
+		const visaIndex = 12;
+		const servicesIndex = 13;
+		const consultantIndex = 14;
+		const consultantIdIndex = 15;
+		var dueDateIndex;
+
+		if(admin){
+			dueDateIndex = 16;
+		}else{
+			dueDateIndex = 14;
+		}
 
 
 		var table;
@@ -22,18 +50,34 @@ $(document).ready(function(){
 			
 			$('#phone').val('');
 			
-			$('#vexpiry').val('');
+			$('#vexpiry-upper-range').val('');
+
+			$('#vexpiry-bottom-range').val('');
 			
 			$('#status').val('');
 
-			$('#lastContacted').val('');
-			
 			$('#consultant').val('');
+
+			$('#last-contact-upper-range').val('');
+
+			$('#last-contact-bottom-range').val('');
+
+			$('#graduation-upper-range').val('');
+
+			$('#graduation-bottom-range').val('');
+
+			$('#course').val('');
+
+			$('#nationality').val('');
+			
+			$('#services').val('');
+
+			$('#svisa-type').val('');
 			table.draw();
 		})
 		var colDefsArray = [ 
 		{
-			"targets": 0,
+			"targets": urgentIndex,
 			"data": "urgent",
 			"render": function ( data, type, row, meta ) {
 
@@ -47,12 +91,10 @@ $(document).ready(function(){
 			}
 		}, 
 		{
-			"targets": 7,
+			"targets": vexpiryIndex,
 			"data": "vexpiry",
 			"render": function ( data, type, row, meta ) {
-				console.log(data);
 				if(data){
-
 					return data;
 				}else{
 
@@ -61,10 +103,9 @@ $(document).ready(function(){
 			}
 		}, 
 		{
-			"targets": 9,
+			"targets": lastContactIndex,
 			"data": "lastContacted",
 			"render": function ( data, type, row, meta ) {
-				console.log(data);
 				if(data){
 
 					return data;
@@ -81,10 +122,10 @@ $(document).ready(function(){
 		if(admin){
 			colDefsArray.push(
 			{
-				"targets": 10,
+				"targets": lastContactIndex,
 				"data": "lastContacted",
 				"render": function ( data, type, row, meta ) {
-					console.log(data);
+					
 					if(data){
 
 						return data;
@@ -96,7 +137,7 @@ $(document).ready(function(){
 			});
 			colDefsArray.push(
 			{
-				"targets": 11,
+				"targets": consultantIdIndex,
 				"visible": false
 			});
 		}
@@ -176,36 +217,78 @@ $(document).ready(function(){
 				
 
 				var firstname = $('#firstname').val();
-				var firstnameCol =  data[1];
+				var firstnameCol =  data[firstNameIndex];
+
 				var lastname = $('#lastname').val();
-				var lastnameCol =  data[2];
+				var lastnameCol =  data[lastNameIndex];
+
 				var birthday= $('#birthday').val();
-				var birthdayCol =  data[4];
+				var birthdayCol =  data[dobIndex];
+
+				var nationality= $('#nationality').val();
+				var nationalityCol =  data[nationalityIndex];
+
+				var visaType= $('#visa-type').val();
+				var visaTypeCol =  data[visaIndex];
+
+				var services= $('#services').val();
+				var servicesCol =  data[servicesIndex];
+
+				var course= $('#course').val();
+				var courseCol =  data[courseIndex];
+
 				var phone= $('#phone').val();
-				var phoneCol =  data[3];
-				var vexpiry= $('#vexpiry').val();
-				var vexpiryCol =  data[7];
+				var phoneCol =  data[mobileIndex];
+
+				var vexpiryUpperRange= new Date($('#vexpiry-upper-range').val());
+				var vexpiryBottomRange= new Date($('#vexpiry-bottom-range').val());
+				var vexpiryCol =  new Date(data[vexpiryIndex]);
+
+				var graduationUpperRange= new Date($('#graduation-upper-range').val());
+				var graduationBottomRange= new Date($('#graduation-bottom-range').val());
+				var graduationCol =  new Date(data[graduationIndex]);
+				
 				var status= $('#status').val();
-				var statusCol =  data[6];
-				var lastContact= $('#lastContacted').val();
-				var lastContactCol =  data[9];
+				var statusCol =  data[currentStatusIndex];
+
+				var lastContactUpperRange= new Date($('#last-contact-upper-range').val());
+				var lastContactBottomRange= new Date($('#last-contact-bottom-range').val());
+				var lastContactCol =  new Date(data[lastContactIndex]);
 
 				var consultant= $('#consultant').val();
-				var consultantCol =  data[11];
+				var consultantCol; 
 				
+				if(admin){
+					consultantCol	=  data[consultantIdIndex];
+				}
 				
 
-				
-
-				var d = new Date(lastContactCol);
-				var now = new Date();
-				var severalMonthsFromNow = new Date(now.setMonth(now.getMonth() + parseInt(lastContact)));
 				
 				if ( firstnameCol.toLowerCase() != firstname.toLowerCase() && firstname !== "")
 				{
 					return false;
 				}
 				if ( lastnameCol.toLowerCase() != lastname.toLowerCase() && lastname !== "")
+				{
+					return false;
+				}
+				if ( nationalityCol.toLowerCase() != nationality.toLowerCase() && nationality !== "")
+				{
+					return false;
+				}
+
+				if ( servicesCol.toLowerCase() != services.toLowerCase() && services !== "")
+				{
+					return false;
+				}
+
+				if ( visaTypeCol.toLowerCase() != visaType.toLowerCase() && visaType !== "")
+				{
+					return false;
+				}
+
+
+				if ( courseCol.toLowerCase() != course.toLowerCase() && course !== "")
 				{
 					return false;
 				}
@@ -217,21 +300,33 @@ $(document).ready(function(){
 				{
 					return false;
 				}
-				if ( vexpiryCol != vexpiry && vexpiry !== "")
+				if ( (vexpiryCol < vexpiryBottomRange || vexpiryCol > vexpiryUpperRange) && vexpiryUpperRange !== "Invalid Date" && vexpiryBottomRange !== "Invalid Date")
 				{
 					return false;
 				}
-				if((d < severalMonthsFromNow || d == "Invalid Date") && lastContact !== ""){
+
+				if ( (graduationCol < graduationBottomRange || graduationCol > graduationUpperRange) && graduationUpperRange !== "Invalid Date" && graduationBottomRange !== "Invalid Date")
+				{
 					return false;
 				}
+
+				if ( (lastContactCol < lastContactBottomRange || lastContactCol > lastContactUpperRange) && lastContactUpperRange !== "Invalid Date" && lastContactBottomRange !== "Invalid Date")
+				{
+					return false;
+				}
+				
 				if ( statusCol != status && status !== "")
 				{
 					return false;
 				}
-				if ( consultantCol != consultant && consultant !== "")
-				{
-					return false;
+				if(admin){
+					if ( consultantCol != consultant && consultant !== "")
+					{
+						
+						return false;
+					}
 				}
+				
 				return true;
 			});
 		

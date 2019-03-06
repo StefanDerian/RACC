@@ -6,8 +6,12 @@
  	{ "data": "DateofBirth" },
  	{ "data": "Email" },
  	{ "data": "CurrentStatus" },
- 	{ "data": "lastContacted" },
+ 	{ "data": "vexpiry" },
  	{ "data": "course" },
- 	{ "data": "lastContacted" },
+	{ "data": "lastContacted" },
+	{ "data": "Nationality" },
+	{ "data": "graduation" },
+	{ "data": "visa" },
+	{ "data": "service" },
  	{"data":"duedate"}
  ]
