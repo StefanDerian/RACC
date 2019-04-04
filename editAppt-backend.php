@@ -360,11 +360,11 @@ function checkError($values, $admin = false){
 			}
 		}
 
-		if(checkUserAvailability($GLOBALS['mysqli'],$values)){
-			$error++;
-			$GLOBALS['fnameError'] = "Both first name and last name already  registered in the system";
-			$GLOBALS['lnameError'] = "Both first name and last name already  registered in the system";
-		}
+		// if(checkUserAvailability($GLOBALS['mysqli'],$values)){
+		// 	$error++;
+		// 	$GLOBALS['fnameError'] = "Both first name and last name already  registered in the system";
+		// 	$GLOBALS['lnameError'] = "Both first name and last name already  registered in the system";
+		// }
 
 		if (empty($values["lname"])) {
 			$error++;
